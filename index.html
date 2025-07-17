@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Collin O'Brien – Director & Producer</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Open Sans', sans-serif;
+      background-color: #1a1a1a;
+      color: #f4f4f4;
+    }
+    nav {
+      position: sticky;
+      top: 0;
+      background: #000;
+      padding: 1rem;
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      z-index: 10;
+    }
+    nav a {
+      color: #f4f4f4;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    nav a:hover {
+      color: #D4AF37;
+    }
+    .hero {
+      position: relative;
+      height: 100vh;
+      overflow: hidden;
+    }
+    .hero video {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: -1;
+    }
+    .tagline {
+      position: relative;
+      top: 40%;
+      width: 100%;
+      text-align: center;
+      font-size: 1.8rem;
+      color: #ffffff;
+      animation: fadeIn 2s ease-in;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .categories {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin: 3rem 0;
+      text-transform: uppercase;
+      font-weight: bold;
+      font-size: 1.2rem;
+    }
+    .phones {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+      padding: 2rem;
+    }
+    .phone {
+      width: 200px;
+      height: 400px;
+      background: #333;
+      border: 2px solid #888;
+      border-radius: 30px;
+      padding: 1rem;
+      box-shadow: 0 0 10px rgba(255,255,255,0.2);
+    }
+    .phone video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 20px;
+    }
+    .brands {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin: 3rem 0;
+      flex-wrap: wrap;
+    }
+    .brands img {
+      height: 40px;
+      filter: grayscale(100%);
+    }
+    .about, .testimonials, .contact {
+      max-width: 800px;
+      margin: 3rem auto;
+      padding: 0 1rem;
+    }
+    .testimonials .quote {
+      border-left: 4px solid #D4AF37;
+      padding-left: 1rem;
+      margin: 2rem 0;
+    }
+    .footer {
+      text-align: center;
+      padding: 2rem;
+      background: #111;
+      font-size: 0.9rem;
+      color: #aaa;
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="#home">Home</a>
+  <a href="#work">Work</a>
+  <a href="#about">About</a>
+  <a href="#testimonials">Testimonials</a>
+  <a href="#contact">Contact</a>
+</nav>
+
+<section class="hero" id="home">
+  <video autoplay muted loop playsinline>
+    <source src="placeholder-video.mp4" type="video/mp4" />
+  </video>
+  <div class="tagline">Crafting narrative and branded content that inspires curiosity and action.</div>
+</section>
+
+<section class="categories">
+  <div>Narrative</div>
+  <div>Unscripted</div>
+  <div>Commercial</div>
+  <div>Branded Content</div>
+  <div>About</div>
+</section>
+
+<section class="phones" id="work">
+  <div class="phone">
+    <video autoplay muted loop playsinline>
+      <source src="placeholder-phone1.mp4" type="video/mp4" />
+    </video>
+  </div>
+  <div class="phone">
+    <video autoplay muted loop playsinline>
+      <source src="placeholder-phone2.mp4" type="video/mp4" />
+    </video>
+  </div>
+  <div class="phone">
+    <video autoplay muted loop playsinline>
+      <source src="placeholder-phone3.mp4" type="video/mp4" />
+    </video>
+  </div>
+</section>
+
+<section class="brands">
+  <img src="samsung-logo.png" alt="Samsung" />
+  <img src="starbucks-logo.png" alt="Starbucks" />
+  <img src="lays-logo.png" alt="Lay's" />
+  <img src="gmc-logo.png" alt="GMC" />
+  <img src="espn-logo.png" alt="ESPN" />
+</section>
+
+<section class="about" id="about">
+  <h2>About</h2>
+  <p>Collin O'Brien is an Emmy Award-winning director and producer based in Los Angeles, focused on powerful storytelling across genres. With work spanning narrative shorts, commercial campaigns, and unscripted content, his mission is to spark curiosity and action through character-driven media.</p>
+</section>
+
+<section class="testimonials" id="testimonials">
+  <h2>Testimonials</h2>
+  <div class="quote">
+    <p>"Collin brings calm and clarity to every chaotic set. His leadership is unmatched." – Jane Doe</p>
+  </div>
+  <div class="quote">
+    <p>"One of the most detail-oriented and collaborative producers I've worked with." – John Smith</p>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <h2>Let’s Collaborate</h2>
+  <p><a href="mailto:cobrienfilm@gmail.com">cobrienfilm@gmail.com</a></p>
+  <p>
+    <a href="https://instagram.com/cobrienfilm" target="_blank">Instagram</a> |
+    <a href="https://linkedin.com/in/yourhandle" target="_blank">LinkedIn</a> |
+    <a href="https://vimeo.com/yourhandle" target="_blank">Vimeo</a>
+  </p>
+</section>
+
+<div class="footer">
+  © 2025 Collin O'Brien • All rights reserved • <a href="#home">Back to top</a>
+</div>
+
+</body>
+</html>
