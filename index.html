@@ -171,14 +171,147 @@
   <p>Collin O'Brien is an Emmy Award-winning director and producer based in Los Angeles, focused on powerful storytelling across genres. With work spanning narrative shorts, commercial campaigns, and unscripted content, his mission is to spark curiosity and action through character-driven media.</p>
 </section>
 
-<section class="testimonials" id="testimonials">
-  <h2>Testimonials</h2>
-  <div class="quote">
-    <p>"Collin brings calm and clarity to every chaotic set. His leadership is unmatched." – Jane Doe</p>
+<section id="testimonials" class="testimonial-wrap" aria-label="Testimonials carousel">
+  <style>
+    #testimonials { --gap: 1rem; --card-bg: #0b0b0b; --text:#f5f5f5; --muted:#cfcfcf; --accent:#e6b800; --ring: rgba(255,255,255,.15); font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji"; color: var(--text); }
+    #testimonials .shell{max-width: 1100px;margin:0 auto;padding:2rem 1rem;}
+    #testimonials .header{display:flex;align-items:end;justify-content:space-between;gap:var(--gap);margin-bottom:1rem}
+    #testimonials .header h2{font-size:clamp(1.4rem,2vw,1.8rem);margin:0;letter-spacing:.2px}
+    #testimonials .viewport{position:relative;overflow:hidden;border-radius:1rem;background:linear-gradient(180deg,#121212,#0a0a0a);box-shadow:0 10px 30px rgba(0,0,0,.35), inset 0 0 0 1px var(--ring)}
+    #testimonials .track{display:flex;transition:transform .6s cubic-bezier(.22,.61,.36,1);will-change:transform}
+    #testimonials .slide{min-width:100%;padding:1.25rem}
+    #testimonials .card{display:grid;grid-template-columns:80px 1fr;gap:1rem;align-items:center;background:var(--card-bg);border-radius:.875rem;padding:1rem;border:1px solid rgba(255,255,255,.08)}
+    #testimonials .avatar{width:72px;height:72px;border-radius:999px;object-fit:cover;border:2px solid rgba(255,255,255,.2);box-shadow:0 8px 20px rgba(0,0,0,.35)}
+    #testimonials .quote{margin:.25rem 0 0 0;line-height:1.5;font-size:1.05rem}
+    #testimonials .name{font-weight:700;margin:0}
+    #testimonials .role{color:var(--muted);font-size:.95rem;margin:.15rem 0 0 0}
+    #testimonials .actions{display:flex;gap:.5rem;align-items:center}
+    #testimonials .btn{appearance:none;border:1px solid rgba(255,255,255,.18);background:#151515;color:var(--text);padding:.5rem .75rem;border-radius:.625rem;cursor:pointer;transition:transform .1s ease, background .2s ease}
+    #testimonials .btn:hover{background:#1b1b1b}
+    #testimonials .btn:active{transform:translateY(1px)}
+    #testimonials .dots{display:flex;gap:.5rem;align-items:center}
+    #testimonials .dot{width:8px;height:8px;border-radius:999px;background:rgba(255,255,255,.25);border:none;cursor:pointer}
+    #testimonials .dot[aria-current="true"], #testimonials .dot:hover{background:var(--accent)}
+    #testimonials .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+    @media (max-width:620px){
+      #testimonials .card{grid-template-columns:64px 1fr}
+      #testimonials .avatar{width:64px;height:64px}
+      #testimonials .quote{font-size:1rem}
+    }
+  </style>
+
+  <div class="shell">
+    <div class="header">
+      <h2>What people say about Collin</h2>
+      <div class="actions" aria-controls="testimonial-carousel">
+        <button class="btn prev" aria-label="Previous testimonial">◀</button>
+        <button class="btn next" aria-label="Next testimonial">▶</button>
+      </div>
+    </div>
+
+    <div class="viewport" id="testimonial-carousel">
+      <div class="track" role="list">
+        <!-- Slide 1 -->
+        <figure class="slide" role="listitem">
+          <div class="card">
+            <img class="avatar" src="https://placehold.co/144x144/jpg?text=Kelly" alt="Headshot of Kelly Sallaway">
+            <figcaption>
+              <p class="name">Kelly Sallaway</p>
+              <p class="role">Emmy Award‑Winning Producer</p>
+              <blockquote class="quote">He brought a delayed project on schedule, then helped us to save thousands on licensing! I want him on every production!</blockquote>
+            </figcaption>
+          </div>
+        </figure>
+        <!-- Slide 2 -->
+        <figure class="slide" role="listitem">
+          <div class="card">
+            <img class="avatar" src="https://placehold.co/144x144/jpg?text=Jasmine" alt="Headshot of Jasmine Holdsworth">
+            <figcaption>
+              <p class="name">Jasmine Holdsworth</p>
+              <p class="role">Line Producer</p>
+              <blockquote class="quote">He’s like a swiss army knife on set. He can do anything!</blockquote>
+            </figcaption>
+          </div>
+        </figure>
+        <!-- Slide 3 -->
+        <figure class="slide" role="listitem">
+          <div class="card">
+            <img class="avatar" src="https://placehold.co/144x144/jpg?text=Ryan" alt="Headshot of Ryan Henry Johnston">
+            <figcaption>
+              <p class="name">Ryan Henry Johnston</p>
+              <p class="role">Multi‑Award‑Winning Director</p>
+              <blockquote class="quote">He’s invaluable because he’s calm under pressure. When everyone else is hyperventilating when something unexpected happens, he stays calm, has already analyzed the situation and is providing courses of action. So awesome!</blockquote>
+            </figcaption>
+          </div>
+        </figure>
+        <!-- Slide 4 -->
+        <figure class="slide" role="listitem">
+          <div class="card">
+            <img class="avatar" src="https://placehold.co/144x144/jpg?text=Tina" alt="Headshot of Tina Imahara">
+            <figcaption>
+              <p class="name">Tina Imahara</p>
+              <p class="role">Academy Award‑Winning Editor</p>
+              <blockquote class="quote">Collin is wonderfully talented! He’s hungry, driven, and persistent! I was amazed at his knowledge and confidence in approaching questions and how he helped others feel welcome!</blockquote>
+            </figcaption>
+          </div>
+        </figure>
+      </div>
+    </div>
+
+    <div class="controls" style="display:flex;justify-content:center;gap:.6rem;margin-top:.9rem">
+      <button class="dot" aria-label="Go to slide 1" aria-current="true"></button>
+      <button class="dot" aria-label="Go to slide 2"></button>
+      <button class="dot" aria-label="Go to slide 3"></button>
+      <button class="dot" aria-label="Go to slide 4"></button>
+    </div>
   </div>
-  <div class="quote">
-    <p>"One of the most detail-oriented and collaborative producers I've worked with." – John Smith</p>
-  </div>
+
+  <script>
+    (function(){
+      const root = document.getElementById('testimonials');
+      const track = root.querySelector('.track');
+      const slides = Array.from(root.querySelectorAll('.slide'));
+      const dots = Array.from(root.querySelectorAll('.dot'));
+      const prevBtn = root.querySelector('.prev');
+      const nextBtn = root.querySelector('.next');
+      const viewport = root.querySelector('.viewport');
+      let index = 0, timer = null, isHovered = false, startX = 0, deltaX = 0;
+
+      function go(i){
+        index = (i + slides.length) % slides.length;
+        track.style.transform = `translateX(${-index * 100}%)`;
+        dots.forEach((d,di)=>d.setAttribute('aria-current', di===index ? 'true':'false'));
+      }
+      function next(){ go(index+1); }
+      function prev(){ go(index-1); }
+      function startAuto(){ stopAuto(); timer = setInterval(()=>{ if(!isHovered) next(); }, 6000); }
+      function stopAuto(){ if(timer) clearInterval(timer); }
+
+      // Buttons
+      nextBtn.addEventListener('click', next);
+      prevBtn.addEventListener('click', prev);
+      dots.forEach((d,di)=> d.addEventListener('click', ()=>go(di)) );
+
+      // Pause on hover
+      viewport.addEventListener('mouseenter', ()=>{ isHovered=true; });
+      viewport.addEventListener('mouseleave', ()=>{ isHovered=false; });
+
+      // Keyboard
+      root.addEventListener('keydown', (e)=>{ if(e.key==='ArrowRight') next(); if(e.key==='ArrowLeft') prev(); });
+      root.tabIndex = 0;
+
+      // Touch swipe
+      viewport.addEventListener('touchstart', (e)=>{ startX = e.touches[0].clientX; deltaX=0; }, {passive:true});
+      viewport.addEventListener('touchmove', (e)=>{ deltaX = e.touches[0].clientX - startX; }, {passive:true});
+      viewport.addEventListener('touchend', ()=>{ if(Math.abs(deltaX) > 50){ deltaX < 0 ? next() : prev(); } });
+
+      // Lazy-ish load: if you replace placeholders with real images, they benefit from native loading
+      root.querySelectorAll('img').forEach(img=>{ img.loading = 'lazy'; })
+
+      // Init
+      go(0); startAuto();
+    })();
+  </script>
 </section>
 
 <section class="contact" id="contact">
