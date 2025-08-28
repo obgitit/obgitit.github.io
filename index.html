@@ -4,47 +4,18 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Collin O'Brien – Director & Producer</title>
-  <style>
-    /* About layout */
-.about{max-width:1100px;margin:3rem auto;padding:0 1rem;}
-.about-grid{
-  display:grid;
-  grid-template-columns:1fr 1.2fr;
-  gap:clamp(1rem,3vw,2rem);
-  align-items:center;
-}
-@media (max-width: 900px){
-  .about-grid{grid-template-columns:1fr;}
-}
-
-/* Beveled, high-end photo card */
-.about-photo{position:relative;}
-.about-photo img{
-  width:100%; display:block;
-  border-radius:20px;                 /* soft corners */
-  border:1px solid rgba(255,255,255,.12);
-  box-shadow:
-    0 22px 50px rgba(0,0,0,.55),      /* depth */
-    0 2px 0 rgba(255,255,255,.04) inset,
-    0 -2px 0 rgba(0,0,0,.35) inset;   /* “bevel” edge */
-}
-
-/* subtle glossy bevel overlay */
-.about-photo::after{
-  content:""; position:absolute; inset:0; border-radius:20px;
-  background:
-    linear-gradient(145deg, rgba(255,255,255,.18), rgba(255,255,255,0) 35%),
-    linear-gradient(to bottom, rgba(255,255,255,.06), rgba(0,0,0,0) 55%);
-  pointer-events:none; mix-blend-mode:screen;
-}
-
-/* Copy */
-.about-copy h2{margin:0 0 .5rem 0; font-size:clamp(1.4rem,2.2vw,2rem);}
-.about-copy p{line-height:1.6; margin:0;}
-
+<meta name="description" content="Collin O’Brien — Emmy Award-Winning Producer & Director crafting narrative, unscripted, and branded content that inspires curiosity and action.">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+<meta property="og:title" content="Collin O’Brien — Producer & Director">
+<meta property="og:description" content="Storytelling that inspires curiosity and action.">
+<meta property="og:image" content="images/collin-emmy.webp">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<style>
     body {
       margin: 0;
-      font-family: 'Open Sans', sans-serif;
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
       background-color: #1a1a1a;
       color: #f4f4f4;
     }
@@ -150,11 +121,43 @@
       font-size: 0.9rem;
       color: #aaa;
     }
+  
+/* Hero overlay & CTA */
+.hero { position:relative; height:100vh; overflow:hidden; }
+.hero video { width:100%; height:100%; object-fit:cover; }
+.hero-overlay{ position:absolute; inset:0; background:linear-gradient(180deg, rgba(0,0,0,.35) 0%, rgba(0,0,0,.55) 65%, rgba(0,0,0,.65) 100%); z-index:0; }
+.tagline{ position:absolute; left:50%; top:45%; transform:translate(-50%,-50%); text-align:center; padding:0 1rem; z-index:1; }
+.tagline h1{ margin:0 0 1rem; font-size:clamp(1.6rem,3.2vw,2.4rem); }
+.tagline .cta{ display:inline-block; padding:.75rem 1.1rem; border-radius:.6rem; background:#D4AF37; color:#000; text-decoration:none; font-weight:700; }
+
+/* About layout */
+.about{max-width:1100px;margin:3rem auto;padding:0 1rem;}
+.about-grid{display:grid;grid-template-columns:1fr 1.2fr;gap:clamp(1rem,3vw,2rem);align-items:center;}
+@media (max-width:900px){ .about-grid{grid-template-columns:1fr;} }
+.about-photo{position:relative;}
+.about-photo img{ width:100%; display:block; border-radius:20px; border:1px solid rgba(255,255,255,.12); box-shadow:0 22px 50px rgba(0,0,0,.55), 0 2px 0 rgba(255,255,255,.04) inset, 0 -2px 0 rgba(0,0,0,.35) inset; }
+.about-photo::after{ content:""; position:absolute; inset:0; border-radius:20px; background:linear-gradient(145deg, rgba(255,255,255,.18), rgba(255,255,255,0) 35%), linear-gradient(to bottom, rgba(255,255,255,.06), rgba(0,0,0,0) 55%); mix-blend-mode:screen; pointer-events:none; }
+.about-copy h2{margin:0 0 .5rem; font-size:clamp(1.4rem,2.2vw,2rem);}
+.about-copy p{line-height:1.6; margin:0;}
+
+/* Brands strip */
+.brands{display:flex;justify-content:center;gap:2rem;margin:3rem 0;flex-wrap:wrap;opacity:.9}
+.brands img{height:auto;filter:grayscale(100%);opacity:.7;transition:opacity .2s ease, filter .2s ease}
+.brands img:hover{filter:grayscale(0%);opacity:1}
+
+/* Phones captions */
+.phone-cap{margin:.5rem 0 0;text-align:center;font-size:.9rem;opacity:.85}
+
+/* Skip link */
+.sr-only-focusable{position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;}
+.sr-only-focusable:focus{position:static;width:auto;height:auto;padding:.5rem;background:#000;color:#fff;z-index:9999;}
+
   </style>
 </head>
 <body>
+<a href="#home" class="sr-only-focusable">Skip to content</a>
 
-<nav>
+<nav aria-label="Primary">
   <a href="#home">Home</a>
   <a href="#work">Work</a>
   <a href="#about">About</a>
@@ -162,11 +165,15 @@
   <a href="#contact">Contact</a>
 </nav>
 
-<section class="hero" id="home">
-  <video autoplay muted loop playsinline>
-    <source src="background loop_1.mp4" type="video/mp4" />
+<section class="hero" id="home" aria-label="Hero">
+  <video autoplay muted loop playsinline preload="metadata">
+    <source src="background loop_1.mp4" type="video/mp4"/>
   </video>
-  <div class="tagline">Crafting narrative and branded content that inspires curiosity and action.</div>
+  <div class="hero-overlay"></div>
+  <div class="tagline">
+    <h1>Crafting narrative & branded content that inspires curiosity and action.</h1>
+    <a class="cta" href="#work">Watch the Reel</a>
+  </div>
 </section>
 
 <section class="categories">
@@ -182,41 +189,41 @@
     <video autoplay muted loop playsinline>
       <source src="Gabriela_1.mp4" type="video/mp4" />
     </video>
+    <p class="phone-cap">Gabriela 1</p>
   </div>
   <div class="phone">
     <video autoplay muted loop playsinline>
       <source src="Bella Dose and Alyssa Raghu_1.mp4" type="video/mp4" />
     </video>
+    <p class="phone-cap">Bella Dose and Alyssa Raghu 1</p>
   </div>
   <div class="phone">
     <video autoplay muted loop playsinline>
       <source src="Jay_1.mp4" type="video/mp4" />
     </video>
+    <p class="phone-cap">Jay 1</p>
   </div>
 </section>
 
-<section class="brands">
-  <img src="png-transparent-samsung-galaxy-gurugram-faridabad-logo-samsung-blue-text-logo.png" alt="Samsung" />
-  <img src="Starbucks Logo.png" alt="Starbucks" />
-  <img src="Lay's Logo copy.jpg" alt="Lay's" />
-  <img src="GMC Logo copy.png" alt="GMC" />
-  <img src="ESPN Logo.png" alt="ESPN" />
+<section class="brands" aria-label="Brands">
+  <img src="png-transparent-samsung-galaxy-gurugram-faridabad-logo-samsung-blue-text-logo.png" alt="Samsung" width="140" height="40" loading="lazy">
+  <img src="Starbucks Logo.png" alt="Starbucks" width="140" height="40" loading="lazy">
+  <img src="Lay's Logo copy.jpg" alt="Lay's" width="140" height="40" loading="lazy">
+  <img src="GMC Logo copy.png" alt="GMC" width="140" height="40" loading="lazy">
+  <img src="ESPN Logo.png" alt="ESPN" width="140" height="40" loading="lazy">
 </section>
-  
-<section class="about" id="about">
+
+<section class="about" id="about" aria-label="About">
   <div class="about-grid">
     <figure class="about-photo">
-      <!-- Put the optimized image in your repo: /images/collin-emmy.webp -->
-      <img src="collin-emmy.webp" alt="Collin O’Brien holding an Emmy award">
+      <img src="images/collin-emmy.webp" alt="Collin O’Brien holding an Emmy award" width="1600" height="1067" loading="lazy">
     </figure>
-
     <div class="about-copy">
       <h2>About</h2>
-      <p>Collin O'Brien is an Emmy Award-Winning Producer and Director based in Los Angeles, focused on powerful storytelling across genres. With work spanning narrative shorts, commercial campaigns, and unscripted content, his mission is to spark curiosity and action through character-driven media. <br>Let's connect!</p>
+      <p>Collin O'Brien is an <strong>Emmy Award-Winning Producer & Director</strong> based in Los Angeles. He creates narrative, unscripted, and branded work for companies like Starbucks, Samsung, Lay’s, GMC, and ESPN—projects engineered to spark curiosity and move audiences to action.</p>
     </div>
   </div>
 </section>
-
 
 <section id="testimonials" class="testimonial-wrap" aria-label="Testimonials carousel">
   <style>
@@ -282,10 +289,10 @@
         <!-- Slide 1 -->
         <figure class="slide" role="listitem">
           <div class="card">
-            <img class="avatar" src="Kelly Sallaway_IMdB.png" alt="Headshot of Kelly Sallaway">
+            <img class="avatar" src="Kelly Sallaway_IMdB.png" loading="lazy" onerror="this.onerror=null;this.src='https://placehold.co/144x144/jpg';" alt="Headshot of Kelly Sallaway">
             <figcaption>
               <p class="name">Kelly Sallaway</p>
-              <p class="role">Emmy Award-Winning Producer</p>
+              <p class="role">Emmy Award‑Winning Producer</p>
               <blockquote class="quote">He brought a delayed project on schedule, then helped us to save thousands on licensing! I want him on every production!</blockquote>
             </figcaption>
           </div>
@@ -293,7 +300,7 @@
         <!-- Slide 2 -->
         <figure class="slide" role="listitem">
           <div class="card">
-            <img class="avatar" src="Jasmine Holdsworth.png" alt="Headshot of Jasmine Holdsworth">
+            <img class="avatar" src="Jasmine Holdsworth_IMdB.png" loading="lazy" onerror="this.onerror=null;this.src='https://placehold.co/144x144/jpg';" alt="Headshot of Jasmine Holdsworth">
             <figcaption>
               <p class="name">Jasmine Holdsworth</p>
               <p class="role">Line Producer</p>
@@ -304,10 +311,10 @@
         <!-- Slide 3 -->
         <figure class="slide" role="listitem">
           <div class="card">
-            <img class="avatar" src="Ryan Henry Johnston.png" alt="Headshot of Ryan Henry Johnston">
+            <img class="avatar" src="Ryan Henry Johnston_IMdB.png" loading="lazy" onerror="this.onerror=null;this.src='https://placehold.co/144x144/jpg';" alt="Headshot of Ryan Henry Johnston">
             <figcaption>
               <p class="name">Ryan Henry Johnston</p>
-              <p class="role">Multi-Award-Winning Director</p>
+              <p class="role">Multi‑Award‑Winning Director</p>
               <blockquote class="quote">He’s invaluable because he’s calm under pressure. When everyone else is hyperventilating when something unexpected happens, he stays calm, has already analyzed the situation and is providing courses of action. So awesome!</blockquote>
             </figcaption>
           </div>
@@ -315,10 +322,10 @@
         <!-- Slide 4 -->
         <figure class="slide" role="listitem">
           <div class="card">
-            <img class="avatar" src="Tina Imahara.png" alt="Headshot of Tina Imahara">
+            <img class="avatar" src="Tina Imahara_IMdB.png" loading="lazy" onerror="this.onerror=null;this.src='https://placehold.co/144x144/jpg';" alt="Headshot of Tina Imahara">
             <figcaption>
               <p class="name">Tina Imahara</p>
-              <p class="role">Academy Award-Winning Editor</p>
+              <p class="role">Academy Award‑Winning Editor</p>
               <blockquote class="quote">Collin is wonderfully talented! He’s hungry, driven, and persistent! I was amazed at his knowledge and confidence in approaching questions and how he helped others feel welcome!</blockquote>
             </figcaption>
           </div>
@@ -382,14 +389,13 @@
   </script>
 </section>
 
-
 <section class="contact" id="contact">
   <h2>Let’s Collaborate</h2>
   <p><a href="mailto:cobrienfilm@gmail.com">cobrienfilm@gmail.com</a></p>
   <p>
-    <a href="https://instagram.com/cobrienfilm" target="_blank">Instagram</a> |
-    <a href="https://linkedin.com/in/cobriencreate" target="_blank">LinkedIn</a> |
-    <a href="https://vimeo.com/yourhandle" target="_blank">Vimeo</a>
+    <a href="https://instagram.com/cobrienfilm" target="_blank" rel="noopener">Instagram</a> |
+    <a href="https://linkedin.com/in/cobriencreate" target="_blank" rel="noopener">LinkedIn</a> |
+    <a href="https://vimeo.com/yourhandle" target="_blank" rel="noopener">Vimeo</a>
   </p>
 </section>
 
