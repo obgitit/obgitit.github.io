@@ -47,3 +47,427 @@
       transition: color 0.2s;
     }
     nav a:hover { color: var(--accent); }
+
+    /* Hero Section */
+    .hero {
+      position: relative;
+      height: 90vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 0 2rem;
+      overflow: hidden;
+    }
+    .hero video {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      z-index: -2;
+      opacity: 0.4;
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, transparent, var(--bg-color));
+      z-index: -1;
+    }
+    .hero-content h1 {
+      font-size: clamp(2rem, 5vw, 4rem);
+      margin: 0 0 1rem 0;
+      letter-spacing: -1px;
+    }
+    .hero-content p {
+      font-size: clamp(1.1rem, 2vw, 1.5rem);
+      color: var(--text-muted);
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    /* 9:16 Hybrid Section - Vertical Stack */
+    .hybrid-section {
+      display: flex;
+      flex-direction: column;
+      gap: 5rem;
+      max-width: 1200px;
+      margin: var(--spacing-section) auto;
+      padding: 0 2rem;
+      align-items: center;
+    }
+
+    /* Horizontal Tech Panel for Desktop */
+    .tech-panel {
+      width: 100%;
+      box-sizing: border-box;
+      background: var(--surface-color);
+      padding: 4rem;
+      border-radius: var(--radius);
+      border: 1px solid rgba(255,255,255,0.05);
+      display: grid;
+      grid-template-columns: 1fr 1.5fr;
+      gap: 4rem;
+      align-items: center;
+    }
+    .tech-header-col { text-align: left; }
+    .tech-list-col { text-align: left; }
+    
+    .badge {
+      display: inline-block;
+      background: var(--accent);
+      color: #000;
+      font-weight: bold;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      padding: 0.4rem 0.8rem;
+      border-radius: 4px;
+      margin-bottom: 1rem;
+    }
+    .tech-panel h2 { margin-top: 0; font-size: 2.2rem; line-height: 1.2; }
+    .tech-panel p.lead { color: var(--text-muted); font-size: 1.1rem; }
+    
+    .tech-list { list-style: none; padding: 0; margin: 0; }
+    .tech-list li {
+      margin-bottom: 1.5rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      font-size: 1.05rem;
+    }
+    .tech-list li:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+    .tech-list strong { color: var(--accent); display: block; margin-bottom: 0.25rem; font-size: 1.1rem; }
+
+    /* Fanned Media - Scaled Up and Centered */
+    .fanned-media {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-top: 2rem;
+      width: 100%;
+    }
+    .fanned-card {
+      width: 280px; 
+      aspect-ratio: 9/16;
+      background: #111;
+      border-radius: 20px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      box-shadow: 0 30px 60px rgba(0,0,0,0.8);
+      transform: rotate(var(--rot)) translateY(var(--y));
+      cursor: pointer;
+      transition: filter 0.2s ease;
+    }
+    .fanned-card:hover { filter: brightness(1.2); }
+    .fanned-card video {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      pointer-events: none;
+    }
+
+    /* Brands */
+    .brands {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 3rem;
+      flex-wrap: wrap;
+      margin: var(--spacing-section) auto;
+      padding: 2rem;
+      background: var(--surface-color);
+    }
+    .brands img {
+      height: 30px;
+      filter: grayscale(100%) opacity(0.6);
+      transition: filter 0.3s;
+    }
+    .brands img:hover { filter: grayscale(0%) opacity(1); }
+
+    /* Original Testimonials Carousel Styles */
+    #testimonials { --gap: 1rem; --card-bg: #0b0b0b; --text:#f5f5f5; --muted:#cfcfcf; --accent:#D4AF37; --ring: rgba(255,255,255,.15); box-sizing: border-box; margin: var(--spacing-section) auto; }
+    #testimonials figure, #testimonials blockquote { margin: 0; }
+    #testimonials .shell{max-width:1100px;margin:0 auto;padding:2rem 1rem;}
+    #testimonials .header{display:flex;align-items:end;justify-content:space-between;gap:var(--gap);margin-bottom:1rem}
+    #testimonials .header h2{font-size:clamp(1.4rem,2vw,1.8rem);margin:0;letter-spacing:.2px}
+    #testimonials .viewport{
+      position:relative;
+      overflow:hidden;
+      border-radius:1rem;
+      background:linear-gradient(180deg,#121212,#0a0a0a);
+      box-shadow:0 10px 30px rgba(0,0,0,.35), inset 0 0 0 1px var(--ring)
+    }
+    #testimonials .track{display:flex;transition:transform .6s cubic-bezier(.22,.61,.36,1);will-change:transform}
+    #testimonials .slide{min-width:100%; padding:1.25rem; box-sizing: border-box;}
+    #testimonials .card{
+      display:grid;grid-template-columns:80px 1fr;gap:1rem;align-items:center;
+      background:var(--card-bg);border-radius:.875rem;padding:1rem;border:1px solid rgba(255,255,255,.08)
+    }
+    #testimonials .avatar{width:72px;height:72px;border-radius:999px;object-fit:cover;border:2px solid rgba(255,255,255,.2);box-shadow:0 8px 20px rgba(0,0,0,.35)}
+    #testimonials .quote{margin:.25rem 0 0 0;line-height:1.5;font-size:1.05rem}
+    #testimonials .name{font-weight:700;margin:0}
+    #testimonials .role{color:var(--muted);font-size:.95rem;margin:.15rem 0 0 0}
+    #testimonials .actions{display:flex;gap:.5rem;align-items:center}
+    #testimonials .btn{appearance:none;border:1px solid rgba(255,255,255,.18);background:#151515;color:var(--text-main);padding:.5rem .75rem;border-radius:.625rem;cursor:pointer;transition:transform .1s ease, background .2s ease}
+    #testimonials .btn:hover{background:#1b1b1b}
+    #testimonials .btn:active{transform:translateY(1px)}
+    #testimonials .dots{display:flex;gap:.5rem;align-items:center}
+    #testimonials .dot{width:8px;height:8px;border-radius:999px;background:rgba(255,255,255,.25);border:none;cursor:pointer}
+    #testimonials .dot[aria-current="true"], #testimonials .dot:hover{background:var(--accent)}
+
+    /* About */
+    .about {
+      max-width: 1000px;
+      margin: var(--spacing-section) auto;
+      padding: 0 2rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+    .about-photo img {
+      width: 100%;
+      border-radius: var(--radius);
+      filter: contrast(1.1);
+    }
+
+    /* Contact & Footer */
+    .contact {
+      text-align: center;
+      margin: var(--spacing-section) auto;
+      padding: 4rem 2rem;
+      background: var(--surface-color);
+    }
+    .contact a { color: var(--accent); text-decoration: none; font-size: 1.2rem; }
+    .footer { text-align: center; padding: 2rem; color: var(--text-muted); font-size: 0.9rem; }
+
+    /* Mobile Breakpoints */
+    @media (max-width: 900px) {
+      .tech-panel { grid-template-columns: 1fr; padding: 2rem; gap: 2rem; }
+      .about { grid-template-columns: 1fr; gap: 3rem; }
+      
+      .fanned-media { transform: scale(0.95); gap: 0.5rem; margin-top: 0; }
+      .fanned-card { width: 40vw; max-width: 200px; }
+      
+      #testimonials .card{grid-template-columns:64px 1fr}
+      #testimonials .avatar{width:64px;height:64px}
+      #testimonials .quote{font-size:1rem}
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="#home">Home</a>
+  <a href="#work">Work</a>
+  <a href="#testimonials">Testimonials</a>
+  <a href="#about">About</a>
+  <a href="#contact">Contact</a>
+</nav>
+
+<section class="hero" id="home">
+  <video autoplay muted loop playsinline poster="background loop_1 poster.jpg">
+    <source src="background loop_1.mp4" type="video/mp4" />
+  </video>
+  <div class="hero-content">
+    <h1>Technical Producer & Director</h1>
+    <p>Architecting complex production workflows and directing character-driven media from concept through delivery.</p>
+  </div>
+</section>
+
+<section class="hybrid-section" id="work">
+  <div class="tech-panel">
+    <div class="tech-header-col">
+      <div class="badge">3x MARCOM Award Winner</div>
+      <h2>Digital Delivery & Logistics</h2>
+      <p class="lead">Engineering complex content pipelines for high-conversion social and digital environments.</p>
+    </div>
+    
+    <div class="tech-list-col">
+      <ul class="tech-list">
+        <li><strong>Scale & Routing:</strong> Programmed the scheduling architecture and digital delivery logistics for Arizona's first environmental film festival.</li>
+        <li><strong>Format Flexibility:</strong> Native ingestion and formatting for 9:16 cross-platform deployment.</li>
+        <li><strong>Technical Direction:</strong> Multi-cam sync and rapid post-production workflows optimized for high-volume commercial output.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="fanned-media">
+    <div class="fanned-card" style="--rot: -8deg; --y: 30px;">
+      <video autoplay muted loop playsinline poster="Gabriela_1 poster.jpg">
+        <source src="Gabriela_1.mp4" type="video/mp4" />
+      </video>
+    </div>
+    <div class="fanned-card" style="--rot: 0deg; --y: 0px;">
+      <video autoplay muted loop playsinline poster="Bella Dose and Alyssa Raghu_1 poster.jpg">
+        <source src="Bella Dose and Alyssa Raghu_1.mp4" type="video/mp4" />
+      </video>
+    </div>
+    <div class="fanned-card" style="--rot: 8deg; --y: 30px;">
+      <video autoplay muted loop playsinline poster="Jay_1 poster.jpg">
+        <source src="Jay_1.mp4" type="video/mp4" />
+      </video>
+    </div>
+  </div>
+</section>
+
+<section class="brands">
+  <img src="png-transparent-samsung-galaxy-gurugram-faridabad-logo-samsung-blue-text-logo.png" alt="Samsung" />
+  <img src="Starbucks Logo.png" alt="Starbucks" />
+  <img src="Lay's Logo copy.jpg" alt="Lay's" />
+  <img src="GMC Logo copy.png" alt="GMC" />
+  <img src="ESPN Logo.png" alt="ESPN" />
+</section>
+
+<section id="testimonials" aria-label="Testimonials carousel">
+  <div class="shell">
+    <div class="header">
+      <h2>What people say about Collin</h2>
+      <div class="actions" aria-controls="testimonial-carousel">
+        <button class="btn prev" aria-label="Previous testimonial">◀</button>
+        <button class="btn next" aria-label="Next testimonial">▶</button>
+      </div>
+    </div>
+
+    <div class="viewport" id="testimonial-carousel">
+      <div class="track" role="list">
+        <figure class="slide" role="listitem">
+          <div class="card">
+            <img class="avatar" src="Kelly Sallaway_IMdB.png" alt="Headshot of Kelly Sallaway" loading="lazy">
+            <figcaption>
+              <p class="name">Kelly Sallaway</p>
+              <p class="role">Emmy Award-Winning Producer</p>
+              <blockquote class="quote">He brought a delayed project on schedule, then helped us to save thousands on licensing! I want him on every production!</blockquote>
+            </figcaption>
+          </div>
+        </figure>
+        <figure class="slide" role="listitem">
+          <div class="card">
+            <img class="avatar" src="Jasmine Holdsworth.png" alt="Headshot of Jasmine Holdsworth" loading="lazy">
+            <figcaption>
+              <p class="name">Jasmine Holdsworth</p>
+              <p class="role">Line Producer</p>
+              <blockquote class="quote">He’s like a swiss army knife on set. He can do anything!</blockquote>
+            </figcaption>
+          </div>
+        </figure>
+        <figure class="slide" role="listitem">
+          <div class="card">
+            <img class="avatar" src="Ryan Henry Johnston.png" alt="Headshot of Ryan Henry Johnston" loading="lazy">
+            <figcaption>
+              <p class="name">Ryan Henry Johnston</p>
+              <p class="role">Multi-Award-Winning Director</p>
+              <blockquote class="quote">He’s invaluable because he’s calm under pressure. When everyone else is hyperventilating when something unexpected happens, he stays calm, has already analyzed the situation and is providing courses of action. So awesome!</blockquote>
+            </figcaption>
+          </div>
+        </figure>
+        <figure class="slide" role="listitem">
+          <div class="card">
+            <img class="avatar" src="Tina Imahara.png" alt="Headshot of Tina Imahara" loading="lazy">
+            <figcaption>
+              <p class="name">Tina Imahara</p>
+              <p class="role">Academy Award-Winning Editor</p>
+              <blockquote class="quote">Collin is wonderfully talented! He’s hungry, driven, and persistent! I was amazed at his knowledge and confidence in approaching questions and how he helped others feel welcome!</blockquote>
+            </figcaption>
+          </div>
+        </figure>
+      </div>
+    </div>
+
+    <div class="controls" style="display:flex;justify-content:center;gap:.6rem;margin-top:.9rem">
+      <button class="dot" aria-label="Go to slide 1" aria-current="true"></button>
+      <button class="dot" aria-label="Go to slide 2"></button>
+      <button class="dot" aria-label="Go to slide 3"></button>
+      <button class="dot" aria-label="Go to slide 4"></button>
+    </div>
+  </div>
+</section>
+
+<section class="about" id="about">
+  <figure class="about-photo">
+    <img src="collin-emmy.webp" alt="Collin O’Brien holding an Emmy award" loading="lazy">
+  </figure>
+  <div class="about-copy">
+    <h2>About</h2>
+    <p>Collin O'Brien is an Emmy Award-Winning Technical Producer and Director based in Los Angeles. He specializes in bridging the gap between creative vision and technical execution.</p>
+    <p>With a proven track record spanning narrative shorts, commercial campaigns, and large-scale logistical operations, his focus is on building resilient production pipelines that allow powerful storytelling to thrive.</p>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <h2>Let’s Build Something</h2>
+  <p>Available for technical consultation and directing roles.</p>
+  <p><br><a href="mailto:cobrienfilm@gmail.com">cobrienfilm@gmail.com</a></p>
+</section>
+
+<div class="footer">
+  © 2026 Collin O'Brien • All rights reserved
+</div>
+
+<script>
+  // 1. Original Testimonial Carousel Logic
+  (function(){
+    const root = document.getElementById('testimonials');
+    if(!root) return;
+    const track = root.querySelector('.track');
+    const slides = Array.from(root.querySelectorAll('.slide'));
+    const dots = Array.from(root.querySelectorAll('.dot'));
+    const prevBtn = root.querySelector('.prev');
+    const nextBtn = root.querySelector('.next');
+    const viewport = root.querySelector('.viewport');
+    let index = 0, timer = null, isHovered = false, startX = 0, deltaX = 0;
+
+    function go(i){
+      index = (i + slides.length) % slides.length;
+      track.style.transform = `translateX(${-index * 100}%)`;
+      dots.forEach((d,di)=>d.setAttribute('aria-current', di===index ? 'true':'false'));
+    }
+    function next(){ go(index+1); }
+    function prev(){ go(index-1); }
+    function startAuto(){ stopAuto(); timer = setInterval(()=>{ if(!isHovered) next(); }, 6000); }
+    function stopAuto(){ if(timer) clearInterval(timer); }
+
+    nextBtn.addEventListener('click', next);
+    prevBtn.addEventListener('click', prev);
+    dots.forEach((d,di)=> d.addEventListener('click', ()=>go(di)) );
+
+    viewport.addEventListener('mouseenter', ()=>{ isHovered=true; });
+    viewport.addEventListener('mouseleave', ()=>{ isHovered=false; });
+
+    root.addEventListener('keydown', (e)=>{ if(e.key==='ArrowRight') next(); if(e.key==='ArrowLeft') prev(); });
+    root.tabIndex = 0;
+
+    viewport.addEventListener('touchstart', (e)=>{ startX = e.touches[0].clientX; deltaX=0; }, {passive:true});
+    viewport.addEventListener('touchmove', (e)=>{ deltaX = e.touches[0].clientX - startX; }, {passive:true});
+    viewport.addEventListener('touchend', ()=>{ if(Math.abs(deltaX) > 50){ deltaX < 0 ? next() : prev(); } });
+
+    go(0); startAuto();
+  })();
+
+  // 2. Performance Optimization: Intersection Observer for Video Playback
+  document.addEventListener("DOMContentLoaded", () => {
+    const videos = document.querySelectorAll("video");
+    
+    // Check if browser supports IntersectionObserver
+    if ("IntersectionObserver" in window) {
+      const videoObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.play().catch(error => {
+              console.warn("Autoplay prevented by browser:", error);
+            });
+          } else {
+            entry.target.pause();
+          }
+        });
+      }, {
+        threshold: 0.1 
+      });
+
+      videos.forEach((video) => {
+        videoObserver.observe(video);
+      });
+    }
+  });
+</script>
+
+</body>
+</html>
