@@ -86,45 +86,33 @@
       margin: 0 auto;
     }
 
-    /* 9:16 Hybrid Section */
+    /* 9:16 Hybrid Section - Refactored for Vertical Stack */
     .hybrid-section {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 4rem;
+      display: flex;
+      flex-direction: column;
+      gap: 5rem;
       max-width: 1200px;
       margin: var(--spacing-section) auto;
       padding: 0 2rem;
       align-items: center;
     }
-    .fanned-media {
-      display: flex;
-      justify-content: center;
-      gap: 2rem;
-    }
-    .fanned-card {
-      width: 220px;
-      aspect-ratio: 9/16;
-      background: #111;
-      border-radius: 16px;
-      overflow: hidden;
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      box-shadow: 0 20px 40px rgba(0,0,0,0.6);
-      transform: rotate(var(--rot)) translateY(var(--y));
-      cursor: pointer;
-      transition: filter 0.2s ease;
-    }
-    .fanned-card:hover { filter: brightness(1.2); }
-    .fanned-card video {
-      width: 100%; height: 100%;
-      object-fit: cover;
-      pointer-events: none;
-    }
+
+    /* Horizontal Tech Panel for Desktop */
     .tech-panel {
+      width: 100%;
+      box-sizing: border-box;
       background: var(--surface-color);
-      padding: 3rem;
+      padding: 4rem;
       border-radius: var(--radius);
       border: 1px solid rgba(255,255,255,0.05);
+      display: grid;
+      grid-template-columns: 1fr 1.5fr;
+      gap: 4rem;
+      align-items: center;
     }
+    .tech-header-col { text-align: left; }
+    .tech-list-col { text-align: left; }
+    
     .badge {
       display: inline-block;
       background: var(--accent);
@@ -136,15 +124,45 @@
       border-radius: 4px;
       margin-bottom: 1rem;
     }
-    .tech-panel h2 { margin-top: 0; font-size: 2rem; }
-    .tech-list { list-style: none; padding: 0; margin: 1.5rem 0 0 0; }
+    .tech-panel h2 { margin-top: 0; font-size: 2.2rem; line-height: 1.2; }
+    .tech-panel p.lead { color: var(--text-muted); font-size: 1.1rem; }
+    
+    .tech-list { list-style: none; padding: 0; margin: 0; }
     .tech-list li {
-      margin-bottom: 1rem;
-      padding-bottom: 1rem;
+      margin-bottom: 1.5rem;
+      padding-bottom: 1.5rem;
       border-bottom: 1px solid rgba(255,255,255,0.1);
+      font-size: 1.05rem;
     }
     .tech-list li:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
-    .tech-list strong { color: var(--accent); }
+    .tech-list strong { color: var(--accent); display: block; margin-bottom: 0.25rem; font-size: 1.1rem; }
+
+    /* Fanned Media - Scaled Up and Centered */
+    .fanned-media {
+      display: flex;
+      justify-content: center;
+      gap: 2rem; /* Increased gap to prevent corner overlap on larger cards */
+      margin-top: 2rem;
+      width: 100%;
+    }
+    .fanned-card {
+      width: 280px; /* Scaled up from 180px */
+      aspect-ratio: 9/16;
+      background: #111;
+      border-radius: 20px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      box-shadow: 0 30px 60px rgba(0,0,0,0.8);
+      transform: rotate(var(--rot)) translateY(var(--y));
+      cursor: pointer;
+      transition: filter 0.2s ease;
+    }
+    .fanned-card:hover { filter: brightness(1.2); }
+    .fanned-card video {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      pointer-events: none;
+    }
 
     /* Brands */
     .brands {
@@ -223,10 +241,13 @@
 
     /* Mobile Breakpoints */
     @media (max-width: 900px) {
-      .hybrid-section, .about { grid-template-columns: 1fr; gap: 3rem; }
-      .fanned-media { transform: scale(0.9); gap: 0.5rem; }
-      .fanned-card { width: 35vw; }
-      .tech-panel { padding: 1.5rem; }
+      .tech-panel { grid-template-columns: 1fr; padding: 2rem; gap: 2rem; }
+      .about { grid-template-columns: 1fr; gap: 3rem; }
+      
+      /* Scale fanned cards down and tighten gap for mobile */
+      .fanned-media { transform: scale(0.95); gap: 0.5rem; margin-top: 0; }
+      .fanned-card { width: 40vw; max-width: 200px; }
+      
       #testimonials .card{grid-template-columns:64px 1fr}
       #testimonials .avatar{width:64px;height:64px}
       #testimonials .quote{font-size:1rem}
@@ -245,7 +266,7 @@
 
 <section class="hero" id="home">
   <video autoplay muted loop playsinline poster="background_loop_1_poster.jpg">
-    <source src="background loop_1.mp4" type="video/mp4" />
+    <source src="background_loop_1.mp4" type="video/mp4" />
   </video>
   <div class="hero-content">
     <h1>Technical Producer & Director</h1>
@@ -254,42 +275,47 @@
 </section>
 
 <section class="hybrid-section" id="work">
+  <div class="tech-panel">
+    <div class="tech-header-col">
+      <div class="badge">3x MARCOM Award Winner</div>
+      <h2>Digital Delivery & Logistics</h2>
+      <p class="lead">Engineering complex content pipelines for high-conversion social and digital environments.</p>
+    </div>
+    
+    <div class="tech-list-col">
+      <ul class="tech-list">
+        <li><strong>Scale & Routing:</strong> Programmed the scheduling architecture and digital delivery logistics for Arizona's first environmental film festival.</li>
+        <li><strong>Format Flexibility:</strong> Native ingestion and formatting for 9:16 cross-platform deployment.</li>
+        <li><strong>Technical Direction:</strong> Multi-cam sync and rapid post-production workflows optimized for high-volume commercial output.</li>
+      </ul>
+    </div>
+  </div>
+
   <div class="fanned-media">
-    <div class="fanned-card" style="--rot: -8deg; --y: 20px;">
+    <div class="fanned-card" style="--rot: -8deg; --y: 30px;">
       <video autoplay muted loop playsinline poster="Gabriela_1_poster.jpg">
         <source src="Gabriela_1.mp4" type="video/mp4" />
       </video>
     </div>
     <div class="fanned-card" style="--rot: 0deg; --y: 0px;">
       <video autoplay muted loop playsinline poster="Bella_Dose_and_Alyssa_Raghu_1_poster.jpg">
-        <source src="Bella Dose and Alyssa Raghu_1.mp4" type="video/mp4" />
+        <source src="Bella_Dose_and_Alyssa_Raghu_1.mp4" type="video/mp4" />
       </video>
     </div>
-    <div class="fanned-card" style="--rot: 8deg; --y: 20px;">
+    <div class="fanned-card" style="--rot: 8deg; --y: 30px;">
       <video autoplay muted loop playsinline poster="Jay_1_poster.jpg">
         <source src="Jay_1.mp4" type="video/mp4" />
       </video>
     </div>
   </div>
-
-  <div class="tech-panel">
-    <div class="badge">3x MARCOM Award Winner</div>
-    <h2>Digital Delivery & Logistics</h2>
-    <p>Engineering complex content pipelines for high-conversion social and digital environments.</p>
-    <ul class="tech-list">
-      <li><strong>Scale & Routing:</strong> Programmed the scheduling architecture and digital delivery logistics for Arizona's first environmental film festival.</li>
-      <li><strong>Format Flexibility:</strong> Native ingestion and formatting for 9:16 cross-platform deployment.</li>
-      <li><strong>Technical Direction:</strong> Multi-cam sync and rapid post-production workflows optimized for high-volume commercial output.</li>
-    </ul>
-  </div>
 </section>
 
 <section class="brands">
-  <img src="png-transparent-samsung-galaxy-gurugram-faridabad-logo-samsung-blue-text-logo.png" alt="Samsung" />
-  <img src="Starbucks Logo.png" alt="Starbucks" />
-  <img src="Lay's Logo copy.jpg" alt="Lay's" />
-  <img src="GMC Logo copy.png" alt="GMC" />
-  <img src="ESPN Logo.png" alt="ESPN" />
+  <img src="samsung_logo.png" alt="Samsung" />
+  <img src="Starbucks_Logo.png" alt="Starbucks" />
+  <img src="Lays_Logo.jpg" alt="Lay's" />
+  <img src="GMC_Logo.png" alt="GMC" />
+  <img src="ESPN_Logo.png" alt="ESPN" />
 </section>
 
 <section id="testimonials" aria-label="Testimonials carousel">
@@ -306,7 +332,7 @@
       <div class="track" role="list">
         <figure class="slide" role="listitem">
           <div class="card">
-            <img class="avatar" src="Kelly Sallaway_IMdB.png" alt="Headshot of Kelly Sallaway" loading="lazy">
+            <img class="avatar" src="Kelly_Sallaway_IMdB.png" alt="Headshot of Kelly Sallaway" loading="lazy">
             <figcaption>
               <p class="name">Kelly Sallaway</p>
               <p class="role">Emmy Award-Winning Producer</p>
@@ -316,7 +342,7 @@
         </figure>
         <figure class="slide" role="listitem">
           <div class="card">
-            <img class="avatar" src="Jasmine Holdsworth.png" alt="Headshot of Jasmine Holdsworth" loading="lazy">
+            <img class="avatar" src="Jasmine_Holdsworth.png" alt="Headshot of Jasmine Holdsworth" loading="lazy">
             <figcaption>
               <p class="name">Jasmine Holdsworth</p>
               <p class="role">Line Producer</p>
@@ -326,7 +352,7 @@
         </figure>
         <figure class="slide" role="listitem">
           <div class="card">
-            <img class="avatar" src="Ryan Henry Johnston.png" alt="Headshot of Ryan Henry Johnston" loading="lazy">
+            <img class="avatar" src="Ryan_Henry_Johnston.png" alt="Headshot of Ryan Henry Johnston" loading="lazy">
             <figcaption>
               <p class="name">Ryan Henry Johnston</p>
               <p class="role">Multi-Award-Winning Director</p>
@@ -336,7 +362,7 @@
         </figure>
         <figure class="slide" role="listitem">
           <div class="card">
-            <img class="avatar" src="Tina Imahara.png" alt="Headshot of Tina Imahara" loading="lazy">
+            <img class="avatar" src="Tina_Imahara.png" alt="Headshot of Tina Imahara" loading="lazy">
             <figcaption>
               <p class="name">Tina Imahara</p>
               <p class="role">Academy Award-Winning Editor</p>
@@ -358,7 +384,7 @@
 
 <section class="about" id="about">
   <figure class="about-photo">
-    <img src="collin-emmy.webp" alt="Collin O’Brien holding an Emmy award" loading="lazy">
+    <img src="collin_emmy.webp" alt="Collin O’Brien holding an Emmy award" loading="lazy">
   </figure>
   <div class="about-copy">
     <h2>About</h2>
