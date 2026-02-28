@@ -86,42 +86,6 @@
       margin: 0 auto;
     }
 
-    /* 16:9 Portfolio Grid */
-    .section-title {
-      text-align: center;
-      font-size: 2rem;
-      margin: var(--spacing-section) 0 3rem 0;
-    }
-    .portfolio-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 2rem;
-      max-width: 1200px;
-      margin: 0 auto var(--spacing-section) auto;
-      padding: 0 2rem;
-    }
-    .work-item {
-      background: var(--surface-color);
-      border-radius: var(--radius);
-      overflow: hidden;
-      border: 1px solid rgba(255,255,255,0.05);
-      transition: transform 0.3s ease;
-    }
-    .work-item:hover {
-      transform: translateY(-5px);
-    }
-    .work-item video {
-      width: 100%;
-      aspect-ratio: 16/9;
-      object-fit: cover;
-      display: block;
-    }
-    .work-meta {
-      padding: 1.5rem;
-    }
-    .work-meta h3 { margin: 0 0 0.5rem 0; }
-    .work-meta p { margin: 0; color: var(--text-muted); font-size: 0.9rem; }
-
     /* 9:16 Hybrid Section */
     .hybrid-section {
       display: grid;
@@ -200,26 +164,36 @@
     }
     .brands img:hover { filter: grayscale(0%) opacity(1); }
 
-    /* Clean Testimonials Grid */
-    .testimonials {
-      max-width: 1200px;
-      margin: var(--spacing-section) auto;
-      padding: 0 2rem;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 2rem;
+    /* Original Testimonials Carousel Styles */
+    #testimonials { --gap: 1rem; --card-bg: #0b0b0b; --text:#f5f5f5; --muted:#cfcfcf; --accent:#D4AF37; --ring: rgba(255,255,255,.15); box-sizing: border-box; margin: var(--spacing-section) auto; }
+    #testimonials figure, #testimonials blockquote { margin: 0; }
+    #testimonials .shell{max-width:1100px;margin:0 auto;padding:2rem 1rem;}
+    #testimonials .header{display:flex;align-items:end;justify-content:space-between;gap:var(--gap);margin-bottom:1rem}
+    #testimonials .header h2{font-size:clamp(1.4rem,2vw,1.8rem);margin:0;letter-spacing:.2px}
+    #testimonials .viewport{
+      position:relative;
+      overflow:hidden;
+      border-radius:1rem;
+      background:linear-gradient(180deg,#121212,#0a0a0a);
+      box-shadow:0 10px 30px rgba(0,0,0,.35), inset 0 0 0 1px var(--ring)
     }
-    .test-card {
-      background: var(--surface-color);
-      padding: 2rem;
-      border-radius: var(--radius);
-      border: 1px solid rgba(255,255,255,0.05);
+    #testimonials .track{display:flex;transition:transform .6s cubic-bezier(.22,.61,.36,1);will-change:transform}
+    #testimonials .slide{min-width:100%; padding:1.25rem; box-sizing: border-box;}
+    #testimonials .card{
+      display:grid;grid-template-columns:80px 1fr;gap:1rem;align-items:center;
+      background:var(--card-bg);border-radius:.875rem;padding:1rem;border:1px solid rgba(255,255,255,.08)
     }
-    .test-header { display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem; }
-    .test-avatar { width: 50px; height: 50px; border-radius: 50%; object-fit: cover; }
-    .test-name { margin: 0; font-weight: bold; }
-    .test-role { margin: 0; font-size: 0.85rem; color: var(--text-muted); }
-    .test-quote { margin: 0; font-style: italic; font-size: 0.95rem; }
+    #testimonials .avatar{width:72px;height:72px;border-radius:999px;object-fit:cover;border:2px solid rgba(255,255,255,.2);box-shadow:0 8px 20px rgba(0,0,0,.35)}
+    #testimonials .quote{margin:.25rem 0 0 0;line-height:1.5;font-size:1.05rem}
+    #testimonials .name{font-weight:700;margin:0}
+    #testimonials .role{color:var(--muted);font-size:.95rem;margin:.15rem 0 0 0}
+    #testimonials .actions{display:flex;gap:.5rem;align-items:center}
+    #testimonials .btn{appearance:none;border:1px solid rgba(255,255,255,.18);background:#151515;color:var(--text-main);padding:.5rem .75rem;border-radius:.625rem;cursor:pointer;transition:transform .1s ease, background .2s ease}
+    #testimonials .btn:hover{background:#1b1b1b}
+    #testimonials .btn:active{transform:translateY(1px)}
+    #testimonials .dots{display:flex;gap:.5rem;align-items:center}
+    #testimonials .dot{width:8px;height:8px;border-radius:999px;background:rgba(255,255,255,.25);border:none;cursor:pointer}
+    #testimonials .dot[aria-current="true"], #testimonials .dot:hover{background:var(--accent)}
 
     /* About */
     .about {
@@ -253,6 +227,9 @@
       .fanned-media { transform: scale(0.9); gap: 0.5rem; }
       .fanned-card { width: 30vw; }
       .tech-panel { padding: 1.5rem; }
+      #testimonials .card{grid-template-columns:64px 1fr}
+      #testimonials .avatar{width:64px;height:64px}
+      #testimonials .quote{font-size:1rem}
     }
   </style>
 </head>
@@ -261,12 +238,13 @@
 <nav>
   <a href="#home">Home</a>
   <a href="#work">Work</a>
+  <a href="#testimonials">Testimonials</a>
   <a href="#about">About</a>
   <a href="#contact">Contact</a>
 </nav>
 
 <section class="hero" id="home">
-  <video autoplay muted loop playsinline>
+  <video autoplay muted loop playsinline poster="background_loop_1_poster.jpg">
     <source src="background loop_1.mp4" type="video/mp4" />
   </video>
   <div class="hero-content">
@@ -275,52 +253,20 @@
   </div>
 </section>
 
-<h2 class="section-title" id="work">Selected Work</h2>
-
-<section class="portfolio-grid">
-  <div class="work-item">
-    <video autoplay muted loop playsinline>
-      <source src="Gabriela_1.mp4" type="video/mp4" />
-    </video>
-    <div class="work-meta">
-      <h3>Project Alpha</h3>
-      <p>Technical Direction / Multi-cam Setup</p>
-    </div>
-  </div>
-  <div class="work-item">
-    <video autoplay muted loop playsinline>
-      <source src="Bella Dose and Alyssa Raghu_1.mp4" type="video/mp4" />
-    </video>
-    <div class="work-meta">
-      <h3>Project Beta</h3>
-      <p>Live Broadcast Integration</p>
-    </div>
-  </div>
-  <div class="work-item">
-    <video autoplay muted loop playsinline>
-      <source src="Jay_1.mp4" type="video/mp4" />
-    </video>
-    <div class="work-meta">
-      <h3>Project Gamma</h3>
-      <p>Post-Production Pipeline Management</p>
-    </div>
-  </div>
-</section>
-
-<section class="hybrid-section">
+<section class="hybrid-section" id="work">
   <div class="fanned-media">
     <div class="fanned-card" style="--rot: -8deg; --y: 20px;">
-      <video autoplay muted loop playsinline>
+      <video autoplay muted loop playsinline poster="Gabriela_1_poster.jpg">
         <source src="Gabriela_1.mp4" type="video/mp4" />
       </video>
     </div>
     <div class="fanned-card" style="--rot: 0deg; --y: 0px;">
-      <video autoplay muted loop playsinline>
+      <video autoplay muted loop playsinline poster="Bella_Dose_and_Alyssa_Raghu_1_poster.jpg">
         <source src="Bella Dose and Alyssa Raghu_1.mp4" type="video/mp4" />
       </video>
     </div>
     <div class="fanned-card" style="--rot: 8deg; --y: 20px;">
-      <video autoplay muted loop playsinline>
+      <video autoplay muted loop playsinline poster="Jay_1_poster.jpg">
         <source src="Jay_1.mp4" type="video/mp4" />
       </video>
     </div>
@@ -346,32 +292,73 @@
   <img src="ESPN Logo.png" alt="ESPN" />
 </section>
 
-<section class="testimonials">
-  <div class="test-card">
-    <div class="test-header">
-      <img class="test-avatar" src="Kelly Sallaway_IMdB.png" alt="Kelly Sallaway">
-      <div>
-        <p class="test-name">Kelly Sallaway</p>
-        <p class="test-role">Emmy Award-Winning Producer</p>
+<section id="testimonials" aria-label="Testimonials carousel">
+  <div class="shell">
+    <div class="header">
+      <h2>What people say about Collin</h2>
+      <div class="actions" aria-controls="testimonial-carousel">
+        <button class="btn prev" aria-label="Previous testimonial">◀</button>
+        <button class="btn next" aria-label="Next testimonial">▶</button>
       </div>
     </div>
-    <p class="test-quote">"He brought a delayed project on schedule, then helped us to save thousands on licensing! I want him on every production!"</p>
-  </div>
-  <div class="test-card">
-    <div class="test-header">
-      <img class="test-avatar" src="Ryan Henry Johnston.png" alt="Ryan Henry Johnston">
-      <div>
-        <p class="test-name">Ryan Henry Johnston</p>
-        <p class="test-role">Multi-Award-Winning Director</p>
+
+    <div class="viewport" id="testimonial-carousel">
+      <div class="track" role="list">
+        <figure class="slide" role="listitem">
+          <div class="card">
+            <img class="avatar" src="Kelly Sallaway_IMdB.png" alt="Headshot of Kelly Sallaway" loading="lazy">
+            <figcaption>
+              <p class="name">Kelly Sallaway</p>
+              <p class="role">Emmy Award-Winning Producer</p>
+              <blockquote class="quote">He brought a delayed project on schedule, then helped us to save thousands on licensing! I want him on every production!</blockquote>
+            </figcaption>
+          </div>
+        </figure>
+        <figure class="slide" role="listitem">
+          <div class="card">
+            <img class="avatar" src="Jasmine Holdsworth.png" alt="Headshot of Jasmine Holdsworth" loading="lazy">
+            <figcaption>
+              <p class="name">Jasmine Holdsworth</p>
+              <p class="role">Line Producer</p>
+              <blockquote class="quote">He’s like a swiss army knife on set. He can do anything!</blockquote>
+            </figcaption>
+          </div>
+        </figure>
+        <figure class="slide" role="listitem">
+          <div class="card">
+            <img class="avatar" src="Ryan Henry Johnston.png" alt="Headshot of Ryan Henry Johnston" loading="lazy">
+            <figcaption>
+              <p class="name">Ryan Henry Johnston</p>
+              <p class="role">Multi-Award-Winning Director</p>
+              <blockquote class="quote">He’s invaluable because he’s calm under pressure. When everyone else is hyperventilating when something unexpected happens, he stays calm, has already analyzed the situation and is providing courses of action. So awesome!</blockquote>
+            </figcaption>
+          </div>
+        </figure>
+        <figure class="slide" role="listitem">
+          <div class="card">
+            <img class="avatar" src="Tina Imahara.png" alt="Headshot of Tina Imahara" loading="lazy">
+            <figcaption>
+              <p class="name">Tina Imahara</p>
+              <p class="role">Academy Award-Winning Editor</p>
+              <blockquote class="quote">Collin is wonderfully talented! He’s hungry, driven, and persistent! I was amazed at his knowledge and confidence in approaching questions and how he helped others feel welcome!</blockquote>
+            </figcaption>
+          </div>
+        </figure>
       </div>
     </div>
-    <p class="test-quote">"He’s invaluable because he’s calm under pressure. When everyone else is hyperventilating... he stays calm, has already analyzed the situation and is providing courses of action."</p>
+
+    <div class="controls" style="display:flex;justify-content:center;gap:.6rem;margin-top:.9rem">
+      <button class="dot" aria-label="Go to slide 1" aria-current="true"></button>
+      <button class="dot" aria-label="Go to slide 2"></button>
+      <button class="dot" aria-label="Go to slide 3"></button>
+      <button class="dot" aria-label="Go to slide 4"></button>
+    </div>
   </div>
 </section>
-  
+
 <section class="about" id="about">
   <figure class="about-photo">
-    <img src="collin-emmy.webp" alt="Collin O’Brien holding an Emmy award">
+    <img src="collin-emmy.webp" alt="Collin O’Brien holding an Emmy award" loading="lazy">
   </figure>
   <div class="about-copy">
     <h2>About</h2>
@@ -389,6 +376,77 @@
 <div class="footer">
   © 2026 Collin O'Brien • All rights reserved
 </div>
+
+<script>
+  // 1. Original Testimonial Carousel Logic
+  (function(){
+    const root = document.getElementById('testimonials');
+    if(!root) return;
+    const track = root.querySelector('.track');
+    const slides = Array.from(root.querySelectorAll('.slide'));
+    const dots = Array.from(root.querySelectorAll('.dot'));
+    const prevBtn = root.querySelector('.prev');
+    const nextBtn = root.querySelector('.next');
+    const viewport = root.querySelector('.viewport');
+    let index = 0, timer = null, isHovered = false, startX = 0, deltaX = 0;
+
+    function go(i){
+      index = (i + slides.length) % slides.length;
+      track.style.transform = `translateX(${-index * 100}%)`;
+      dots.forEach((d,di)=>d.setAttribute('aria-current', di===index ? 'true':'false'));
+    }
+    function next(){ go(index+1); }
+    function prev(){ go(index-1); }
+    function startAuto(){ stopAuto(); timer = setInterval(()=>{ if(!isHovered) next(); }, 6000); }
+    function stopAuto(){ if(timer) clearInterval(timer); }
+
+    nextBtn.addEventListener('click', next);
+    prevBtn.addEventListener('click', prev);
+    dots.forEach((d,di)=> d.addEventListener('click', ()=>go(di)) );
+
+    viewport.addEventListener('mouseenter', ()=>{ isHovered=true; });
+    viewport.addEventListener('mouseleave', ()=>{ isHovered=false; });
+
+    root.addEventListener('keydown', (e)=>{ if(e.key==='ArrowRight') next(); if(e.key==='ArrowLeft') prev(); });
+    root.tabIndex = 0;
+
+    viewport.addEventListener('touchstart', (e)=>{ startX = e.touches[0].clientX; deltaX=0; }, {passive:true});
+    viewport.addEventListener('touchmove', (e)=>{ deltaX = e.touches[0].clientX - startX; }, {passive:true});
+    viewport.addEventListener('touchend', ()=>{ if(Math.abs(deltaX) > 50){ deltaX < 0 ? next() : prev(); } });
+
+    go(0); startAuto();
+  })();
+
+  // 2. Performance Optimization: Intersection Observer for Video Playback
+  document.addEventListener("DOMContentLoaded", () => {
+    const videos = document.querySelectorAll("video");
+    
+    // Check if browser supports IntersectionObserver
+    if ("IntersectionObserver" in window) {
+      const videoObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          // If the video is in the viewport, play it.
+          if (entry.isIntersecting) {
+            entry.target.play().catch(error => {
+              // Catch DOMException if browser blocks autoplay
+              console.warn("Autoplay prevented by browser:", error);
+            });
+          } else {
+            // If the video scrolls out of view, pause it to save battery/data.
+            entry.target.pause();
+          }
+        });
+      }, {
+        // Trigger when at least 10% of the video is visible
+        threshold: 0.1 
+      });
+
+      videos.forEach((video) => {
+        videoObserver.observe(video);
+      });
+    }
+  });
+</script>
 
 </body>
 </html>
