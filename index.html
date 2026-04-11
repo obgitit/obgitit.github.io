@@ -164,23 +164,27 @@
       pointer-events: none;
     }
 
-    /* Brands */
-    .brands {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 3rem;
-      flex-wrap: wrap;
-      margin: var(--spacing-section) auto;
-      padding: 2rem;
-      background: var(--surface-color);
-    }
-    .brands img {
-      height: 30px;
-      filter: grayscale(100%) opacity(0.6);
-      transition: filter 0.3s;
-    }
-    .brands img:hover { filter: grayscale(0%) opacity(1); }
+/* Brands */
+.brands {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: var(--spacing-section) auto;
+  padding: 2rem;
+  background: var(--surface-color);
+}
+
+.consolidated-logos {
+  max-width: 100%;
+  width: 800px; /* Adjust this to make the banner wider or narrower */
+  height: auto;
+  opacity: 0.7; /* Keeps the slightly muted look */
+  transition: opacity 0.3s ease;
+}
+
+.consolidated-logos:hover {
+  opacity: 1; /* Brightens up when the user hovers */
+}
 
     /* Original Testimonials Carousel Styles */
     #testimonials { --gap: 1rem; --card-bg: #0b0b0b; --text:#f5f5f5; --muted:#cfcfcf; --accent:#D4AF37; --ring: rgba(255,255,255,.15); box-sizing: border-box; margin: var(--spacing-section) auto; }
@@ -310,11 +314,7 @@
 </section>
 
 <section class="brands">
-  <img src="image.png" alt="Samsung" />
-  <img src="image.png" alt="Starbucks" />
-  <img src="image.jpg" alt="Lay's" />
-  <img src="image.png" alt="GMC" />
-  <img src="image.png" alt="ESPN" />
+  <img src="All Logos.png" alt="Trusted Clients: ESPN, GMC, Lay's, Samsung, Starbucks" class="consolidated-logos" />
 </section>
 
 <section id="testimonials" aria-label="Testimonials carousel">
