@@ -86,73 +86,56 @@
       margin: 0 auto;
     }
 
-    /* 9:16 Hybrid Section - Vertical Stack */
-    .hybrid-section {
+    /* Awards Bar - 1 Row, 3 Columns */
+    .awards-bar {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      max-width: 1000px;
+      margin: 4rem auto 0 auto;
+      padding: 2rem;
+      text-align: center;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .award-item h2 {
+      color: var(--accent);
+      font-size: 2.5rem;
+      margin: 0 0 0.5rem 0;
+      line-height: 1;
+    }
+    .award-item p {
+      margin: 0;
+      font-size: 1.1rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--text-main);
+    }
+
+    /* Centered Fanned Media Container */
+    .fanned-container {
       display: flex;
       flex-direction: column;
-      gap: 5rem;
-      max-width: 1200px;
+      align-items: center;
       margin: var(--spacing-section) auto;
+      max-width: 1200px;
       padding: 0 2rem;
-      align-items: center;
     }
 
-    /* Horizontal Tech Panel for Desktop */
-    .tech-panel {
-      width: 100%;
-      box-sizing: border-box;
-      background: var(--surface-color);
-      padding: 4rem;
-      border-radius: var(--radius);
-      border: 1px solid rgba(255,255,255,0.05);
-      display: grid;
-      grid-template-columns: 1fr 1.5fr;
-      gap: 4rem;
-      align-items: center;
-    }
-    .tech-header-col { text-align: left; }
-    .tech-list-col { text-align: left; }
-    
-    .badge {
-      display: inline-block;
-      background: var(--accent);
-      color: #000;
-      font-weight: bold;
-      font-size: 0.85rem;
-      text-transform: uppercase;
-      padding: 0.4rem 0.8rem;
-      border-radius: 4px;
-      margin-bottom: 1rem;
-    }
-    .tech-panel h2 { margin-top: 0; font-size: 2.2rem; line-height: 1.2; }
-    .tech-panel p.lead { color: var(--text-muted); font-size: 1.1rem; }
-    
-    .tech-list { list-style: none; padding: 0; margin: 0; }
-    .tech-list li {
-      margin-bottom: 1.5rem;
-      padding-bottom: 1.5rem;
-      border-bottom: 1px solid rgba(255,255,255,0.1);
-      font-size: 1.05rem;
-    }
-    .tech-list li:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
-    .tech-list strong { color: var(--accent); display: block; margin-bottom: 0.25rem; font-size: 1.1rem; }
-
-    /* Fanned Media - Scaled Up and Centered */
+    /* Fanned Media - Scaled Up */
     .fanned-media {
       display: flex;
       justify-content: center;
-      gap: 2rem;
-      margin-top: 2rem;
+      gap: 2.5rem;
       width: 100%;
     }
     .fanned-card {
-      width: 280px; 
+      width: 340px; /* Scaled up heavily for desktop */
       aspect-ratio: 9/16;
       background: #111;
       border-radius: 20px;
       overflow: hidden;
       border: 1px solid rgba(255, 255, 255, 0.15);
-      box-shadow: 0 30px 60px rgba(0,0,0,0.8);
+      box-shadow: 0 40px 80px rgba(0,0,0,0.9);
       transform: rotate(var(--rot)) translateY(var(--y));
       cursor: pointer;
       transition: filter 0.2s ease;
@@ -164,29 +147,115 @@
       pointer-events: none;
     }
 
-/* Brands */
-.brands {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: var(--spacing-section) auto;
-  padding: 2rem;
-  background: transparent;
-}
+    /* Full-Width Category Strips */
+    .portfolio-categories {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      margin: var(--spacing-section) 0;
+    }
+    
+    .category-strip {
+      position: relative;
+      width: 100%;
+      min-height: 400px;
+      background-color: #151515; /* Fallback */
+      /* Placeholder gradients - Replace with background-image: url('your-image.jpg') */
+      background: linear-gradient(135deg, #1a1a1a, #050505);
+      background-size: cover;
+      background-position: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      border-top: 1px solid rgba(255,255,255,0.05);
+    }
 
-.consolidated-logos {
-  max-width: 100%;
-  width: 800px; /* Adjust this to make the banner wider or narrower */
-  height: auto;
-  opacity: 0.7; /* Keeps the slightly muted look */
-  transition: opacity 0.3s ease;
-}
+    .cat-title {
+      position: absolute;
+      font-size: clamp(3rem, 6vw, 5rem);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      z-index: 2;
+      transition: opacity 0.4s ease, transform 0.4s ease;
+      margin: 0;
+      text-shadow: 0 10px 20px rgba(0,0,0,0.8);
+    }
 
-.consolidated-logos:hover {
-  opacity: 1; /* Brightens up when the user hovers */
-}
+    /* Hover Reveal Container */
+    .cat-hover-content {
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.85);
+      backdrop-filter: blur(8px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.4s ease, visibility 0.4s;
+      z-index: 3;
+    }
 
-    /* Original Testimonials Carousel Styles */
+    /* The Single Row, Multiple Columns Layout */
+    .cat-grid {
+      display: grid;
+      gap: 2rem;
+      width: 100%;
+      max-width: 1400px;
+    }
+    .grid-3 { grid-template-columns: repeat(3, 1fr); }
+    .grid-4 { grid-template-columns: repeat(4, 1fr); }
+    .grid-2 { grid-template-columns: repeat(2, 1fr); max-width: 800px;}
+
+    .cat-col {
+      text-align: center;
+      padding: 1rem;
+      border-left: 1px solid rgba(255,255,255,0.1);
+    }
+    .cat-col:first-child { border-left: none; }
+    .cat-col h3 {
+      color: var(--accent);
+      font-size: 1.4rem;
+      margin: 0 0 1rem 0;
+    }
+    .cat-col p {
+      color: var(--text-muted);
+      font-size: 1rem;
+      margin: 0;
+      line-height: 1.5;
+    }
+
+    /* Trigger the Hover Effects */
+    .category-strip:hover .cat-title {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+    .category-strip:hover .cat-hover-content {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    /* Brands */
+    .brands {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 3rem;
+      flex-wrap: wrap;
+      margin: var(--spacing-section) auto;
+      padding: 2rem;
+      background: var(--surface-color);
+    }
+    .brands img {
+      height: 30px;
+      filter: grayscale(100%) opacity(0.6);
+      transition: filter 0.3s;
+    }
+    .brands img:hover { filter: grayscale(0%) opacity(1); }
+
+    /* Testimonials */
     #testimonials { --gap: 1rem; --card-bg: #0b0b0b; --text:#f5f5f5; --muted:#cfcfcf; --accent:#D4AF37; --ring: rgba(255,255,255,.15); box-sizing: border-box; margin: var(--spacing-section) auto; }
     #testimonials figure, #testimonials blockquote { margin: 0; }
     #testimonials .shell{max-width:1100px;margin:0 auto;padding:2rem 1rem;}
@@ -233,27 +302,87 @@
       filter: contrast(1.1);
     }
 
-    /* Contact & Footer */
+    /* Contact Form */
     .contact {
-      text-align: center;
+      max-width: 800px;
       margin: var(--spacing-section) auto;
       padding: 4rem 2rem;
       background: var(--surface-color);
+      border-radius: var(--radius);
+      border: 1px solid rgba(255,255,255,0.05);
+      text-align: center;
     }
-    .contact a { color: var(--accent); text-decoration: none; font-size: 1.2rem; }
+    .contact h2 { margin-top: 0; }
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      margin-top: 2rem;
+      text-align: left;
+    }
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    .form-group label {
+      font-weight: 600;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+    .form-group input, 
+    .form-group textarea {
+      width: 100%;
+      box-sizing: border-box;
+      padding: 1rem;
+      background: var(--bg-color);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 8px;
+      color: var(--text-main);
+      font-family: inherit;
+      font-size: 1rem;
+      transition: border-color 0.3s ease;
+    }
+    .form-group input:focus, 
+    .form-group textarea:focus {
+      outline: none;
+      border-color: var(--accent);
+    }
+    .btn-submit {
+      background: var(--accent);
+      color: #000;
+      border: none;
+      padding: 1rem 2rem;
+      font-size: 1rem;
+      font-weight: bold;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: transform 0.1s ease, filter 0.2s ease;
+      align-self: center;
+      margin-top: 1rem;
+    }
+    .btn-submit:hover { filter: brightness(1.1); }
+    .btn-submit:active { transform: translateY(2px); }
+
     .footer { text-align: center; padding: 2rem; color: var(--text-muted); font-size: 0.9rem; }
 
     /* Mobile Breakpoints */
     @media (max-width: 900px) {
-      .tech-panel { grid-template-columns: 1fr; padding: 2rem; gap: 2rem; }
-      .about { grid-template-columns: 1fr; gap: 3rem; }
+      .awards-bar { grid-template-columns: 1fr; gap: 1.5rem; padding: 1rem; margin-top: 2rem;}
       
-      .fanned-media { transform: scale(0.95); gap: 0.5rem; margin-top: 0; }
+      .fanned-media { transform: scale(0.95); gap: 0.5rem; }
       .fanned-card { width: 40vw; max-width: 200px; }
       
+      .about { grid-template-columns: 1fr; gap: 3rem; }
       #testimonials .card{grid-template-columns:64px 1fr}
       #testimonials .avatar{width:64px;height:64px}
       #testimonials .quote{font-size:1rem}
+
+      /* Stack Category Grids on Mobile */
+      .cat-grid { grid-template-columns: 1fr; gap: 1rem; }
+      .cat-col { border-left: none; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 1rem; }
+      .cat-col:first-child { border-top: none; }
+      .category-strip { min-height: auto; padding: 4rem 0; }
     }
   </style>
 </head>
@@ -277,25 +406,24 @@
   </div>
 </section>
 
-<section class="hybrid-section" id="work">
-  <div class="tech-panel">
-    <div class="tech-header-col">
-      <div class="badge">3x MARCOM Award Winner</div>
-      <h2>Engineered for Impact</h2>
-      <p class="lead">We translate your solution to the world.</p>
-    </div>
-    
-    <div class="tech-list-col">
-      <ul class="tech-list">
-        <li><strong>Cinematic Architecture (16:9):</strong> High-spec, horizontal storytelling for brand anthems and commercials. This is where we build your permanent brand identity with cinema-grade precision.</li>
-        <li><strong>Agile Mechanics (9:16):</strong> Social-native content engineered for the scroll. We design high-retention vertical commercials that feel native to the platform and impossible to ignore.</li>
-        <li><strong>Technical Translation:</strong>We bridge the gap between complex product specs and human emotion. Whether it’s a million-dollar broadcast spot or a 15-second ad, we make sure the "why" behind your product is understood.</li>
-      </ul>
-    </div>
+<section class="awards-bar">
+  <div class="award-item">
+    <h2>1x</h2>
+    <p>Emmy Award</p>
   </div>
+  <div class="award-item">
+    <h2>3x</h2>
+    <p>Telly Awards</p>
+  </div>
+  <div class="award-item">
+    <h2>3x</h2>
+    <p>MARCOM Awards</p>
+  </div>
+</section>
 
+<section class="fanned-container" id="work">
   <div class="fanned-media">
-    <div class="fanned-card" style="--rot: -8deg; --y: 30px;">
+    <div class="fanned-card" style="--rot: -8deg; --y: 40px;">
       <video autoplay muted loop playsinline poster="Gabriela_1 poster.jpg">
         <source src="Gabriela_1.mp4" type="video/mp4" />
       </video>
@@ -305,7 +433,7 @@
         <source src="Bella Dose and Alyssa Raghu_1.mp4" type="video/mp4" />
       </video>
     </div>
-    <div class="fanned-card" style="--rot: 8deg; --y: 30px;">
+    <div class="fanned-card" style="--rot: 8deg; --y: 40px;">
       <video autoplay muted loop playsinline poster="Jay_1 poster.jpg">
         <source src="Jay_1.mp4" type="video/mp4" />
       </video>
@@ -313,8 +441,71 @@
   </div>
 </section>
 
+<section class="portfolio-categories">
+  
+  <div class="category-strip">
+    <h2 class="cat-title">Film / TV</h2>
+    <div class="cat-hover-content">
+      <div class="cat-grid grid-3">
+        <div class="cat-col">
+          <h3>Short</h3>
+        </div>
+        <div class="cat-col">
+          <h3>Feature</h3>
+        </div>
+        <div class="cat-col">
+          <h3>TV</h3>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="category-strip">
+    <h2 class="cat-title">Commercial</h2>
+    <div class="cat-hover-content">
+      <div class="cat-grid grid-4">
+        <div class="cat-col">
+          <h3>Creative Development</h3>
+          <p>Development / Pre-Production Consulting</p>
+        </div>
+        <div class="cat-col">
+          <h3>Broadcast Commercial</h3>
+          <p>&nbsp;</p>
+        </div>
+        <div class="cat-col">
+          <h3>Social Ads / Campaigns</h3>
+          <p>Story Development, Influencer Direction, Pre-Post Production</p>
+        </div>
+        <div class="cat-col">
+          <h3>Branded Content</h3>
+          <p>Product Demonstration, Testimonial, Behind-the-Scenes, Mini-Docs, Short Film</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="category-strip">
+    <h2 class="cat-title">Music Video</h2>
+    <div class="cat-hover-content">
+      <div class="cat-grid grid-2">
+        <div class="cat-col">
+          <h3>Story Consulting</h3>
+        </div>
+        <div class="cat-col">
+          <h3>Pre / Post Production</h3>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
 <section class="brands">
-  <img src="All Logos New.png" alt="Trusted Clients: ESPN, GMC, Lay's, Samsung, Starbucks" class="consolidated-logos" />
+  <img src="png-transparent-samsung-galaxy-gurugram-faridabad-logo-samsung-blue-text-logo.png" alt="Samsung" />
+  <img src="Starbucks Logo.png" alt="Starbucks" />
+  <img src="Lay's Logo copy.jpg" alt="Lay's" />
+  <img src="GMC Logo copy.png" alt="GMC" />
+  <img src="ESPN Logo.png" alt="ESPN" />
 </section>
 
 <section id="testimonials" aria-label="Testimonials carousel">
@@ -397,7 +588,26 @@
 <section class="contact" id="contact">
   <h2>Let’s Build Something</h2>
   <p>Available for technical consultation and directing roles.</p>
-  <p><br><a href="mailto:cobrienfilm@gmail.com">cobrienfilm@gmail.com</a></p>
+  
+  <form class="contact-form" action="https://formspree.io/f/YOUR_FORM_ID_HERE" method="POST">
+    <div class="form-group">
+      <label for="name">Name</label>
+      <input type="text" id="name" name="name" required>
+    </div>
+    
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input type="email" id="email" name="_replyto" required>
+    </div>
+    
+    <div class="form-group">
+      <label for="message">What are you asking about?</label>
+      <textarea id="message" name="message" rows="5" required></textarea>
+    </div>
+    
+    <input type="text" name="_gotcha" style="display:none" />
+    <button type="submit" class="btn-submit">Send Message</button>
+  </form>
 </section>
 
 <div class="footer">
@@ -448,7 +658,6 @@
   document.addEventListener("DOMContentLoaded", () => {
     const videos = document.querySelectorAll("video");
     
-    // Check if browser supports IntersectionObserver
     if ("IntersectionObserver" in window) {
       const videoObserver = new IntersectionObserver((entries) => {
         entries.forEach((entry) => {
