@@ -24,18 +24,19 @@
       line-height: 1.6;
     }
 
-    /* Navigation */
+    /* Navigation & Dropdown */
     nav {
       position: sticky;
       top: 0;
       background: rgba(10, 10, 10, 0.9);
       backdrop-filter: blur(10px);
-      padding: 1.5rem;
+      padding: 1rem 1.5rem;
       display: flex;
       justify-content: center;
       gap: 2.5rem;
       z-index: 100;
       border-bottom: 1px solid rgba(255,255,255,0.05);
+      align-items: center;
     }
     nav a {
       color: var(--text-main);
@@ -47,6 +48,55 @@
       transition: color 0.2s;
     }
     nav a:hover { color: var(--accent); }
+
+    /* Dropdown Logic */
+    .nav-item {
+      position: relative;
+      display: inline-block;
+      padding: 0.5rem 0;
+    }
+    .nav-dropdown {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--surface-color);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 8px;
+      padding: 1rem;
+      min-width: 280px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+      z-index: 101;
+    }
+    .nav-item:hover .nav-dropdown {
+      display: block;
+    }
+    .nav-cat-title {
+      color: var(--accent);
+      font-size: 0.75rem;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin: 1rem 0 0.5rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      padding-bottom: 0.25rem;
+    }
+    .nav-cat-title:first-child { margin-top: 0; }
+    .nav-dropdown a {
+      display: block;
+      padding: 0.4rem 0;
+      font-size: 0.85rem;
+      text-transform: none;
+      font-weight: normal;
+    }
+    .nav-dropdown span.desc {
+      display: block;
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      margin-top: -0.2rem;
+      margin-bottom: 0.3rem;
+    }
 
     /* Hero Section */
     .hero {
@@ -86,42 +136,75 @@
       margin: 0 auto;
     }
 
-    /* Awards Bar - 1 Row, 3 Columns */
+    /* New Awards Bar - Tight Spacing */
     .awards-bar {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 2rem;
-      max-width: 1000px;
-      margin: 4rem auto 0 auto;
-      padding: 2rem;
-      text-align: center;
-      border-bottom: 1px solid rgba(255,255,255,0.05);
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 4rem;
+      max-width: 1200px;
+      margin: 2rem auto 2rem auto; /* Reduced space below hero */
+      padding: 0 2rem;
     }
-    .award-item h2 {
-      color: var(--accent);
-      font-size: 2.5rem;
-      margin: 0 0 0.5rem 0;
+    
+    .award-item {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    
+    .award-number {
+      font-size: 80px; /* 1/5th of 400px phone height */
+      font-weight: 800;
       line-height: 1;
     }
-    .award-item p {
-      margin: 0;
-      font-size: 1.1rem;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      color: var(--text-main);
+    
+    .shiny-gold {
+      background: linear-gradient(to bottom right, #BF953F, #FCF6BA, #B38728, #FBF5B7, #AA771C);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
     }
 
-    /* Centered Fanned Media Container */
+    .shiny-platinum {
+      background: linear-gradient(to bottom right, #a0a0a0, #ffffff, #808080, #e6e6e6, #666666);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .award-details {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .award-details img {
+      width: 80px;
+      height: 80px;
+      object-fit: contain;
+      background: rgba(255,255,255,0.05); /* Just to show placeholder boundary */
+      border-radius: 4px;
+      margin-bottom: 0.25rem;
+    }
+    .award-details p {
+      margin: 0;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      font-weight: bold;
+      letter-spacing: 1px;
+    }
+
+    /* Centered Fanned Media Container - Tight Spacing */
     .fanned-container {
       display: flex;
       flex-direction: column;
       align-items: center;
-      margin: var(--spacing-section) auto;
+      margin: 2rem auto 4rem auto; /* Reduced top gap to sit closer to awards */
       max-width: 1200px;
       padding: 0 2rem;
     }
 
-    /* Fanned Media - Scaled Up */
+    /* Fanned Media */
     .fanned-media {
       display: flex;
       justify-content: center;
@@ -129,7 +212,7 @@
       width: 100%;
     }
     .fanned-card {
-      width: 340px; /* Scaled up heavily for desktop */
+      width: 340px; 
       aspect-ratio: 9/16;
       background: #111;
       border-radius: 20px;
@@ -147,117 +230,65 @@
       pointer-events: none;
     }
 
-    /* Full-Width Category Strips */
-    .portfolio-categories {
+    /* New Services Row (Based on Image Reference) */
+    .services-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 3rem;
+      max-width: 1000px;
+      margin: 4rem auto var(--spacing-section) auto;
+      padding: 0 2rem;
+      text-align: center;
+    }
+    .service-card {
       display: flex;
       flex-direction: column;
-      width: 100%;
-      margin: var(--spacing-section) 0;
-    }
-    
-    .category-strip {
-      position: relative;
-      width: 100%;
-      min-height: 400px;
-      background-color: #151515; /* Fallback */
-      /* Placeholder gradients - Replace with background-image: url('your-image.jpg') */
-      background: linear-gradient(135deg, #1a1a1a, #050505);
-      background-size: cover;
-      background-position: center;
-      display: flex;
       align-items: center;
-      justify-content: center;
-      overflow: hidden;
-      border-top: 1px solid rgba(255,255,255,0.05);
+      text-decoration: none;
+      color: var(--text-main);
+      transition: transform 0.2s ease;
     }
-
-    .cat-title {
-      position: absolute;
-      font-size: clamp(3rem, 6vw, 5rem);
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      z-index: 2;
-      transition: opacity 0.4s ease, transform 0.4s ease;
-      margin: 0;
-      text-shadow: 0 10px 20px rgba(0,0,0,0.8);
+    .service-card:hover {
+      transform: translateY(-5px);
     }
-
-    /* Hover Reveal Container */
-    .cat-hover-content {
-      position: absolute;
-      inset: 0;
-      background: rgba(0,0,0,0.85);
-      backdrop-filter: blur(8px);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 2rem;
-      opacity: 0;
-      visibility: hidden;
-      transition: opacity 0.4s ease, visibility 0.4s;
-      z-index: 3;
+    .service-card img {
+      width: 60px;
+      height: 60px;
+      object-fit: contain;
+      margin-bottom: 1.5rem;
+      /* Optional filter to make placeholders look like your golden line-art example */
+      filter: invert(73%) sepia(45%) saturate(415%) hue-rotate(5deg) brightness(95%) contrast(88%);
     }
-
-    /* The Single Row, Multiple Columns Layout */
-    .cat-grid {
-      display: grid;
-      gap: 2rem;
-      width: 100%;
-      max-width: 1400px;
-    }
-    .grid-3 { grid-template-columns: repeat(3, 1fr); }
-    .grid-4 { grid-template-columns: repeat(4, 1fr); }
-    .grid-2 { grid-template-columns: repeat(2, 1fr); max-width: 800px;}
-
-    .cat-col {
-      text-align: center;
-      padding: 1rem;
-      border-left: 1px solid rgba(255,255,255,0.1);
-    }
-    .cat-col:first-child { border-left: none; }
-    .cat-col h3 {
-      color: var(--accent);
-      font-size: 1.4rem;
+    .service-card h3 {
+      font-size: 1.5rem;
+      letter-spacing: 1px;
       margin: 0 0 1rem 0;
     }
-    .cat-col p {
+    .service-card p {
+      font-size: 0.95rem;
       color: var(--text-muted);
-      font-size: 1rem;
+      line-height: 1.6;
       margin: 0;
-      line-height: 1.5;
+      font-style: italic;
     }
 
-    /* Trigger the Hover Effects */
-    .category-strip:hover .cat-title {
-      opacity: 0;
-      transform: translateY(-20px);
+    /* Brands */
+    .brands {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: var(--spacing-section) auto;
+      padding: 2rem;
+      background: transparent;
     }
-    .category-strip:hover .cat-hover-content {
-      opacity: 1;
-      visibility: visible;
+    .consolidated-logos {
+      max-width: 100%;
+      width: 800px; 
+      height: auto;
+      opacity: 0.7; 
+      transition: opacity 0.3s ease;
     }
-
-/* Brands */
-.brands {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: var(--spacing-section) auto;
-  padding: 2rem;
-  background: transparent;
-}
-
-.consolidated-logos {
-  max-width: 100%;
-  width: 800px; /* Adjust this to make the banner wider or narrower */
-  height: auto;
-  opacity: 0.7; /* Keeps the slightly muted look */
-  transition: opacity 0.3s ease;
-}
-
-.consolidated-logos:hover {
-  opacity: 1; /* Brightens up when the user hovers */
-}
+    .consolidated-logos:hover { opacity: 1; }
 
     /* Testimonials */
     #testimonials { --gap: 1rem; --card-bg: #0b0b0b; --text:#f5f5f5; --muted:#cfcfcf; --accent:#D4AF37; --ring: rgba(255,255,255,.15); box-sizing: border-box; margin: var(--spacing-section) auto; }
@@ -372,21 +403,17 @@
 
     /* Mobile Breakpoints */
     @media (max-width: 900px) {
-      .awards-bar { grid-template-columns: 1fr; gap: 1.5rem; padding: 1rem; margin-top: 2rem;}
+      .awards-bar { flex-direction: column; gap: 2rem; }
       
       .fanned-media { transform: scale(0.95); gap: 0.5rem; }
       .fanned-card { width: 40vw; max-width: 200px; }
       
+      .services-row { grid-template-columns: 1fr; gap: 4rem; }
+
       .about { grid-template-columns: 1fr; gap: 3rem; }
       #testimonials .card{grid-template-columns:64px 1fr}
       #testimonials .avatar{width:64px;height:64px}
       #testimonials .quote{font-size:1rem}
-
-      /* Stack Category Grids on Mobile */
-      .cat-grid { grid-template-columns: 1fr; gap: 1rem; }
-      .cat-col { border-left: none; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 1rem; }
-      .cat-col:first-child { border-top: none; }
-      .category-strip { min-height: auto; padding: 4rem 0; }
     }
   </style>
 </head>
@@ -394,7 +421,27 @@
 
 <nav>
   <a href="#home">Home</a>
-  <a href="#work">Work</a>
+  
+  <div class="nav-item">
+    <a href="#work">Work</a>
+    <div class="nav-dropdown">
+      <div class="nav-cat-title">Film / TV</div>
+      <a href="#">Short</a>
+      <a href="#">Feature</a>
+      <a href="#">TV</a>
+      
+      <div class="nav-cat-title">Commercial</div>
+      <a href="#">Creative Development <span class="desc">Development / Pre-Production Consulting</span></a>
+      <a href="#">Broadcast Commercial</a>
+      <a href="#">Social Ads / Campaigns <span class="desc">Story Dev, Influencer Direction, Pre-Post</span></a>
+      <a href="#">Branded Content <span class="desc">Product Demo, Testimonial, Mini-Docs</span></a>
+      
+      <div class="nav-cat-title">Music Video</div>
+      <a href="#">Story Consulting</a>
+      <a href="#">Pre / Post Production</a>
+    </div>
+  </div>
+
   <a href="#testimonials">Testimonials</a>
   <a href="#about">About</a>
   <a href="#contact">Contact</a>
@@ -412,16 +459,27 @@
 
 <section class="awards-bar">
   <div class="award-item">
-    <h2>1x</h2>
-    <p>Emmy Award</p>
+    <div class="award-number shiny-gold">1x</div>
+    <div class="award-details">
+      <img src="award_placeholder_emmy.png" alt="Emmy Award Image Placeholder">
+      <p>Emmy Award</p>
+    </div>
   </div>
+  
   <div class="award-item">
-    <h2>3x</h2>
-    <p>Telly Awards</p>
+    <div class="award-number shiny-platinum">3x</div>
+    <div class="award-details">
+      <img src="award_placeholder_telly.png" alt="Telly Award Image Placeholder">
+      <p>Telly Awards</p>
+    </div>
   </div>
+  
   <div class="award-item">
-    <h2>3x</h2>
-    <p>MARCOM Awards</p>
+    <div class="award-number shiny-platinum">3x</div>
+    <div class="award-details">
+      <img src="award_placeholder_marcom.png" alt="MARCOM Award Image Placeholder">
+      <p>Marcom Awards</p>
+    </div>
   </div>
 </section>
 
@@ -445,63 +503,24 @@
   </div>
 </section>
 
-<section class="portfolio-categories">
-  
-  <div class="category-strip">
-    <h2 class="cat-title">Film / TV</h2>
-    <div class="cat-hover-content">
-      <div class="cat-grid grid-3">
-        <div class="cat-col">
-          <h3>Short</h3>
-        </div>
-        <div class="cat-col">
-          <h3>Feature</h3>
-        </div>
-        <div class="cat-col">
-          <h3>TV</h3>
-        </div>
-      </div>
-    </div>
-  </div>
+<section class="services-row">
+  <a href="film-tv.html" class="service-card">
+    <img src="icon_placeholder_film.png" alt="Film Icon Placeholder">
+    <h3>Film / TV</h3>
+    <p>I'm a paragraph. Click here to add your own text and edit me.</p>
+  </a>
 
-  <div class="category-strip">
-    <h2 class="cat-title">Commercial</h2>
-    <div class="cat-hover-content">
-      <div class="cat-grid grid-4">
-        <div class="cat-col">
-          <h3>Creative Development</h3>
-          <p>Development / Pre-Production Consulting</p>
-        </div>
-        <div class="cat-col">
-          <h3>Broadcast Commercial</h3>
-          <p>&nbsp;</p>
-        </div>
-        <div class="cat-col">
-          <h3>Social Ads / Campaigns</h3>
-          <p>Story Development, Influencer Direction, Pre-Post Production</p>
-        </div>
-        <div class="cat-col">
-          <h3>Branded Content</h3>
-          <p>Product Demonstration, Testimonial, Behind-the-Scenes, Mini-Docs, Short Film</p>
-        </div>
-      </div>
-    </div>
-  </div>
+  <a href="commercial.html" class="service-card">
+    <img src="icon_placeholder_tv.png" alt="TV Icon Placeholder">
+    <h3>Commercial</h3>
+    <p>I'm a paragraph. Click here to add your own text and edit me.</p>
+  </a>
 
-  <div class="category-strip">
-    <h2 class="cat-title">Music Video</h2>
-    <div class="cat-hover-content">
-      <div class="cat-grid grid-2">
-        <div class="cat-col">
-          <h3>Story Consulting</h3>
-        </div>
-        <div class="cat-col">
-          <h3>Pre / Post Production</h3>
-        </div>
-      </div>
-    </div>
-  </div>
-
+  <a href="music-video.html" class="service-card">
+    <img src="icon_placeholder_music.png" alt="Music Icon Placeholder">
+    <h3>Music Video</h3>
+    <p>I'm a paragraph. Click here to add your own text and edit me.</p>
+  </a>
 </section>
 
 <section class="brands">
