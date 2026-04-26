@@ -3,418 +3,952 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Collin O'Brien – Technical Producer & Director</title>
+  <title>Collin O'Brien — Technical Producer & Director</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
   <style>
-    /* Global Variables */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
     :root {
-      --bg-color: #0a0a0a;
-      --surface-color: #1a1a1a;
-      --text-main: #f4f4f4;
-      --text-muted: #a0a0a0;
-      --accent: #D4AF37;
-      --spacing-section: 6rem;
-      --radius: 12px;
+      --black: #050505;
+      --deep: #0c0c0c;
+      --surface: #111111;
+      --surface2: #181818;
+      --border: rgba(255,255,255,0.07);
+      --border-mid: rgba(255,255,255,0.12);
+      --gold: #C8A96E;
+      --gold-light: #E8D5A3;
+      --gold-dim: rgba(200,169,110,0.15);
+      --text: #F0EDE8;
+      --muted: #7A7672;
+      --muted-mid: #A09C96;
+      --serif: 'Cormorant Garamond', Georgia, serif;
+      --sans: 'DM Sans', system-ui, sans-serif;
+      --section: clamp(80px, 10vw, 140px);
     }
+
+    html { scroll-behavior: smooth; }
 
     body {
-      margin: 0;
-      font-family: 'Open Sans', -apple-system, sans-serif;
-      background-color: var(--bg-color);
-      color: var(--text-main);
+      font-family: var(--sans);
+      background: var(--black);
+      color: var(--text);
       line-height: 1.6;
+      overflow-x: hidden;
+      cursor: none;
     }
 
-    /* Navigation & Dropdown */
-    nav {
-      position: sticky;
-      top: 0;
-      background: rgba(10, 10, 10, 0.9);
-      backdrop-filter: blur(10px);
-      padding: 1rem 1.5rem;
-      display: flex;
-      justify-content: center;
-      gap: 2.5rem;
-      z-index: 100;
-      border-bottom: 1px solid rgba(255,255,255,0.05);
-      align-items: center;
+    /* CUSTOM CURSOR */
+    .cursor {
+      position: fixed;
+      width: 8px; height: 8px;
+      background: var(--gold);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9999;
+      transform: translate(-50%, -50%);
+      transition: width 0.2s, height 0.2s, background 0.2s;
+      mix-blend-mode: normal;
     }
-    nav a {
-      color: var(--text-main);
+    .cursor-ring {
+      position: fixed;
+      width: 36px; height: 36px;
+      border: 1px solid rgba(200,169,110,0.4);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9998;
+      transform: translate(-50%, -50%);
+      transition: transform 0.12s ease, width 0.3s, height 0.3s, border-color 0.3s;
+    }
+    body:has(a:hover) .cursor, body:has(button:hover) .cursor { width: 14px; height: 14px; }
+    body:has(a:hover) .cursor-ring, body:has(button:hover) .cursor-ring {
+      width: 52px; height: 52px; border-color: rgba(200,169,110,0.7);
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.5rem 3rem;
+      transition: background 0.4s, backdrop-filter 0.4s, border-bottom 0.4s;
+    }
+    nav.scrolled {
+      background: rgba(5,5,5,0.92);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo {
+      font-family: var(--serif);
+      font-size: 1.25rem;
+      font-weight: 300;
+      letter-spacing: 0.05em;
+      color: var(--text);
       text-decoration: none;
-      font-weight: 600;
-      font-size: 0.9rem;
+    }
+    .nav-logo span { color: var(--gold); }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2.5rem;
+      list-style: none;
+    }
+    .nav-links a {
+      color: var(--muted-mid);
+      text-decoration: none;
+      font-size: 0.78rem;
+      font-weight: 400;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
-      letter-spacing: 1px;
       transition: color 0.2s;
     }
-    nav a:hover { color: var(--accent); }
+    .nav-links a:hover { color: var(--text); }
+    .nav-cta {
+      background: transparent;
+      border: 1px solid var(--gold);
+      color: var(--gold) !important;
+      padding: 0.55rem 1.4rem;
+      border-radius: 2px;
+      font-size: 0.75rem !important;
+      letter-spacing: 0.14em !important;
+      transition: background 0.2s !important, color 0.2s !important;
+    }
+    .nav-cta:hover { background: var(--gold) !important; color: var(--black) !important; }
 
-    /* Dropdown Logic */
-    .nav-item {
-      position: relative;
-      display: inline-block;
-      padding: 0.5rem 0;
-    }
-    .nav-dropdown {
-      display: none;
-      position: absolute;
-      top: 100%;
-      left: 50%;
-      transform: translateX(-50%);
-      background: var(--surface-color);
-      border: 1px solid rgba(255,255,255,0.1);
-      border-radius: 8px;
-      padding: 1rem;
-      min-width: 280px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.8);
-      z-index: 101;
-    }
-    .nav-item:hover .nav-dropdown { display: block; }
-    .nav-cat-title {
-      color: var(--accent); font-size: 0.75rem; font-weight: bold;
-      text-transform: uppercase; letter-spacing: 1px; margin: 1rem 0 0.5rem 0;
-      border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 0.25rem;
-    }
-    .nav-cat-title:first-child { margin-top: 0; }
-    .nav-dropdown a {
-      display: block; padding: 0.4rem 0; font-size: 0.85rem;
-      text-transform: none; font-weight: normal;
-    }
-    .nav-dropdown span.desc {
-      display: block; font-size: 0.7rem; color: var(--text-muted);
-      margin-top: -0.2rem; margin-bottom: 0.3rem;
-    }
-
-    /* Hero Section */
+    /* HERO */
     .hero {
       position: relative;
-      height: 90vh;
+      height: 100vh;
+      min-height: 700px;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+    }
+    .hero-video-wrap {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+    }
+    .hero-video-wrap video {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      opacity: 0.25;
+      filter: grayscale(30%);
+    }
+    .hero-video-wrap::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom,
+        rgba(5,5,5,0.3) 0%,
+        rgba(5,5,5,0.1) 40%,
+        rgba(5,5,5,0.7) 80%,
+        rgba(5,5,5,1) 100%);
+    }
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      padding: 0 2rem;
+      max-width: 1000px;
+    }
+    .hero-eyebrow {
+      font-family: var(--sans);
+      font-size: 0.72rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 2rem;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.3s forwards;
+    }
+    .hero-title {
+      font-family: var(--serif);
+      font-size: clamp(3.5rem, 8vw, 7.5rem);
+      font-weight: 300;
+      line-height: 0.95;
+      letter-spacing: -0.02em;
+      color: var(--text);
+      margin-bottom: 2rem;
+      opacity: 0;
+      animation: fadeUp 0.9s 0.5s forwards;
+    }
+    .hero-title em {
+      font-style: italic;
+      color: var(--gold-light);
+    }
+    .hero-sub {
+      font-size: 1rem;
+      color: var(--muted-mid);
+      font-weight: 300;
+      max-width: 560px;
+      margin: 0 auto 3rem;
+      line-height: 1.7;
+      opacity: 0;
+      animation: fadeUp 0.9s 0.7s forwards;
+    }
+    .hero-actions {
+      display: flex;
+      gap: 1.2rem;
+      justify-content: center;
+      align-items: center;
+      opacity: 0;
+      animation: fadeUp 0.9s 0.9s forwards;
+    }
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      background: var(--gold);
+      color: var(--black);
+      padding: 1rem 2.2rem;
+      font-family: var(--sans);
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border: none;
+      cursor: none;
+      border-radius: 2px;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); }
+    .btn-ghost {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      background: transparent;
+      color: var(--muted-mid);
+      padding: 1rem 2rem;
+      font-family: var(--sans);
+      font-size: 0.8rem;
+      font-weight: 400;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border: 1px solid var(--border-mid);
+      border-radius: 2px;
+      cursor: none;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .btn-ghost:hover { border-color: var(--muted-mid); color: var(--text); }
+    .hero-scroll {
+      position: absolute;
+      bottom: 2.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      opacity: 0;
+      animation: fadeIn 1s 1.5s forwards;
+    }
+    .scroll-line {
+      width: 1px;
+      height: 48px;
+      background: linear-gradient(to bottom, var(--gold), transparent);
+      animation: scrollPulse 2s infinite;
+    }
+    .scroll-label {
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+      writing-mode: horizontal-tb;
+    }
+
+    /* AWARDS STRIP */
+    .awards-strip {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      margin: 0;
+    }
+    .award-cell {
       display: flex;
       align-items: center;
       justify-content: center;
-      text-align: center;
-      padding: 0 2rem;
-      overflow: hidden;
+      gap: 1.4rem;
+      padding: 3rem 2rem;
+      border-right: 1px solid var(--border);
+      transition: background 0.3s;
     }
-    .hero video {
+    .award-cell:last-child { border-right: none; }
+    .award-cell:hover { background: rgba(200,169,110,0.04); }
+    .award-num {
+      font-family: var(--serif);
+      font-size: clamp(3rem, 5vw, 4.5rem);
+      font-weight: 300;
+      line-height: 1;
+      background: linear-gradient(135deg, #BF953F, #FCF6BA, #B38728);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    .award-num.platinum {
+      background: linear-gradient(135deg, #a8a8a8, #ffffff, #888888);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    .award-label {
+      display: flex;
+      flex-direction: column;
+    }
+    .award-label strong {
+      font-family: var(--sans);
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text);
+    }
+    .award-label span {
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+      text-transform: uppercase;
+    }
+    .award-img {
+      height: 52px;
+      width: auto;
+      object-fit: contain;
+      opacity: 0.85;
+    }
+
+    /* SECTION COMMONS */
+    .section-label {
+      font-family: var(--sans);
+      font-size: 0.68rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.2rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .section-label::before {
+      content: '';
+      display: block;
+      width: 28px;
+      height: 1px;
+      background: var(--gold);
+    }
+    h2.display {
+      font-family: var(--serif);
+      font-size: clamp(2.2rem, 4vw, 3.8rem);
+      font-weight: 300;
+      line-height: 1.1;
+      letter-spacing: -0.01em;
+      color: var(--text);
+    }
+    h2.display em { font-style: italic; color: var(--gold-light); }
+
+    /* WORK / REEL SECTION */
+    .work-section {
+      padding: var(--section) 0;
+      max-width: 1300px;
+      margin: 0 auto;
+      padding-left: 3rem;
+      padding-right: 3rem;
+    }
+    .work-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 4rem;
+    }
+    .work-header-left {}
+    .work-header-right {
+      font-size: 0.85rem;
+      color: var(--muted);
+      max-width: 280px;
+      text-align: right;
+      line-height: 1.6;
+    }
+    .phones-row {
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      gap: 1.5rem;
+      perspective: 1200px;
+    }
+    .phone-frame {
+      position: relative;
+      width: 220px;
+      aspect-ratio: 9/19.5;
+      background: #0a0a0a;
+      border-radius: 36px;
+      border: 1.5px solid rgba(255,255,255,0.12);
+      overflow: hidden;
+      box-shadow:
+        0 0 0 1px rgba(0,0,0,0.8),
+        0 40px 80px rgba(0,0,0,0.7),
+        inset 0 1px 0 rgba(255,255,255,0.08);
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+      cursor: none;
+    }
+    .phone-frame:hover {
+      box-shadow:
+        0 0 0 1px rgba(0,0,0,0.8),
+        0 60px 120px rgba(0,0,0,0.8),
+        0 0 40px rgba(200,169,110,0.08),
+        inset 0 1px 0 rgba(255,255,255,0.08);
+    }
+    .phone-frame:nth-child(1) { transform: rotate(-6deg) translateY(30px); }
+    .phone-frame:nth-child(2) { transform: rotate(0deg) translateY(0px); width: 240px; }
+    .phone-frame:nth-child(3) { transform: rotate(6deg) translateY(30px); }
+    .phone-frame:nth-child(1):hover { transform: rotate(-2deg) translateY(15px) scale(1.03); }
+    .phone-frame:nth-child(2):hover { transform: rotate(0deg) translateY(-10px) scale(1.03); }
+    .phone-frame:nth-child(3):hover { transform: rotate(2deg) translateY(15px) scale(1.03); }
+    .phone-notch {
       position: absolute;
-      top: 0; left: 0;
+      top: 12px; left: 50%;
+      transform: translateX(-50%);
+      width: 80px; height: 26px;
+      background: #0a0a0a;
+      border-radius: 14px;
+      z-index: 10;
+    }
+    .phone-frame video {
       width: 100%; height: 100%;
       object-fit: cover;
-      z-index: -2;
-      opacity: 0.4;
-    }
-    .hero::after {
-      content: ''; position: absolute; inset: 0;
-      background: linear-gradient(to bottom, transparent, var(--bg-color));
-      z-index: -1;
-    }
-    .hero-content h1 {
-      font-size: clamp(2rem, 5vw, 4rem); margin: 0 0 1rem 0; letter-spacing: -1px;
-    }
-    .hero-content p {
-      font-size: clamp(1.1rem, 2vw, 1.5rem); color: var(--text-muted);
-      max-width: 800px; margin: 0 auto;
+      pointer-events: none;
     }
 
-   /* AWARDS BAR - Restored to Safe Document Flow */
-    .awards-bar {
-      display: grid; 
-      grid-template-columns: repeat(3, 1fr); 
-      gap: 2rem; 
-      max-width: 1200px; 
-      margin: 2rem auto 0 auto; /* Standard, safe spacing without negative pull */
-      padding: 2rem; 
-      box-sizing: border-box; 
+    /* SERVICES */
+    .services-section {
+      padding: var(--section) 3rem;
+      max-width: 1300px;
+      margin: 0 auto;
     }
-    
-    .award-item {
-      display: flex; 
-      justify-content: center; 
-      align-items: center; /* THIS CENTERS THE IMAGE, NUMBER, AND TEXT VERTICALLY */
-      gap: 1rem; 
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      margin-top: 4rem;
     }
-
-    /* NEW IMAGE CLASS: Calculates 140% of the 55px font size */
-    .award-icon {
-      height: 77px; 
-      width: auto; /* Maintains aspect ratio */
-      object-fit: contain; 
-      margin-right: 0.5rem; /* Gap between image and number */
+    .service-item {
+      background: var(--black);
+      padding: 3rem 2.5rem;
+      text-decoration: none;
+      color: var(--text);
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      transition: background 0.3s;
+      position: relative;
+      overflow: hidden;
     }
-    
-    .award-badge {
-      display: flex; 
-      align-items: baseline; 
-      /* DELETED HEIGHT CONSTRAINT TO ALLOW TRUE CENTERING */
+    .service-item::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 2px;
+      background: var(--gold);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.35s ease;
     }
-
-    .award-badge .num {
-      font-size: 55px; 
-      line-height: 0.8; 
-      font-weight: 200; 
+    .service-item:hover { background: var(--surface); }
+    .service-item:hover::after { transform: scaleX(1); }
+    .service-icon {
+      width: 44px; height: 44px;
+      object-fit: contain;
+      filter: invert(75%) sepia(30%) saturate(500%) hue-rotate(5deg) brightness(90%);
+      opacity: 0.9;
     }
-
-    .award-badge .x {
-      font-size: calc(55px / 3); /* CALCULATES EXACTLY 1/3 OF THE ACTUAL 55PX FONT */
-      line-height: 1; 
-      font-weight: 200; 
-      margin-left: -2px; 
+    .service-num {
+      font-family: var(--serif);
+      font-size: 3.5rem;
+      font-weight: 300;
+      color: var(--border-mid);
+      line-height: 1;
+      position: absolute;
+      top: 2rem;
+      right: 2rem;
     }
-
-    .award-text {
-      display: flex; 
-      flex-direction: column; 
-      justify-content: center; 
-      text-align: left; 
-      /* DELETED HEIGHT CONSTRAINT TO ALLOW TRUE CENTERING */
+    .service-title {
+      font-family: var(--serif);
+      font-size: 1.8rem;
+      font-weight: 300;
+      letter-spacing: -0.01em;
     }
-
-    .award-text span {
-      font-size: 1.25rem; 
-      line-height: 1.1; 
-      font-weight: bold; 
-      text-transform: uppercase; 
-      color: var(--text-main); 
+    .service-desc {
+      font-size: 0.88rem;
+      color: var(--muted);
+      line-height: 1.7;
     }
-    
-    .shiny-gold {
-      background: linear-gradient(to bottom right, #BF953F, #FCF6BA, #B38728, #FBF5B7, #AA771C);
-      -webkit-background-clip: text; background-clip: text; color: transparent;
+    .service-arrow {
+      font-size: 1rem;
+      color: var(--gold);
+      margin-top: auto;
+      opacity: 0;
+      transform: translateX(-8px);
+      transition: opacity 0.25s, transform 0.25s;
     }
-
-    .shiny-platinum {
-      background: linear-gradient(to bottom right, #a0a0a0, #ffffff, #808080, #e6e6e6, #666666);
-      -webkit-background-clip: text; background-clip: text; color: transparent;
-    }
-
-    /* FANNED MEDIA CONTAINER */
-    .fanned-container {
-      display: flex; 
-      flex-direction: column; 
-      align-items: center; 
-      /* TOP MARGIN REDUCED FROM 4rem TO 1rem TO PULL CLOSER TO AWARDS */
-      margin: 1rem auto 0 auto; 
-      max-width: 1200px; 
-      padding: 0 2rem; 
-    }
-
-    .fanned-media {
-      display: flex; justify-content: center; gap: 2.5rem; width: 100%; 
-    }
-    .fanned-card {
-      width: 340px; aspect-ratio: 9/16; background: #111; border-radius: 20px; 
-      overflow: hidden; border: 1px solid rgba(255, 255, 255, 0.15); 
-      box-shadow: 0 40px 80px rgba(0,0,0,0.9); 
-      transform: rotate(var(--rot)) translateY(var(--y)); 
-      cursor: pointer; transition: filter 0.2s ease; 
-    }
-    .fanned-card:hover { filter: brightness(1.2); } 
-    .fanned-card video {
-      width: 100%; height: 100%; object-fit: cover; pointer-events: none; 
-    }
-
-    /* SERVICES ROW */
-    .services-row {
-      display: grid; 
-      grid-template-columns: repeat(3, 1fr); 
-      gap: 3rem; 
-      max-width: 1000px; 
-      /* TOP MARGIN INCREASED FROM 7rem TO 11rem TO PUSH DOWN FROM FANNED PHONES */
-      margin: 11rem auto var(--spacing-section) auto; 
-      padding: 0 2rem; 
-      text-align: center; 
-    }
-    .service-card {
-      display: flex; flex-direction: column; align-items: center; 
-      text-decoration: none; color: var(--text-main); transition: transform 0.2s ease; 
-    }
-    .service-card:hover { transform: translateY(-5px); }
-    .service-card img {
-      width: 60px; height: 60px; object-fit: contain; margin-bottom: 1.5rem; 
-      filter: invert(73%) sepia(45%) saturate(415%) hue-rotate(5deg) brightness(95%) contrast(88%); 
-    }
-    .service-card h3 { font-size: 1.5rem; letter-spacing: 1px; margin: 0 0 1rem 0; }
-    .service-card p {
-      font-size: 0.95rem; color: var(--text-muted); line-height: 1.6; margin: 0; font-style: italic; 
-    }
+    .service-item:hover .service-arrow { opacity: 1; transform: translateX(0); }
 
     /* BRANDS */
-    .brands {
-      display: flex; justify-content: center; align-items: center;
-      margin: var(--spacing-section) auto; padding: 2rem; background: transparent;
+    .brands-section {
+      padding: calc(var(--section) * 0.6) 3rem;
+      text-align: center;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
     }
-    .consolidated-logos {
-      max-width: 100%; width: 800px; height: auto; opacity: 0.7; transition: opacity 0.3s ease;
+    .brands-label {
+      font-size: 0.68rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 3rem;
     }
-    .consolidated-logos:hover { opacity: 1; }
+    .brands-logo {
+      max-width: 780px;
+      width: 100%;
+      height: auto;
+      opacity: 0.45;
+      filter: grayscale(100%) brightness(1.4);
+      transition: opacity 0.3s;
+    }
+    .brands-logo:hover { opacity: 0.7; }
 
-    /* TESTIMONIALS CAROUSEL */
-    #testimonials { --gap: 1rem; --card-bg: #0b0b0b; --text:#f5f5f5; --muted:#cfcfcf; --accent:#D4AF37; --ring: rgba(255,255,255,.15); box-sizing: border-box; margin: var(--spacing-section) auto; }
-    #testimonials figure, #testimonials blockquote { margin: 0; }
-    #testimonials .shell{max-width:1100px;margin:0 auto;padding:2rem 1rem;}
-    #testimonials .header{display:flex;align-items:end;justify-content:space-between;gap:var(--gap);margin-bottom:1rem}
-    #testimonials .header h2{font-size:clamp(1.4rem,2vw,1.8rem);margin:0;letter-spacing:.2px}
-    #testimonials .viewport{
-      position:relative; overflow:hidden; border-radius:1rem;
-      background:linear-gradient(180deg,#121212,#0a0a0a);
-      box-shadow:0 10px 30px rgba(0,0,0,.35), inset 0 0 0 1px var(--ring)
+    /* TESTIMONIALS */
+    .testimonials-section {
+      padding: var(--section) 3rem;
+      max-width: 1300px;
+      margin: 0 auto;
     }
-    #testimonials .track{display:flex;transition:transform .6s cubic-bezier(.22,.61,.36,1);will-change:transform}
-    #testimonials .slide{min-width:100%; padding:1.25rem; box-sizing: border-box;}
-    #testimonials .card{
-      display:grid;grid-template-columns:80px 1fr;gap:1rem;align-items:center;
-      background:var(--card-bg);border-radius:.875rem;padding:1rem;border:1px solid rgba(255,255,255,.08)
+    .testimonials-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 3rem;
     }
-    #testimonials .avatar{width:72px;height:72px;border-radius:999px;object-fit:cover;border:2px solid rgba(255,255,255,.2);box-shadow:0 8px 20px rgba(0,0,0,.35)}
-    #testimonials .quote{margin:.25rem 0 0 0;line-height:1.5;font-size:1.05rem}
-    #testimonials .name{font-weight:700;margin:0}
-    #testimonials .role{color:var(--muted);font-size:.95rem;margin:.15rem 0 0 0}
-    #testimonials .actions{display:flex;gap:.5rem;align-items:center}
-    #testimonials .btn{appearance:none;border:1px solid rgba(255,255,255,.18);background:#151515;color:var(--text-main);padding:.5rem .75rem;border-radius:.625rem;cursor:pointer;transition:transform .1s ease, background .2s ease}
-    #testimonials .btn:hover{background:#1b1b1b}
-    #testimonials .btn:active{transform:translateY(1px)}
-    #testimonials .dots{display:flex;gap:.5rem;align-items:center}
-    #testimonials .dot{width:8px;height:8px;border-radius:999px;background:rgba(255,255,255,.25);border:none;cursor:pointer}
-    #testimonials .dot[aria-current="true"], #testimonials .dot:hover{background:var(--accent)}
+    .carousel-controls {
+      display: flex;
+      gap: 0.5rem;
+    }
+    .carousel-btn {
+      width: 44px; height: 44px;
+      border: 1px solid var(--border-mid);
+      background: transparent;
+      color: var(--muted-mid);
+      font-size: 0.9rem;
+      cursor: none;
+      border-radius: 2px;
+      display: grid;
+      place-items: center;
+      transition: border-color 0.2s, color 0.2s, background 0.2s;
+    }
+    .carousel-btn:hover { border-color: var(--gold); color: var(--gold); background: var(--gold-dim); }
+    .carousel-viewport {
+      overflow: hidden;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+    }
+    .carousel-track {
+      display: flex;
+      transition: transform 0.6s cubic-bezier(0.22, 0.61, 0.36, 1);
+    }
+    .testimonial-slide {
+      min-width: 100%;
+      padding: 3rem;
+      background: var(--surface);
+    }
+    .testimonial-inner {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 2.5rem;
+      align-items: start;
+      max-width: 900px;
+    }
+    .testimonial-avatar {
+      width: 80px; height: 80px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 1px solid var(--border-mid);
+      filter: grayscale(20%);
+    }
+    .testimonial-quote {
+      font-family: var(--serif);
+      font-size: clamp(1.2rem, 2vw, 1.5rem);
+      font-weight: 300;
+      font-style: italic;
+      line-height: 1.6;
+      color: var(--text);
+      margin-bottom: 1.5rem;
+    }
+    .testimonial-quote::before { content: '\201C'; color: var(--gold); font-size: 1.2em; margin-right: 2px; }
+    .testimonial-quote::after { content: '\201D'; color: var(--gold); font-size: 1.2em; margin-left: 2px; }
+    .testimonial-name {
+      font-size: 0.9rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      color: var(--text);
+      margin-bottom: 0.25rem;
+    }
+    .testimonial-role {
+      font-size: 0.78rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+    .carousel-dots {
+      display: flex;
+      gap: 0.5rem;
+      margin-top: 1.5rem;
+    }
+    .dot-btn {
+      width: 24px; height: 2px;
+      background: var(--border-mid);
+      border: none;
+      cursor: none;
+      transition: background 0.2s, width 0.3s;
+    }
+    .dot-btn.active { background: var(--gold); width: 40px; }
 
     /* ABOUT */
-    .about {
-      max-width: 1000px; margin: var(--spacing-section) auto; padding: 0 2rem;
-      display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center;
+    .about-section {
+      padding: var(--section) 3rem;
+      max-width: 1300px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6rem;
+      align-items: center;
     }
-    .about-photo img { width: 100%; border-radius: var(--radius); filter: contrast(1.1); }
+    .about-img-wrap {
+      position: relative;
+    }
+    .about-img-wrap img {
+      width: 100%;
+      border-radius: 4px;
+      filter: grayscale(15%) contrast(1.05);
+      display: block;
+    }
+    .about-img-wrap::after {
+      content: '';
+      position: absolute;
+      inset: -12px -12px auto auto;
+      width: 60%;
+      height: 60%;
+      border-top: 1px solid var(--gold);
+      border-right: 1px solid var(--gold);
+      pointer-events: none;
+    }
+    .about-img-wrap::before {
+      content: '';
+      position: absolute;
+      inset: auto auto -12px -12px;
+      width: 40%;
+      height: 40%;
+      border-bottom: 1px solid var(--border-mid);
+      border-left: 1px solid var(--border-mid);
+      pointer-events: none;
+    }
+    .about-copy {}
+    .about-copy p {
+      font-size: 0.95rem;
+      color: var(--muted-mid);
+      line-height: 1.85;
+      margin-bottom: 1.4rem;
+    }
+    .about-copy p:first-of-type {
+      font-family: var(--serif);
+      font-size: 1.2rem;
+      color: var(--text);
+      font-weight: 300;
+      line-height: 1.7;
+    }
+    .about-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      margin-top: 2.5rem;
+    }
+    .stat-cell {
+      background: var(--black);
+      padding: 1.5rem;
+      text-align: center;
+    }
+    .stat-num {
+      font-family: var(--serif);
+      font-size: 2rem;
+      font-weight: 300;
+      color: var(--gold);
+      display: block;
+    }
+    .stat-label {
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-top: 0.25rem;
+    }
 
-    /* CONTACT FORM */
-    .contact {
-      max-width: 800px; margin: var(--spacing-section) auto; padding: 4rem 2rem;
-      background: var(--surface-color); border-radius: var(--radius);
-      border: 1px solid rgba(255,255,255,0.05); text-align: center;
+    /* BOOKING CTA */
+    .cta-section {
+      padding: var(--section) 3rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      border-top: 1px solid var(--border);
     }
-    .contact h2 { margin-top: 0; }
-    .contact-form {
-      display: flex; flex-direction: column; gap: 1.5rem;
-      margin-top: 2rem; text-align: left;
+    .cta-section::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(200,169,110,0.06) 0%, transparent 70%);
+      pointer-events: none;
     }
-    .form-group { display: flex; flex-direction: column; gap: 0.5rem; }
-    .form-group label { font-weight: 600; font-size: 0.9rem; color: var(--text-muted); }
-    .form-group input, .form-group textarea {
-      width: 100%; box-sizing: border-box; padding: 1rem;
-      background: var(--bg-color); border: 1px solid rgba(255,255,255,0.1);
-      border-radius: 8px; color: var(--text-main); font-family: inherit;
-      font-size: 1rem; transition: border-color 0.3s ease;
+    .cta-section .section-label { justify-content: center; }
+    .cta-section .section-label::before { display: none; }
+    .cta-title {
+      font-family: var(--serif);
+      font-size: clamp(3rem, 6vw, 5.5rem);
+      font-weight: 300;
+      letter-spacing: -0.02em;
+      line-height: 1.05;
+      margin: 1.5rem auto 2rem;
+      max-width: 800px;
     }
-    .form-group input:focus, .form-group textarea:focus {
-      outline: none; border-color: var(--accent);
+    .cta-title em { font-style: italic; color: var(--gold-light); }
+    .cta-sub {
+      color: var(--muted);
+      font-size: 1rem;
+      margin-bottom: 3rem;
+      max-width: 450px;
+      margin-left: auto;
+      margin-right: auto;
     }
-    .btn-submit {
-      background: var(--accent); color: #000; border: none; padding: 1rem 2rem;
-      font-size: 1rem; font-weight: bold; border-radius: 8px; cursor: pointer;
-      transition: transform 0.1s ease, filter 0.2s ease; align-self: center; margin-top: 1rem;
+    .cta-form-wrap {
+      max-width: 580px;
+      margin: 0 auto;
+      text-align: left;
     }
-    .btn-submit:hover { filter: brightness(1.1); }
-    .btn-submit:active { transform: translateY(2px); }
-    .footer { text-align: center; padding: 2rem; color: var(--text-muted); font-size: 0.9rem; }
+    .form-row { margin-bottom: 1rem; }
+    .form-row label {
+      display: block;
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0.5rem;
+    }
+    .form-row input,
+    .form-row textarea,
+    .form-row select {
+      width: 100%;
+      background: var(--surface);
+      border: 1px solid var(--border-mid);
+      border-radius: 2px;
+      padding: 0.9rem 1.1rem;
+      color: var(--text);
+      font-family: var(--sans);
+      font-size: 0.95rem;
+      outline: none;
+      transition: border-color 0.2s;
+      appearance: none;
+    }
+    .form-row input:focus,
+    .form-row textarea:focus,
+    .form-row select:focus {
+      border-color: var(--gold);
+    }
+    .form-row textarea { resize: vertical; min-height: 120px; }
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .form-submit {
+      width: 100%;
+      margin-top: 1.5rem;
+      padding: 1.1rem;
+      background: var(--gold);
+      color: var(--black);
+      border: none;
+      font-family: var(--sans);
+      font-size: 0.82rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      cursor: none;
+      border-radius: 2px;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .form-submit:hover { background: var(--gold-light); transform: translateY(-2px); }
 
-    /* MOBILE BREAKPOINTS */
+    /* FOOTER */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2.5rem 3rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .footer-logo {
+      font-family: var(--serif);
+      font-size: 1rem;
+      font-weight: 300;
+      color: var(--muted);
+    }
+    .footer-copy {
+      font-size: 0.75rem;
+      color: var(--muted);
+      letter-spacing: 0.05em;
+    }
+
+    /* ANIMATIONS */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    @keyframes scrollPulse {
+      0%, 100% { opacity: 0.4; }
+      50% { opacity: 1; }
+    }
+
+    /* REVEAL ON SCROLL */
+    .reveal {
+      opacity: 0;
+      transform: translateY(32px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+
+    /* MOBILE */
     @media (max-width: 900px) {
-      .awards-bar { grid-template-columns: 1fr; gap: 2rem; margin-top: 2rem; }
-      .fanned-media { transform: scale(0.95); gap: 0.5rem; }
-      .fanned-card { width: 40vw; max-width: 200px; }
-      .services-row { grid-template-columns: 1fr; gap: 4rem; margin-top: 4rem; }
-      .about { grid-template-columns: 1fr; gap: 3rem; }
-      #testimonials .card{grid-template-columns:64px 1fr}
-      #testimonials .avatar{width:64px;height:64px}
-      #testimonials .quote{font-size:1rem}
+      nav { padding: 1.2rem 1.5rem; }
+      .nav-links { gap: 1.2rem; }
+      .nav-links li:not(:last-child) { display: none; }
+      .work-section, .services-section, .testimonials-section, .about-section, .cta-section, .brands-section { padding-left: 1.5rem; padding-right: 1.5rem; }
+      .phones-row { gap: 0.5rem; }
+      .phone-frame { width: 38vw; max-width: 180px; }
+      .phone-frame:nth-child(2) { width: 42vw; max-width: 200px; }
+      .services-grid { grid-template-columns: 1fr; }
+      .about-section { grid-template-columns: 1fr; gap: 3rem; }
+      .form-grid { grid-template-columns: 1fr; }
+      .awards-strip { grid-template-columns: 1fr; }
+      .award-cell { border-right: none; border-bottom: 1px solid var(--border); }
+      .work-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
+      .work-header-right { text-align: left; }
+      .testimonials-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
+      footer { flex-direction: column; gap: 1rem; text-align: center; }
+      body { cursor: auto; }
+      .cursor, .cursor-ring { display: none; }
     }
   </style>
 </head>
 <body>
 
-<nav>
-  <a href="#home">Home</a>
-  <div class="nav-item">
-    <a href="#work">Work</a>
-    <div class="nav-dropdown">
-      <div class="nav-cat-title">Film / TV</div>
-      <a href="#">Short</a>
-      <a href="#">Feature</a>
-      <a href="#">TV</a>
-      
-      <div class="nav-cat-title">Commercial</div>
-      <a href="#">Creative Development <span class="desc">Development / Pre-Production Consulting</span></a>
-      <a href="#">Broadcast Commercial</a>
-      <a href="#">Social Ads / Campaigns <span class="desc">Story Dev, Influencer Direction, Pre-Post</span></a>
-      <a href="#">Branded Content <span class="desc">Product Demo, Testimonial, Mini-Docs</span></a>
-      
-      <div class="nav-cat-title">Music Video</div>
-      <a href="#">Story Consulting</a>
-      <a href="#">Pre / Post Production</a>
-    </div>
-  </div>
-  <a href="#testimonials">Testimonials</a>
-  <a href="#about">About</a>
-  <a href="#contact">Contact</a>
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursor-ring"></div>
+
+<nav id="nav">
+  <a href="#home" class="nav-logo">Collin O<span>'</span>Brien</a>
+  <ul class="nav-links">
+    <li><a href="#work">Work</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#testimonials">Reviews</a></li>
+    <li><a href="#contact" class="nav-cta">Book a Call</a></li>
+  </ul>
 </nav>
 
 <section class="hero" id="home">
-  <video autoplay muted loop playsinline poster="background loop_1 poster.jpg">
-    <source src="background loop_1.mp4" type="video/mp4" />
-  </video>
+  <div class="hero-video-wrap">
+    <video autoplay muted loop playsinline poster="background loop_1 poster.jpg">
+      <source src="background loop_1.mp4" type="video/mp4" />
+    </video>
+  </div>
   <div class="hero-content">
-    <h1>Technical Producer & Director</h1>
-    <p>From socials to streamers, we can make your product stand out.</p>
-  </div>
-</section> 
-
-<section class="awards-bar">
-  <div class="award-item">
-    <img class="award-icon" src="award_image_placeholder.png" alt="Emmy Award Icon">
-    <div class="award-badge shiny-gold">
-      <span class="num">1</span><span class="x">x</span>
-    </div>
-    <div class="award-text">
-      <span>Emmy</span>
-      <span>Award</span>
+    <p class="hero-eyebrow">Emmy Award–Winning Producer & Director</p>
+    <h1 class="hero-title">Stories that<br><em>demand</em> attention</h1>
+    <p class="hero-sub">From streaming platforms to social campaigns — cinematic production that elevates brands and moves audiences.</p>
+    <div class="hero-actions">
+      <a href="#contact" class="btn-primary">Book a Consultation →</a>
+      <a href="#work" class="btn-ghost">View Work</a>
     </div>
   </div>
-  
-  <div class="award-item">
-    <img class="award-icon" src="award_image_placeholder.png" alt="Telly Award Icon">
-    <div class="award-badge shiny-platinum">
-      <span class="num">3</span><span class="x">x</span>
-    </div>
-    <div class="award-text">
-      <span>Telly</span>
-      <span>Awards</span>
-    </div>
-  </div>
-  
-  <div class="award-item">
-    <img class="award-icon" src="award_image_placeholder.png" alt="MARCOM Award Icon">
-    <div class="award-badge shiny-platinum">
-      <span class="num">3</span><span class="x">x</span>
-    </div>
-    <div class="award-text">
-      <span>Marcom</span>
-      <span>Awards</span>
-    </div>
+  <div class="hero-scroll">
+    <div class="scroll-line"></div>
+    <span class="scroll-label">Scroll</span>
   </div>
 </section>
 
-<section class="fanned-container" id="work">
-  <div class="fanned-media">
-    <div class="fanned-card" style="--rot: -8deg; --y: 40px;">
+<div class="awards-strip reveal">
+  <div class="award-cell">
+    <img class="award-img" src="award_image_placeholder.png" alt="Emmy Award">
+    <div class="award-num">1×</div>
+    <div class="award-label">
+      <strong>Emmy</strong>
+      <span>Award</span>
+    </div>
+  </div>
+  <div class="award-cell">
+    <img class="award-img" src="award_image_placeholder.png" alt="Telly Award">
+    <div class="award-num platinum">3×</div>
+    <div class="award-label">
+      <strong>Telly</strong>
+      <span>Awards</span>
+    </div>
+  </div>
+  <div class="award-cell">
+    <img class="award-img" src="award_image_placeholder.png" alt="MARCOM Award">
+    <div class="award-num platinum">3×</div>
+    <div class="award-label">
+      <strong>Marcom</strong>
+      <span>Awards</span>
+    </div>
+  </div>
+</div>
+
+<section class="work-section" id="work">
+  <div class="work-header reveal">
+    <div class="work-header-left">
+      <div class="section-label">Selected Work</div>
+      <h2 class="display">The <em>reel</em></h2>
+    </div>
+    <p class="work-header-right">Content that reaches millions — crafted with precision, delivered on schedule.</p>
+  </div>
+  <div class="phones-row reveal">
+    <div class="phone-frame">
+      <div class="phone-notch"></div>
       <video autoplay muted loop playsinline poster="Gabriela_1 poster.jpg">
         <source src="Gabriela_1.mp4" type="video/mp4" />
       </video>
     </div>
-    <div class="fanned-card" style="--rot: 0deg; --y: 0px;">
+    <div class="phone-frame">
+      <div class="phone-notch"></div>
       <video autoplay muted loop playsinline poster="Bella Dose and Alyssa Raghu_1 poster.jpg">
         <source src="Bella Dose and Alyssa Raghu_1.mp4" type="video/mp4" />
       </video>
     </div>
-    <div class="fanned-card" style="--rot: 8deg; --y: 40px;">
+    <div class="phone-frame">
+      <div class="phone-notch"></div>
       <video autoplay muted loop playsinline poster="Jay_1 poster.jpg">
         <source src="Jay_1.mp4" type="video/mp4" />
       </video>
@@ -422,201 +956,233 @@
   </div>
 </section>
 
-<section class="services-row">
-  <a href="film-tv.html" class="service-card">
-    <img src="Camera.png" alt="Film Icon Placeholder">
-    <h3>Film / TV</h3>
-    <p>Shorts, Features, TV.</p>
-  </a>
-
-  <a href="commercial.html" class="service-card">
-    <img src="Phone.png" alt="TV Icon Placeholder">
-    <h3>Commercial</h3>
-    <p>Creative Development, Broadcast Commercial, Social Ads/Campaigns, Branded Content, Product Demonstration, Testimonial, Behind-the-Scenes, Mini-Docs, Short Film</p>
-  </a>
-
-  <a href="music-video.html" class="service-card">
-    <img src="Album.png" alt="Music Icon Placeholder">
-    <h3>Music Video</h3>
-    <p>Story Consulting, Pre-Post Production.</p>
-  </a>
-</section>
-
-<section class="brands">
-  <img src="All Logos New_No BG.png" alt="Trusted Clients: ESPN, GMC, Lay's, Samsung, Starbucks" class="consolidated-logos" />
-</section>
-
-<section id="testimonials" aria-label="Testimonials carousel">
-  <div class="shell">
-    <div class="header">
-      <h2>What people say about Collin</h2>
-      <div class="actions" aria-controls="testimonial-carousel">
-        <button class="btn prev" aria-label="Previous testimonial">◀</button>
-        <button class="btn next" aria-label="Next testimonial">▶</button>
-      </div>
-    </div>
-
-    <div class="viewport" id="testimonial-carousel">
-      <div class="track" role="list">
-        <figure class="slide" role="listitem">
-          <div class="card">
-            <img class="avatar" src="Kelly Sallaway_IMdB.png" alt="Headshot of Kelly Sallaway" loading="lazy">
-            <figcaption>
-              <p class="name">Kelly Sallaway</p>
-              <p class="role">Emmy Award-Winning Producer</p>
-              <blockquote class="quote">He brought a delayed project on schedule, then helped us to save thousands on licensing! I want him on every production!</blockquote>
-            </figcaption>
-          </div>
-        </figure>
-        <figure class="slide" role="listitem">
-          <div class="card">
-            <img class="avatar" src="Jasmine Holdsworth.png" alt="Headshot of Jasmine Holdsworth" loading="lazy">
-            <figcaption>
-              <p class="name">Jasmine Holdsworth</p>
-              <p class="role">Line Producer</p>
-              <blockquote class="quote">He’s like a swiss army knife on set. He can do anything!</blockquote>
-            </figcaption>
-          </div>
-        </figure>
-        <figure class="slide" role="listitem">
-          <div class="card">
-            <img class="avatar" src="Ryan Henry Johnston.png" alt="Headshot of Ryan Henry Johnston" loading="lazy">
-            <figcaption>
-              <p class="name">Ryan Henry Johnston</p>
-              <p class="role">Multi-Award-Winning Director</p>
-              <blockquote class="quote">He’s invaluable because he’s calm under pressure. When everyone else is hyperventilating when something unexpected happens, he stays calm, has already analyzed the situation and is providing courses of action. So awesome!</blockquote>
-            </figcaption>
-          </div>
-        </figure>
-        <figure class="slide" role="listitem">
-          <div class="card">
-            <img class="avatar" src="Tina Imahara.png" alt="Headshot of Tina Imahara" loading="lazy">
-            <figcaption>
-              <p class="name">Tina Imahara</p>
-              <p class="role">Academy Award-Winning Editor</p>
-              <blockquote class="quote">Collin is wonderfully talented! He’s hungry, driven, and persistent! I was amazed at his knowledge and confidence in approaching questions and how he helped others feel welcome!</blockquote>
-            </figcaption>
-          </div>
-        </figure>
-      </div>
-    </div>
-
-    <div class="controls" style="display:flex;justify-content:center;gap:.6rem;margin-top:.9rem">
-      <button class="dot" aria-label="Go to slide 1" aria-current="true"></button>
-      <button class="dot" aria-label="Go to slide 2"></button>
-      <button class="dot" aria-label="Go to slide 3"></button>
-      <button class="dot" aria-label="Go to slide 4"></button>
-    </div>
+<section class="services-section">
+  <div class="reveal">
+    <div class="section-label">Capabilities</div>
+    <h2 class="display">What I <em>do</em></h2>
+  </div>
+  <div class="services-grid">
+    <a href="film-tv.html" class="service-item reveal reveal-delay-1">
+      <span class="service-num">01</span>
+      <img class="service-icon" src="Camera.png" alt="">
+      <h3 class="service-title">Film & TV</h3>
+      <p class="service-desc">Feature-length films, short films, documentaries, and episodic television. From development through post — I've done it.</p>
+      <span class="service-arrow">→ Explore</span>
+    </a>
+    <a href="commercial.html" class="service-item reveal reveal-delay-2">
+      <span class="service-num">02</span>
+      <img class="service-icon" src="Phone.png" alt="">
+      <h3 class="service-title">Commercial</h3>
+      <p class="service-desc">Creative development, broadcast spots, social campaigns, branded content, product demos, testimonials, and mini-docs.</p>
+      <span class="service-arrow">→ Explore</span>
+    </a>
+    <a href="music-video.html" class="service-item reveal reveal-delay-3">
+      <span class="service-num">03</span>
+      <img class="service-icon" src="Album.png" alt="">
+      <h3 class="service-title">Music Video</h3>
+      <p class="service-desc">Story consulting, pre-production strategy, and full end-to-end production for artists and labels.</p>
+      <span class="service-arrow">→ Explore</span>
+    </a>
   </div>
 </section>
 
-<section class="about" id="about">
-  <figure class="about-photo">
-    <img src="collin-emmy.webp" alt="Collin O’Brien holding an Emmy award" loading="lazy">
-  </figure>
-  <div class="about-copy">
-    <h2>About</h2>
-    <p>I'm an Emmy Award winning Producer and multi-award winning Writer & Director with experience in feature-length films, shorts, documentaries, music videos, commercials, and branded content.</p>
-    <p>I decided to create a personal production company because my work consistently delivers high-quality, award-winning content that reaches millions of viewers, this includes 3x International MARCOM Awards for advertising/marketing social media campaigns.</p>
-    <p>My background in sales, mechanical engineering, and assistant directing affords me a unique ability to adapt to any environment that a company requires in order to develop content that creates an impact and drives awareness. My active curiosity in understanding a client’s core principles and goals enables me to develop scripts, pitch decks, and more, to create engaging content that maximizes client ROI.</p>
-    <p>I'm always interested in learning more about different companies, so reach out, and help me share what you want to say.</p>
-  </div>
-</section>
-
-<section class="contact" id="contact">
-  <h2>Let’s Build Something</h2>
-  <p>Available for technical consultation and directing roles.</p>
-  
-  <form class="contact-form" action="https://formspree.io/f/YOUR_FORM_ID_HERE" method="POST">
-    <div class="form-group">
-      <label for="name">Name</label>
-      <input type="text" id="name" name="name" required>
-    </div>
-    
-    <div class="form-group">
-      <label for="email">Email</label>
-      <input type="email" id="email" name="_replyto" required>
-    </div>
-    
-    <div class="form-group">
-      <label for="message">What are you asking about?</label>
-      <textarea id="message" name="message" rows="5" required></textarea>
-    </div>
-    
-    <input type="text" name="_gotcha" style="display:none" />
-    <button type="submit" class="btn-submit">Send Message</button>
-  </form>
-</section>
-
-<div class="footer">
-  © 2026 Collin O'Brien • All rights reserved
+<div class="brands-section reveal">
+  <p class="brands-label">Trusted by leading brands</p>
+  <img src="All Logos New_No BG.png" alt="Clients include ESPN, GMC, Lay's, Samsung, Starbucks" class="brands-logo">
 </div>
 
+<section class="testimonials-section" id="testimonials">
+  <div class="testimonials-header reveal">
+    <div>
+      <div class="section-label">Testimonials</div>
+      <h2 class="display">What they <em>say</em></h2>
+    </div>
+    <div class="carousel-controls">
+      <button class="carousel-btn" id="t-prev" aria-label="Previous">◀</button>
+      <button class="carousel-btn" id="t-next" aria-label="Next">▶</button>
+    </div>
+  </div>
+  <div class="carousel-viewport reveal">
+    <div class="carousel-track" id="t-track">
+      <div class="testimonial-slide">
+        <div class="testimonial-inner">
+          <img class="testimonial-avatar" src="Kelly Sallaway_IMdB.png" alt="Kelly Sallaway">
+          <div>
+            <p class="testimonial-quote">He brought a delayed project on schedule, then helped us save thousands on licensing. I want him on every production!</p>
+            <p class="testimonial-name">Kelly Sallaway</p>
+            <p class="testimonial-role">Emmy Award-Winning Producer</p>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-slide">
+        <div class="testimonial-inner">
+          <img class="testimonial-avatar" src="Jasmine Holdsworth.png" alt="Jasmine Holdsworth">
+          <div>
+            <p class="testimonial-quote">He's like a swiss army knife on set. He can do anything!</p>
+            <p class="testimonial-name">Jasmine Holdsworth</p>
+            <p class="testimonial-role">Line Producer</p>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-slide">
+        <div class="testimonial-inner">
+          <img class="testimonial-avatar" src="Ryan Henry Johnston.png" alt="Ryan Henry Johnston">
+          <div>
+            <p class="testimonial-quote">He's invaluable because he's calm under pressure. When everyone else is hyperventilating, he's already analyzed the situation and providing courses of action.</p>
+            <p class="testimonial-name">Ryan Henry Johnston</p>
+            <p class="testimonial-role">Multi-Award-Winning Director</p>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-slide">
+        <div class="testimonial-inner">
+          <img class="testimonial-avatar" src="Tina Imahara.png" alt="Tina Imahara">
+          <div>
+            <p class="testimonial-quote">Collin is wonderfully talented — hungry, driven, and persistent. I was amazed at his knowledge and confidence, and how he helped others feel welcome.</p>
+            <p class="testimonial-name">Tina Imahara</p>
+            <p class="testimonial-role">Academy Award-Winning Editor</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="carousel-dots" id="t-dots">
+    <button class="dot-btn active"></button>
+    <button class="dot-btn"></button>
+    <button class="dot-btn"></button>
+    <button class="dot-btn"></button>
+  </div>
+</section>
+
+<section class="about-section" id="about">
+  <div class="about-img-wrap reveal">
+    <img src="collin-emmy.webp" alt="Collin O'Brien holding an Emmy award" loading="lazy">
+  </div>
+  <div class="about-copy reveal reveal-delay-1">
+    <div class="section-label">About</div>
+    <h2 class="display" style="margin-bottom: 2rem;">The <em>craft</em><br>behind the lens</h2>
+    <p>Emmy Award-winning producer and multi-award-winning writer & director with experience across features, shorts, documentaries, music videos, commercials, and branded content.</p>
+    <p>A background in sales, mechanical engineering, and assistant directing gives me a rare ability to adapt to any environment — bridging creative vision with logistical execution. My curiosity about a client's core principles drives scripts, pitch decks, and campaigns that maximize ROI.</p>
+    <p>3× International MARCOM Award winner for advertising and marketing social media campaigns. Content that reaches millions — always on time, always on budget.</p>
+    <div class="about-stats">
+      <div class="stat-cell">
+        <span class="stat-num">7+</span>
+        <span class="stat-label">Awards Won</span>
+      </div>
+      <div class="stat-cell">
+        <span class="stat-num">M+</span>
+        <span class="stat-label">Viewers Reached</span>
+      </div>
+      <div class="stat-cell">
+        <span class="stat-num">10+</span>
+        <span class="stat-label">Years Active</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-section" id="contact">
+  <div class="section-label">Book a Consultation</div>
+  <h2 class="cta-title">Let's build something<br><em>worth watching</em></h2>
+  <p class="cta-sub">Available for technical consultation and directing roles. Reach out — let's talk about your project.</p>
+
+  <div class="cta-form-wrap reveal">
+    <form action="https://formspree.io/f/YOUR_FORM_ID_HERE" method="POST">
+      <div class="form-grid">
+        <div class="form-row">
+          <label for="name">Your Name</label>
+          <input type="text" id="name" name="name" placeholder="Jane Smith" required>
+        </div>
+        <div class="form-row">
+          <label for="email">Email Address</label>
+          <input type="email" id="email" name="_replyto" placeholder="jane@company.com" required>
+        </div>
+      </div>
+      <div class="form-row">
+        <label for="project">Project Type</label>
+        <select id="project" name="project">
+          <option value="" disabled selected>Select a category...</option>
+          <option value="film-tv">Film / TV</option>
+          <option value="commercial">Commercial / Branded Content</option>
+          <option value="social">Social Campaign</option>
+          <option value="music-video">Music Video</option>
+          <option value="consulting">Creative Consulting</option>
+          <option value="other">Other</option>
+        </select>
+      </div>
+      <div class="form-row">
+        <label for="message">Tell me about your project</label>
+        <textarea id="message" name="message" placeholder="What are you making? What's the timeline? What's the goal?" required></textarea>
+      </div>
+      <input type="text" name="_gotcha" style="display:none">
+      <button type="submit" class="form-submit">Send Message — Book a Call →</button>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <span class="footer-logo">Collin O'Brien</span>
+  <span class="footer-copy">© 2026 Collin O'Brien · All rights reserved</span>
+</footer>
+
 <script>
-  // 1. Original Testimonial Carousel Logic
-  (function(){
-    const root = document.getElementById('testimonials');
-    if(!root) return;
-    const track = root.querySelector('.track');
-    const slides = Array.from(root.querySelectorAll('.slide'));
-    const dots = Array.from(root.querySelectorAll('.dot'));
-    const prevBtn = root.querySelector('.prev');
-    const nextBtn = root.querySelector('.next');
-    const viewport = root.querySelector('.viewport');
-    let index = 0, timer = null, isHovered = false, startX = 0, deltaX = 0;
+  // Custom cursor
+  const cursor = document.getElementById('cursor');
+  const ring = document.getElementById('cursor-ring');
+  let mx = 0, my = 0, rx = 0, ry = 0;
+  document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; cursor.style.left = mx + 'px'; cursor.style.top = my + 'px'; });
+  function animateRing() {
+    rx += (mx - rx) * 0.12;
+    ry += (my - ry) * 0.12;
+    ring.style.left = rx + 'px';
+    ring.style.top = ry + 'px';
+    requestAnimationFrame(animateRing);
+  }
+  animateRing();
 
-    function go(i){
-      index = (i + slides.length) % slides.length;
-      track.style.transform = `translateX(${-index * 100}%)`;
-      dots.forEach((d,di)=>d.setAttribute('aria-current', di===index ? 'true':'false'));
+  // Nav scroll
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 60);
+  });
+
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  reveals.forEach(el => observer.observe(el));
+
+  // Testimonials carousel
+  (function() {
+    const track = document.getElementById('t-track');
+    const dots = Array.from(document.querySelectorAll('.dot-btn'));
+    const slides = track.querySelectorAll('.testimonial-slide');
+    let idx = 0, timer;
+    function go(i) {
+      idx = (i + slides.length) % slides.length;
+      track.style.transform = `translateX(${-idx * 100}%)`;
+      dots.forEach((d, di) => d.classList.toggle('active', di === idx));
     }
-    function next(){ go(index+1); }
-    function prev(){ go(index-1); }
-    function startAuto(){ stopAuto(); timer = setInterval(()=>{ if(!isHovered) next(); }, 6000); }
-    function stopAuto(){ if(timer) clearInterval(timer); }
-
-    nextBtn.addEventListener('click', next);
-    prevBtn.addEventListener('click', prev);
-    dots.forEach((d,di)=> d.addEventListener('click', ()=>go(di)) );
-
-    viewport.addEventListener('mouseenter', ()=>{ isHovered=true; });
-    viewport.addEventListener('mouseleave', ()=>{ isHovered=false; });
-
-    root.addEventListener('keydown', (e)=>{ if(e.key==='ArrowRight') next(); if(e.key==='ArrowLeft') prev(); });
-    root.tabIndex = 0;
-
-    viewport.addEventListener('touchstart', (e)=>{ startX = e.touches[0].clientX; deltaX=0; }, {passive:true});
-    viewport.addEventListener('touchmove', (e)=>{ deltaX = e.touches[0].clientX - startX; }, {passive:true});
-    viewport.addEventListener('touchend', ()=>{ if(Math.abs(deltaX) > 50){ deltaX < 0 ? next() : prev(); } });
-
-    go(0); startAuto();
+    document.getElementById('t-next').addEventListener('click', () => go(idx + 1));
+    document.getElementById('t-prev').addEventListener('click', () => go(idx - 1));
+    dots.forEach((d, di) => d.addEventListener('click', () => go(di)));
+    timer = setInterval(() => go(idx + 1), 6000);
+    track.parentElement.addEventListener('mouseenter', () => clearInterval(timer));
+    track.parentElement.addEventListener('mouseleave', () => { timer = setInterval(() => go(idx + 1), 6000); });
+    go(0);
   })();
 
-  // 2. Performance Optimization: Intersection Observer for Video Playback
-  document.addEventListener("DOMContentLoaded", () => {
-    const videos = document.querySelectorAll("video");
-    
-    if ("IntersectionObserver" in window) {
-      const videoObserver = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.play().catch(error => {
-              console.warn("Autoplay prevented by browser:", error);
-            });
-          } else {
-            entry.target.pause();
-          }
-        });
-      }, {
-        threshold: 0.1 
-      });
-
-      videos.forEach((video) => {
-        videoObserver.observe(video);
-      });
+  // Video intersection observer
+  document.addEventListener('DOMContentLoaded', () => {
+    const vids = document.querySelectorAll('video');
+    if ('IntersectionObserver' in window) {
+      const vo = new IntersectionObserver(entries => {
+        entries.forEach(e => { e.isIntersecting ? e.target.play().catch(()=>{}) : e.target.pause(); });
+      }, { threshold: 0.1 });
+      vids.forEach(v => vo.observe(v));
     }
   });
 </script>
-
 </body>
 </html>
