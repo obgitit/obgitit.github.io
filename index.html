@@ -49,6 +49,7 @@
     }
     nav a:hover { color: var(--accent); }
 
+    /* Dropdown Logic */
     .nav-item {
       position: relative;
       display: inline-block;
@@ -84,11 +85,10 @@
       margin-top: -0.2rem; margin-bottom: 0.3rem;
     }
 
-    /* Hero Section - Height Reduced for Safe Spacing */
+    /* Hero Section */
     .hero {
       position: relative;
-      height: 75vh; /* Reduced from 90vh to naturally pull content below it higher */
-      min-height: 500px;
+      height: 90vh;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -117,7 +117,7 @@
       max-width: 800px; margin: 0 auto;
     }
 
-    /* AWARDS BAR - Restored to Safe Document Flow */
+   /* AWARDS BAR - Restored to Safe Document Flow */
     .awards-bar {
       display: grid; 
       grid-template-columns: repeat(3, 1fr); 
@@ -131,20 +131,22 @@
     .award-item {
       display: flex; 
       justify-content: center; 
-      align-items: center; 
+      align-items: center; /* THIS CENTERS THE IMAGE, NUMBER, AND TEXT VERTICALLY */
       gap: 1rem; 
     }
 
+    /* NEW IMAGE CLASS: Calculates 140% of the 55px font size */
     .award-icon {
       height: 77px; 
-      width: auto; 
+      width: auto; /* Maintains aspect ratio */
       object-fit: contain; 
-      margin-right: 0.5rem; 
+      margin-right: 0.5rem; /* Gap between image and number */
     }
     
     .award-badge {
       display: flex; 
       align-items: baseline; 
+      /* DELETED HEIGHT CONSTRAINT TO ALLOW TRUE CENTERING */
     }
 
     .award-badge .num {
@@ -154,7 +156,7 @@
     }
 
     .award-badge .x {
-      font-size: calc(55px / 3); 
+      font-size: calc(55px / 3); /* CALCULATES EXACTLY 1/3 OF THE ACTUAL 55PX FONT */
       line-height: 1; 
       font-weight: 200; 
       margin-left: -2px; 
@@ -165,6 +167,7 @@
       flex-direction: column; 
       justify-content: center; 
       text-align: left; 
+      /* DELETED HEIGHT CONSTRAINT TO ALLOW TRUE CENTERING */
     }
 
     .award-text span {
@@ -190,7 +193,8 @@
       display: flex; 
       flex-direction: column; 
       align-items: center; 
-      margin: 2rem auto 0 auto; 
+      /* TOP MARGIN REDUCED FROM 4rem TO 1rem TO PULL CLOSER TO AWARDS */
+      margin: 1rem auto 0 auto; 
       max-width: 1200px; 
       padding: 0 2rem; 
     }
@@ -216,7 +220,8 @@
       grid-template-columns: repeat(3, 1fr); 
       gap: 3rem; 
       max-width: 1000px; 
-      margin: 8rem auto var(--spacing-section) auto; 
+      /* TOP MARGIN INCREASED FROM 7rem TO 11rem TO PUSH DOWN FROM FANNED PHONES */
+      margin: 11rem auto var(--spacing-section) auto; 
       padding: 0 2rem; 
       text-align: center; 
     }
@@ -400,4 +405,218 @@
 <section class="fanned-container" id="work">
   <div class="fanned-media">
     <div class="fanned-card" style="--rot: -8deg; --y: 40px;">
-      <video autoplay
+      <video autoplay muted loop playsinline poster="Gabriela_1 poster.jpg">
+        <source src="Gabriela_1.mp4" type="video/mp4" />
+      </video>
+    </div>
+    <div class="fanned-card" style="--rot: 0deg; --y: 0px;">
+      <video autoplay muted loop playsinline poster="Bella Dose and Alyssa Raghu_1 poster.jpg">
+        <source src="Bella Dose and Alyssa Raghu_1.mp4" type="video/mp4" />
+      </video>
+    </div>
+    <div class="fanned-card" style="--rot: 8deg; --y: 40px;">
+      <video autoplay muted loop playsinline poster="Jay_1 poster.jpg">
+        <source src="Jay_1.mp4" type="video/mp4" />
+      </video>
+    </div>
+  </div>
+</section>
+
+<section class="services-row">
+  <a href="film-tv.html" class="service-card">
+    <img src="icon_placeholder_film.png" alt="Film Icon Placeholder">
+    <h3>Film / TV</h3>
+    <p>I'm a paragraph. Click here to add your own text and edit me.</p>
+  </a>
+
+  <a href="commercial.html" class="service-card">
+    <img src="icon_placeholder_tv.png" alt="TV Icon Placeholder">
+    <h3>Commercial</h3>
+    <p>I'm a paragraph. Click here to add your own text and edit me.</p>
+  </a>
+
+  <a href="music-video.html" class="service-card">
+    <img src="icon_placeholder_music.png" alt="Music Icon Placeholder">
+    <h3>Music Video</h3>
+    <p>I'm a paragraph. Click here to add your own text and edit me.</p>
+  </a>
+</section>
+
+<section class="brands">
+  <img src="All Logos New_No BG.png" alt="Trusted Clients: ESPN, GMC, Lay's, Samsung, Starbucks" class="consolidated-logos" />
+</section>
+
+<section id="testimonials" aria-label="Testimonials carousel">
+  <div class="shell">
+    <div class="header">
+      <h2>What people say about Collin</h2>
+      <div class="actions" aria-controls="testimonial-carousel">
+        <button class="btn prev" aria-label="Previous testimonial">◀</button>
+        <button class="btn next" aria-label="Next testimonial">▶</button>
+      </div>
+    </div>
+
+    <div class="viewport" id="testimonial-carousel">
+      <div class="track" role="list">
+        <figure class="slide" role="listitem">
+          <div class="card">
+            <img class="avatar" src="Kelly Sallaway_IMdB.png" alt="Headshot of Kelly Sallaway" loading="lazy">
+            <figcaption>
+              <p class="name">Kelly Sallaway</p>
+              <p class="role">Emmy Award-Winning Producer</p>
+              <blockquote class="quote">He brought a delayed project on schedule, then helped us to save thousands on licensing! I want him on every production!</blockquote>
+            </figcaption>
+          </div>
+        </figure>
+        <figure class="slide" role="listitem">
+          <div class="card">
+            <img class="avatar" src="Jasmine Holdsworth.png" alt="Headshot of Jasmine Holdsworth" loading="lazy">
+            <figcaption>
+              <p class="name">Jasmine Holdsworth</p>
+              <p class="role">Line Producer</p>
+              <blockquote class="quote">He’s like a swiss army knife on set. He can do anything!</blockquote>
+            </figcaption>
+          </div>
+        </figure>
+        <figure class="slide" role="listitem">
+          <div class="card">
+            <img class="avatar" src="Ryan Henry Johnston.png" alt="Headshot of Ryan Henry Johnston" loading="lazy">
+            <figcaption>
+              <p class="name">Ryan Henry Johnston</p>
+              <p class="role">Multi-Award-Winning Director</p>
+              <blockquote class="quote">He’s invaluable because he’s calm under pressure. When everyone else is hyperventilating when something unexpected happens, he stays calm, has already analyzed the situation and is providing courses of action. So awesome!</blockquote>
+            </figcaption>
+          </div>
+        </figure>
+        <figure class="slide" role="listitem">
+          <div class="card">
+            <img class="avatar" src="Tina Imahara.png" alt="Headshot of Tina Imahara" loading="lazy">
+            <figcaption>
+              <p class="name">Tina Imahara</p>
+              <p class="role">Academy Award-Winning Editor</p>
+              <blockquote class="quote">Collin is wonderfully talented! He’s hungry, driven, and persistent! I was amazed at his knowledge and confidence in approaching questions and how he helped others feel welcome!</blockquote>
+            </figcaption>
+          </div>
+        </figure>
+      </div>
+    </div>
+
+    <div class="controls" style="display:flex;justify-content:center;gap:.6rem;margin-top:.9rem">
+      <button class="dot" aria-label="Go to slide 1" aria-current="true"></button>
+      <button class="dot" aria-label="Go to slide 2"></button>
+      <button class="dot" aria-label="Go to slide 3"></button>
+      <button class="dot" aria-label="Go to slide 4"></button>
+    </div>
+  </div>
+</section>
+
+<section class="about" id="about">
+  <figure class="about-photo">
+    <img src="collin-emmy.webp" alt="Collin O’Brien holding an Emmy award" loading="lazy">
+  </figure>
+  <div class="about-copy">
+    <h2>About</h2>
+    <p>I'm an Emmy Award winning Producer and multi-award winning Writer & Director with experience in feature-length films, shorts, documentaries, music videos, commercials, and branded content.</p>
+    <p>I decided to create a personal production company because my work consistently delivers high-quality, award-winning content that reaches millions of viewers, this includes 3x International MARCOM Awards for advertising/marketing social media campaigns.</p>
+    <p>My background in sales, mechanical engineering, and assistant directing affords me a unique ability to adapt to any environment that a company requires in order to develop content that creates an impact and drives awareness. My active curiosity in understanding a client’s core principles and goals enables me to develop scripts, pitch decks, and more, to create engaging content that maximizes client ROI.</p>
+    <p>I'm always interested in learning more about different companies, so reach out, and help me share what you want to say.</p>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <h2>Let’s Build Something</h2>
+  <p>Available for technical consultation and directing roles.</p>
+  
+  <form class="contact-form" action="https://formspree.io/f/YOUR_FORM_ID_HERE" method="POST">
+    <div class="form-group">
+      <label for="name">Name</label>
+      <input type="text" id="name" name="name" required>
+    </div>
+    
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input type="email" id="email" name="_replyto" required>
+    </div>
+    
+    <div class="form-group">
+      <label for="message">What are you asking about?</label>
+      <textarea id="message" name="message" rows="5" required></textarea>
+    </div>
+    
+    <input type="text" name="_gotcha" style="display:none" />
+    <button type="submit" class="btn-submit">Send Message</button>
+  </form>
+</section>
+
+<div class="footer">
+  © 2026 Collin O'Brien • All rights reserved
+</div>
+
+<script>
+  // 1. Original Testimonial Carousel Logic
+  (function(){
+    const root = document.getElementById('testimonials');
+    if(!root) return;
+    const track = root.querySelector('.track');
+    const slides = Array.from(root.querySelectorAll('.slide'));
+    const dots = Array.from(root.querySelectorAll('.dot'));
+    const prevBtn = root.querySelector('.prev');
+    const nextBtn = root.querySelector('.next');
+    const viewport = root.querySelector('.viewport');
+    let index = 0, timer = null, isHovered = false, startX = 0, deltaX = 0;
+
+    function go(i){
+      index = (i + slides.length) % slides.length;
+      track.style.transform = `translateX(${-index * 100}%)`;
+      dots.forEach((d,di)=>d.setAttribute('aria-current', di===index ? 'true':'false'));
+    }
+    function next(){ go(index+1); }
+    function prev(){ go(index-1); }
+    function startAuto(){ stopAuto(); timer = setInterval(()=>{ if(!isHovered) next(); }, 6000); }
+    function stopAuto(){ if(timer) clearInterval(timer); }
+
+    nextBtn.addEventListener('click', next);
+    prevBtn.addEventListener('click', prev);
+    dots.forEach((d,di)=> d.addEventListener('click', ()=>go(di)) );
+
+    viewport.addEventListener('mouseenter', ()=>{ isHovered=true; });
+    viewport.addEventListener('mouseleave', ()=>{ isHovered=false; });
+
+    root.addEventListener('keydown', (e)=>{ if(e.key==='ArrowRight') next(); if(e.key==='ArrowLeft') prev(); });
+    root.tabIndex = 0;
+
+    viewport.addEventListener('touchstart', (e)=>{ startX = e.touches[0].clientX; deltaX=0; }, {passive:true});
+    viewport.addEventListener('touchmove', (e)=>{ deltaX = e.touches[0].clientX - startX; }, {passive:true});
+    viewport.addEventListener('touchend', ()=>{ if(Math.abs(deltaX) > 50){ deltaX < 0 ? next() : prev(); } });
+
+    go(0); startAuto();
+  })();
+
+  // 2. Performance Optimization: Intersection Observer for Video Playback
+  document.addEventListener("DOMContentLoaded", () => {
+    const videos = document.querySelectorAll("video");
+    
+    if ("IntersectionObserver" in window) {
+      const videoObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.play().catch(error => {
+              console.warn("Autoplay prevented by browser:", error);
+            });
+          } else {
+            entry.target.pause();
+          }
+        });
+      }, {
+        threshold: 0.1 
+      });
+
+      videos.forEach((video) => {
+        videoObserver.observe(video);
+      });
+    }
+  });
+</script>
+
+</body>
+</html>
