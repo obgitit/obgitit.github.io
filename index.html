@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Collin O'Brien – Technical Producer & Director</title>
   <style>
-    /* Global Variables */
+    /* GLOBAL VARIABLES: These act as a single source of truth for colors and spacing. Changing a hex code here updates it everywhere. */
     :root {
       --bg-color: #0a0a0a;
       --surface-color: #1a1a1a;
@@ -16,154 +16,191 @@
       --radius: 12px;
     }
 
+    /* BODY: Targets the entire webpage baseline. */
     body {
-      margin: 0;
-      font-family: 'Open Sans', -apple-system, sans-serif;
-      background-color: var(--bg-color);
-      color: var(--text-main);
-      line-height: 1.6;
+      margin: 0; /* Removes default browser margins so content touches the edges */
+      font-family: 'Open Sans', -apple-system, sans-serif; /* Defines the font hierarchy */
+      background-color: var(--bg-color); /* Pulls background color from variables */
+      color: var(--text-main); /* Pulls primary text color from variables */
+      line-height: 1.6; /* Sets standard reading spacing between lines of paragraph text */
     }
 
-    /* Navigation & Dropdown */
+    /* NAVIGATION BAR: The menu at the top of the screen. */
     nav {
-      position: sticky;
-      top: 0;
-      background: rgba(10, 10, 10, 0.9);
-      backdrop-filter: blur(10px);
-      padding: 1rem 1.5rem;
-      display: flex;
-      justify-content: center;
-      gap: 2.5rem;
-      z-index: 100;
-      border-bottom: 1px solid rgba(255,255,255,0.05);
-      align-items: center;
+      position: sticky; /* Keeps the nav bar on screen when scrolling down */
+      top: 0; /* Locks the sticky nav exactly to the top edge */
+      background: rgba(10, 10, 10, 0.9); /* Sets a 90% opaque dark background */
+      backdrop-filter: blur(10px); /* Blurs the content scrolling underneath the nav bar */
+      padding: 1rem 1.5rem; /* Adds inner spacing (top/bottom, left/right) */
+      display: flex; /* Enables flexbox for horizontal alignment */
+      justify-content: center; /* Centers the navigation links */
+      gap: 2.5rem; /* Adds space between each navigation link */
+      z-index: 100; /* Ensures the nav bar stays layered on top of all other content */
+      border-bottom: 1px solid rgba(255,255,255,0.05); /* Adds a faint line under the nav */
+      align-items: center; /* Vertically centers the text within the nav bar */
     }
     nav a {
-      color: var(--text-main);
-      text-decoration: none;
-      font-weight: 600;
-      font-size: 0.9rem;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      transition: color 0.2s;
+      color: var(--text-main); /* Makes links white */
+      text-decoration: none; /* Removes the default blue underline from links */
+      font-weight: 600; /* Makes font slightly bold */
+      font-size: 0.9rem; /* Sets link size */
+      text-transform: uppercase; /* Forces all text to capitals */
+      letter-spacing: 1px; /* Spreads letters out slightly for readability */
+      transition: color 0.2s; /* Creates a smooth fade when hovering over links */
     }
-    nav a:hover { color: var(--accent); }
+    nav a:hover { 
+      color: var(--accent); /* Changes link to gold when hovered */
+    }
 
-    /* Dropdown Logic */
+    /* DROPDOWN LOGIC: Controls the 'Work' sub-menu. */
     .nav-item {
-      position: relative;
-      display: inline-block;
-      padding: 0.5rem 0;
+      position: relative; /* Acts as the anchor point for the absolute dropdown box */
+      display: inline-block; /* Keeps the item in line with other links */
+      padding: 0.5rem 0; /* Expands the invisible hover target area */
     }
     .nav-dropdown {
-      display: none;
-      position: absolute;
-      top: 100%;
-      left: 50%;
-      transform: translateX(-50%);
-      background: var(--surface-color);
-      border: 1px solid rgba(255,255,255,0.1);
-      border-radius: 8px;
-      padding: 1rem;
-      min-width: 280px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.8);
-      z-index: 101;
+      display: none; /* Hides the dropdown by default */
+      position: absolute; /* Takes the dropdown out of normal document flow */
+      top: 100%; /* Pushes the dropdown exactly below the 'Work' link */
+      left: 50%; /* Moves the left edge of the dropdown to the center of 'Work' */
+      transform: translateX(-50%); /* Pulls the dropdown back 50% of its own width to perfectly center it */
+      background: var(--surface-color); /* Sets dark grey background */
+      border: 1px solid rgba(255,255,255,0.1); /* Adds faint border */
+      border-radius: 8px; /* Rounds the corners */
+      padding: 1rem; /* Adds inner spacing */
+      min-width: 280px; /* Prevents the box from squishing too thin */
+      box-shadow: 0 10px 30px rgba(0,0,0,0.8); /* Adds a drop shadow for depth */
+      z-index: 101; /* Keeps dropdown above the nav bar */
     }
     .nav-item:hover .nav-dropdown {
-      display: block;
+      display: block; /* Reveals the dropdown when the mouse touches the parent .nav-item */
     }
     .nav-cat-title {
-      color: var(--accent);
-      font-size: 0.75rem;
-      font-weight: bold;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      margin: 1rem 0 0.5rem 0;
-      border-bottom: 1px solid rgba(255,255,255,0.1);
-      padding-bottom: 0.25rem;
+      color: var(--accent); /* Makes category titles gold */
+      font-size: 0.75rem; /* Sets small size */
+      font-weight: bold; /* Bolds text */
+      text-transform: uppercase; /* Forces capitals */
+      letter-spacing: 1px; /* Spreads letters */
+      margin: 1rem 0 0.5rem 0; /* Adds spacing above and below */
+      border-bottom: 1px solid rgba(255,255,255,0.1); /* Adds divider line */
+      padding-bottom: 0.25rem; /* Adds space between text and divider line */
     }
-    .nav-cat-title:first-child { margin-top: 0; }
+    .nav-cat-title:first-child { 
+      margin-top: 0; /* Removes top margin from the very first title to keep it flush */
+    }
     .nav-dropdown a {
-      display: block;
-      padding: 0.4rem 0;
-      font-size: 0.85rem;
-      text-transform: none;
-      font-weight: normal;
+      display: block; /* Forces links to stack vertically instead of side-by-side */
+      padding: 0.4rem 0; /* Spacing between links */
+      font-size: 0.85rem; /* Smaller font for sub-links */
+      text-transform: none; /* Allows upper/lower case */
+      font-weight: normal; /* Removes bolding */
     }
     .nav-dropdown span.desc {
-      display: block;
-      font-size: 0.7rem;
-      color: var(--text-muted);
-      margin-top: -0.2rem;
-      margin-bottom: 0.3rem;
+      display: block; /* Forces descriptions to their own line */
+      font-size: 0.7rem; /* Tiny font */
+      color: var(--text-muted); /* Grey text */
+      margin-top: -0.2rem; /* Pulls description closer to its parent link */
+      margin-bottom: 0.3rem; /* Adds space below description */
     }
 
-    /* Hero Section */
+    /* HERO SECTION: The main landing video area. */
     .hero {
-      position: relative;
-      height: 90vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 0 2rem;
-      overflow: hidden;
+      position: relative; /* Anchors the absolute video */
+      height: 90vh; /* Viewport Height: Takes up exactly 90% of the screen height */
+      display: flex; /* Enables centering */
+      align-items: center; /* Centers content vertically */
+      justify-content: center; /* Centers content horizontally */
+      text-align: center; /* Centers the text inside the box */
+      padding: 0 2rem; /* Keeps text from hitting screen edges on mobile */
+      overflow: hidden; /* Chops off any video bleeding outside the section */
     }
     .hero video {
-      position: absolute;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      object-fit: cover;
-      z-index: -2;
-      opacity: 0.4;
+      position: absolute; /* Removes video from flow so text sits on top */
+      top: 0; left: 0; /* Pins video to top left corner */
+      width: 100%; height: 100%; /* Stretches video to fill container */
+      object-fit: cover; /* Ensures video scales without squishing aspect ratio */
+      z-index: -2; /* Pushes video to the very back layer */
+      opacity: 0.4; /* Darkens video so white text is readable */
     }
     .hero::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(to bottom, transparent, var(--bg-color));
-      z-index: -1;
+      content: ''; /* Creates an invisible CSS element */
+      position: absolute; /* Positions it over the video */
+      inset: 0; /* Stretches to all 4 edges */
+      background: linear-gradient(to bottom, transparent, var(--bg-color)); /* Fades video to black at the bottom edge */
+      z-index: -1; /* Places gradient between video and text */
     }
     .hero-content h1 {
-      font-size: clamp(2rem, 5vw, 4rem);
-      margin: 0 0 1rem 0;
-      letter-spacing: -1px;
+      font-size: clamp(2rem, 5vw, 4rem); /* Responsive font: minimum 2rem, ideal 5vw, max 4rem */
+      margin: 0 0 1rem 0; /* Margin layout: top right bottom left */
+      letter-spacing: -1px; /* Tightens title font */
     }
     .hero-content p {
-      font-size: clamp(1.1rem, 2vw, 1.5rem);
-      color: var(--text-muted);
-      max-width: 800px;
-      margin: 0 auto;
+      font-size: clamp(1.1rem, 2vw, 1.5rem); /* Responsive sub-font */
+      color: var(--text-muted); /* Grey color */
+      max-width: 800px; /* Stops text from stretching too wide on massive screens */
+      margin: 0 auto; /* Centers the paragraph block */
     }
 
-    /* New Awards Bar */
+    /* REVISED AWARDS BAR: Adjusted to sit close to hero video and span 1/3 screen each. */
     .awards-bar {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 12rem;
-      max-width: 1200px;
-      margin: 2rem auto 2rem auto; /* Reduced space below hero */
-      padding: 0 2rem;
+      display: grid; /* Grid allows strict column math */
+      grid-template-columns: repeat(3, 1fr); /* Creates 3 columns of exactly 1 fraction each (33.3%) */
+      width: 100%; /* Takes full width of parent */
+      max-width: 1000px; /* Caps width at 1000px for desktop readability */
+      margin: 0 auto; /* 0px top margin pulls it right under hero. Auto centers it left/right. 0 bottom margin */
+      padding: 2rem; /* Inner spacing */
+      box-sizing: border-box; /* Prevents padding from breaking 100% width math */
     }
     
     .award-item {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
+      display: flex; /* Aligns number and text side-by-side */
+      justify-content: center; /* Centers the cluster in its 1/3 column */
+      align-items: center; /* Vertically aligns number and text block */
+      gap: 1rem; /* Sets exact spacing between the number and the stacked text */
     }
     
-    .award-number {
-      font-size: 80px; /* 1/5th of 400px phone height */
-      font-weight: 200;
-      line-height: 1;
+    .award-badge {
+      display: flex; /* Aligns '1' and 'x' side-by-side */
+      align-items: baseline; /* Locks the bottom of 'x' to the bottom of the number */
+      height: 80px; /* Strict 80px height boundary */
+    }
+
+    .award-badge .num {
+      font-size: 80px; /* Strict 80px font size */
+      line-height: 0.8; /* Shrinks invisible font boundary to fit exactly in 80px box */
+      font-weight: 200; /* Thin font */
+    }
+
+    .award-badge .x {
+      font-size: calc(80px / 3); /* CSS Math: Dynamically calculates exactly 1/3 of the 80px number */
+      line-height: 1; /* Standard line height */
+      font-weight: 200; /* Thin font */
+      margin-left: -2px; /* Pulls the 'x' slightly tighter to the number */
+    }
+
+    /* Stacked Award Text */
+    .award-text {
+      display: flex; /* Allows column stacking */
+      flex-direction: column; /* Stacks 'Emmy' over 'Award' */
+      justify-content: center; /* Vertically centers words in container */
+      height: 80px; /* Matches exact height of the number box */
+      text-align: left; /* Left aligns text against the number */
+    }
+
+    .award-text span {
+      font-size: 1.25rem; /* Mathematical font size to fit two stacked words in 80px */
+      line-height: 1.1; /* Tightens gap between stacked words */
+      font-weight: bold; /* Bold text */
+      text-transform: uppercase; /* Forces capitals */
+      color: var(--text-main); /* White text */
     }
     
+    /* Gold & Platinum Gradients (Applied to text) */
     .shiny-gold {
       background: linear-gradient(to bottom right, #BF953F, #FCF6BA, #B38728, #FBF5B7, #AA771C);
-      -webkit-background-clip: text;
+      -webkit-background-clip: text; /* Clips the background strictly to the shape of the font */
       background-clip: text;
-      color: transparent;
+      color: transparent; /* Makes original font transparent so gradient shows through */
     }
 
     .shiny-platinum {
@@ -173,133 +210,102 @@
       color: transparent;
     }
 
-    .award-details {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-    .award-details img {
-      width: 80px;
-      height: 80px;
-      object-fit: contain;
-      background: rgba(255,255,255,0.05); /* Just to show placeholder boundary */
-      border-radius: 4px;
-      margin-bottom: 0.25rem;
-    }
-    .award-details p {
-      margin: 0;
-      font-size: 0.9rem;
-      text-transform: uppercase;
-      font-weight: bold;
-      letter-spacing: 1px;
-    }
-
-    /* Centered Fanned Media Container - Tight Spacing */
+    /* FANNED MEDIA CONTAINER: Adjusted spacing */
     .fanned-container {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      margin: 2rem auto 4rem auto; /* Reduced top gap to sit closer to awards */
-      max-width: 1200px;
-      padding: 0 2rem;
+      display: flex; 
+      flex-direction: column; 
+      align-items: center; 
+      margin: 4rem auto 0 auto; /* 4rem top margin creates slight distance from awards. 0 bottom margin */
+      max-width: 1200px; 
+      padding: 0 2rem; 
     }
 
-    /* Fanned Media */
     .fanned-media {
-      display: flex;
-      justify-content: center;
-      gap: 2.5rem;
-      width: 100%;
+      display: flex; /* Stacks cards in a row */
+      justify-content: center; /* Centers the fanned cluster */
+      gap: 2.5rem; /* Sets horizontal gap between center anchor points */
+      width: 100%; 
     }
     .fanned-card {
-      width: 340px; 
-      aspect-ratio: 9/16;
-      background: #111;
-      border-radius: 20px;
-      overflow: hidden;
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      box-shadow: 0 40px 80px rgba(0,0,0,0.9);
-      transform: rotate(var(--rot)) translateY(var(--y));
-      cursor: pointer;
-      transition: filter 0.2s ease;
+      width: 340px; /* Dictates card width */
+      aspect-ratio: 9/16; /* Forces height to calculate based on 9:16 vertical ratio */
+      background: #111; 
+      border-radius: 20px; /* Rounds card corners */
+      overflow: hidden; /* Clips video to fit rounded corners */
+      border: 1px solid rgba(255, 255, 255, 0.15); /* Faint outer border */
+      box-shadow: 0 40px 80px rgba(0,0,0,0.9); /* Deep static shadow for floating effect */
+      transform: rotate(var(--rot)) translateY(var(--y)); /* Pulls rotation data from inline HTML styling */
+      cursor: pointer; /* Changes mouse to pointing hand */
+      transition: filter 0.2s ease; /* Smooth fade for hover effect */
     }
-    .fanned-card:hover { filter: brightness(1.2); }
+    .fanned-card:hover { filter: brightness(1.2); } /* Brightens card slightly on hover */
+    
     .fanned-card video {
-      width: 100%; height: 100%;
-      object-fit: cover;
-      pointer-events: none;
+      width: 100%; height: 100%; /* Forces video to fill card */
+      object-fit: cover; /* Prevents video squishing */
+      pointer-events: none; /* Passes mouse clicks through video to the card container */
     }
 
-    /* New Services Row (Based on Image Reference) */
+    /* SERVICES ROW: Adjusted spacing below fanned phones */
     .services-row {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 3rem;
-      max-width: 1000px;
-      margin: 4rem auto var(--spacing-section) auto;
-      padding: 0 2rem;
-      text-align: center;
+      display: grid; /* Uses grid for columns */
+      grid-template-columns: repeat(3, 1fr); /* 3 equal columns */
+      gap: 3rem; /* Space between icons */
+      max-width: 1000px; 
+      margin: 7rem auto var(--spacing-section) auto; /* 7rem top margin creates requested distance from phones */
+      padding: 0 2rem; 
+      text-align: center; 
     }
     .service-card {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-decoration: none;
-      color: var(--text-main);
-      transition: transform 0.2s ease;
+      display: flex; 
+      flex-direction: column; 
+      align-items: center; 
+      text-decoration: none; /* Removes link underlines */
+      color: var(--text-main); 
+      transition: transform 0.2s ease; /* Smooth motion */
     }
     .service-card:hover {
-      transform: translateY(-5px);
+      transform: translateY(-5px); /* Pushes icon up 5px on hover */
     }
     .service-card img {
-      width: 60px;
-      height: 60px;
-      object-fit: contain;
-      margin-bottom: 1.5rem;
-      /* Optional filter to make placeholders look like your golden line-art example */
-      filter: invert(73%) sepia(45%) saturate(415%) hue-rotate(5deg) brightness(95%) contrast(88%);
+      width: 60px; height: 60px; /* Forces exact icon size */
+      object-fit: contain; /* Prevents icon distortion */
+      margin-bottom: 1.5rem; /* Space between icon and title */
+      filter: invert(73%) sepia(45%) saturate(415%) hue-rotate(5deg) brightness(95%) contrast(88%); /* CSS trick to turn black PNGs gold */
     }
     .service-card h3 {
-      font-size: 1.5rem;
-      letter-spacing: 1px;
-      margin: 0 0 1rem 0;
+      font-size: 1.5rem; 
+      letter-spacing: 1px; 
+      margin: 0 0 1rem 0; 
     }
     .service-card p {
-      font-size: 0.95rem;
-      color: var(--text-muted);
-      line-height: 1.6;
-      margin: 0;
-      font-style: italic;
+      font-size: 0.95rem; 
+      color: var(--text-muted); 
+      line-height: 1.6; 
+      margin: 0; 
+      font-style: italic; 
     }
 
-    /* Brands */
+    /* BRANDS: Client logo section */
     .brands {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      margin: var(--spacing-section) auto;
-      padding: 2rem;
+      display: flex; justify-content: center; align-items: center;
+      margin: var(--spacing-section) auto; padding: 2rem;
       background: transparent;
     }
     .consolidated-logos {
-      max-width: 100%;
-      width: 800px; 
-      height: auto;
-      opacity: 0.7; 
-      transition: opacity 0.3s ease;
+      max-width: 100%; width: 800px; height: auto;
+      opacity: 0.7; transition: opacity 0.3s ease;
     }
     .consolidated-logos:hover { opacity: 1; }
 
-    /* Testimonials */
+    /* TESTIMONIALS CAROUSEL: Original math and layout preserved */
     #testimonials { --gap: 1rem; --card-bg: #0b0b0b; --text:#f5f5f5; --muted:#cfcfcf; --accent:#D4AF37; --ring: rgba(255,255,255,.15); box-sizing: border-box; margin: var(--spacing-section) auto; }
     #testimonials figure, #testimonials blockquote { margin: 0; }
     #testimonials .shell{max-width:1100px;margin:0 auto;padding:2rem 1rem;}
     #testimonials .header{display:flex;align-items:end;justify-content:space-between;gap:var(--gap);margin-bottom:1rem}
     #testimonials .header h2{font-size:clamp(1.4rem,2vw,1.8rem);margin:0;letter-spacing:.2px}
     #testimonials .viewport{
-      position:relative;
-      overflow:hidden;
-      border-radius:1rem;
+      position:relative; overflow:hidden; border-radius:1rem;
       background:linear-gradient(180deg,#121212,#0a0a0a);
       box-shadow:0 10px 30px rgba(0,0,0,.35), inset 0 0 0 1px var(--ring)
     }
@@ -321,94 +327,57 @@
     #testimonials .dot{width:8px;height:8px;border-radius:999px;background:rgba(255,255,255,.25);border:none;cursor:pointer}
     #testimonials .dot[aria-current="true"], #testimonials .dot:hover{background:var(--accent)}
 
-    /* About */
+    /* ABOUT SECTION: Biography text and photo */
     .about {
-      max-width: 1000px;
-      margin: var(--spacing-section) auto;
-      padding: 0 2rem;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 4rem;
-      align-items: center;
+      max-width: 1000px; margin: var(--spacing-section) auto; padding: 0 2rem;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center;
     }
     .about-photo img {
-      width: 100%;
-      border-radius: var(--radius);
-      filter: contrast(1.1);
+      width: 100%; border-radius: var(--radius); filter: contrast(1.1);
     }
 
-    /* Contact Form */
+    /* CONTACT FORM: Bottom section for lead generation */
     .contact {
-      max-width: 800px;
-      margin: var(--spacing-section) auto;
-      padding: 4rem 2rem;
-      background: var(--surface-color);
-      border-radius: var(--radius);
-      border: 1px solid rgba(255,255,255,0.05);
-      text-align: center;
+      max-width: 800px; margin: var(--spacing-section) auto; padding: 4rem 2rem;
+      background: var(--surface-color); border-radius: var(--radius);
+      border: 1px solid rgba(255,255,255,0.05); text-align: center;
     }
     .contact h2 { margin-top: 0; }
     .contact-form {
-      display: flex;
-      flex-direction: column;
-      gap: 1.5rem;
-      margin-top: 2rem;
-      text-align: left;
+      display: flex; flex-direction: column; gap: 1.5rem;
+      margin-top: 2rem; text-align: left;
     }
-    .form-group {
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
+    .form-group { display: flex; flex-direction: column; gap: 0.5rem; }
+    .form-group label { font-weight: 600; font-size: 0.9rem; color: var(--text-muted); }
+    .form-group input, .form-group textarea {
+      width: 100%; box-sizing: border-box; padding: 1rem;
+      background: var(--bg-color); border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 8px; color: var(--text-main); font-family: inherit;
+      font-size: 1rem; transition: border-color 0.3s ease;
     }
-    .form-group label {
-      font-weight: 600;
-      font-size: 0.9rem;
-      color: var(--text-muted);
-    }
-    .form-group input, 
-    .form-group textarea {
-      width: 100%;
-      box-sizing: border-box;
-      padding: 1rem;
-      background: var(--bg-color);
-      border: 1px solid rgba(255,255,255,0.1);
-      border-radius: 8px;
-      color: var(--text-main);
-      font-family: inherit;
-      font-size: 1rem;
-      transition: border-color 0.3s ease;
-    }
-    .form-group input:focus, 
-    .form-group textarea:focus {
-      outline: none;
-      border-color: var(--accent);
+    .form-group input:focus, .form-group textarea:focus {
+      outline: none; border-color: var(--accent);
     }
     .btn-submit {
-      background: var(--accent);
-      color: #000;
-      border: none;
-      padding: 1rem 2rem;
-      font-size: 1rem;
-      font-weight: bold;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: transform 0.1s ease, filter 0.2s ease;
-      align-self: center;
-      margin-top: 1rem;
+      background: var(--accent); color: #000; border: none; padding: 1rem 2rem;
+      font-size: 1rem; font-weight: bold; border-radius: 8px; cursor: pointer;
+      transition: transform 0.1s ease, filter 0.2s ease; align-self: center; margin-top: 1rem;
     }
     .btn-submit:hover { filter: brightness(1.1); }
     .btn-submit:active { transform: translateY(2px); }
-
     .footer { text-align: center; padding: 2rem; color: var(--text-muted); font-size: 0.9rem; }
 
-    /* Mobile Breakpoints */
+    /* MOBILE BREAKPOINTS: Changes layout rules when screen shrinks below 900px */
     @media (max-width: 900px) {
-      .awards-bar { flex-direction: column; gap: 2rem; }
+      /* Collapses 3-column awards into 1 vertical stack */
+      .awards-bar { grid-template-columns: 1fr; gap: 2rem; margin-top: 2rem; }
       
+      /* Shrinks fanned cards so they fit on a mobile screen */
       .fanned-media { transform: scale(0.95); gap: 0.5rem; }
       .fanned-card { width: 40vw; max-width: 200px; }
       
-      .services-row { grid-template-columns: 1fr; gap: 4rem; }
+      /* Collapses 3-column services row into 1 vertical stack */
+      .services-row { grid-template-columns: 1fr; gap: 4rem; margin-top: 4rem; }
 
       .about { grid-template-columns: 1fr; gap: 3rem; }
       #testimonials .card{grid-template-columns:64px 1fr}
@@ -459,26 +428,32 @@
 
 <section class="awards-bar">
   <div class="award-item">
-    <div class="award-number shiny-gold">1x</div>
-    <div class="award-details">
-      <img src="award_placeholder_emmy.png" alt="Emmy Award Image Placeholder">
-      <p>Emmy Award</p>
+    <div class="award-badge shiny-gold">
+      <span class="num">1</span><span class="x">x</span>
+    </div>
+    <div class="award-text">
+      <span>Emmy</span>
+      <span>Award</span>
     </div>
   </div>
   
   <div class="award-item">
-    <div class="award-number shiny-platinum">3x</div>
-    <div class="award-details">
-      <img src="award_placeholder_telly.png" alt="Telly Award Image Placeholder">
-      <p>Telly Awards</p>
+    <div class="award-badge shiny-platinum">
+      <span class="num">3</span><span class="x">x</span>
+    </div>
+    <div class="award-text">
+      <span>Telly</span>
+      <span>Awards</span>
     </div>
   </div>
   
   <div class="award-item">
-    <div class="award-number shiny-platinum">3x</div>
-    <div class="award-details">
-      <img src="award_placeholder_marcom.png" alt="MARCOM Award Image Placeholder">
-      <p>Marcom Awards</p>
+    <div class="award-badge shiny-platinum">
+      <span class="num">3</span><span class="x">x</span>
+    </div>
+    <div class="award-text">
+      <span>Marcom</span>
+      <span>Awards</span>
     </div>
   </div>
 </section>
