@@ -459,21 +459,20 @@
       background: var(--border);
       border: 1px solid var(--border);
       margin-top: 4rem;
+      position: relative;
     }
-    .service-item {
+    .service-card {
       background: var(--black);
-      padding: 3rem 2.5rem;
-      text-decoration: none;
+      padding: 2.8rem 2.4rem 2.2rem;
       color: var(--text);
       display: flex;
       flex-direction: column;
-      gap: 1.5rem;
+      gap: 1.2rem;
       transition: background 0.3s;
       position: relative;
-      overflow: hidden;
     }
-    .service-item::after {
-      content: '';
+    .service-card::after {
+      content: "";
       position: absolute;
       bottom: 0; left: 0; right: 0;
       height: 2px;
@@ -482,44 +481,207 @@
       transform-origin: left;
       transition: transform 0.35s ease;
     }
-    .service-item:hover { background: var(--surface); }
-    .service-item:hover::after { transform: scaleX(1); }
+    .service-card:hover { background: var(--surface); }
+    .service-card:hover::after { transform: scaleX(1); }
+    .service-card.active { background: var(--surface); }
+    .service-card.active::after { transform: scaleX(1); }
     .service-icon {
-      width: 44px; height: 44px;
+      width: 40px; height: 40px;
       object-fit: contain;
       filter: invert(75%) sepia(30%) saturate(500%) hue-rotate(5deg) brightness(90%);
-      opacity: 0.9;
+      opacity: 0.85;
     }
     .service-num {
       font-family: var(--serif);
-      font-size: 3.5rem;
+      font-size: 3rem;
       font-weight: 300;
       color: var(--border-mid);
       line-height: 1;
       position: absolute;
-      top: 2rem;
+      top: 1.8rem;
       right: 2rem;
     }
     .service-title {
       font-family: var(--serif);
-      font-size: 1.8rem;
+      font-size: 1.75rem;
       font-weight: 300;
       letter-spacing: -0.01em;
+      margin-top: 0.5rem;
     }
     .service-desc {
-      font-size: 0.88rem;
+      font-size: 0.85rem;
       color: var(--muted);
       line-height: 1.7;
+      flex: 1;
     }
-    .service-arrow {
+    .service-expand-btn {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 0.5rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--border);
+      background: none;
+      border-left: none;
+      border-right: none;
+      border-bottom: none;
+      color: var(--muted-mid);
+      font-family: var(--sans);
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      cursor: pointer;
+      width: 100%;
+      text-align: left;
+      transition: color 0.2s;
+    }
+    .service-expand-btn:hover { color: var(--gold); }
+    .service-expand-btn.open { color: var(--gold); }
+    .expand-circle {
+      width: 24px; height: 24px;
+      border: 1px solid currentColor;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
       font-size: 1rem;
-      color: var(--gold);
-      margin-top: auto;
-      opacity: 0;
-      transform: translateX(-8px);
-      transition: opacity 0.25s, transform 0.25s;
+      line-height: 1;
+      flex-shrink: 0;
+      transition: transform 0.35s ease, background 0.2s, color 0.2s;
     }
-    .service-item:hover .service-arrow { opacity: 1; transform: translateX(0); }
+    .service-expand-btn.open .expand-circle {
+      transform: rotate(45deg);
+      background: var(--gold);
+      color: var(--black);
+      border-color: var(--gold);
+    }
+
+    /* PEDIGREE PANEL desktop */
+    .pedigree-panel {
+      display: none;
+      grid-column: 1 / -1;
+      position: relative;
+      overflow: hidden;
+      background: var(--black);
+    }
+    .pedigree-panel.open { display: block; }
+    .pedigree-stem {
+      position: absolute;
+      top: 0;
+      width: 1px;
+      height: 44px;
+      background: var(--gold);
+      left: var(--stem-left, 50%);
+      transform: translateX(-50%);
+    }
+    .pedigree-bar-wrap {
+      position: absolute;
+      top: 44px;
+      left: 0; right: 0;
+      height: 1px;
+      background: var(--gold);
+    }
+    .pedigree-bar-label {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: var(--black);
+      padding: 0 1.2rem;
+      font-family: var(--serif);
+      font-size: 0.9rem;
+      font-style: italic;
+      font-weight: 300;
+      color: var(--muted-mid);
+      white-space: nowrap;
+      pointer-events: none;
+    }
+    .pedigree-bar-label em {
+      font-style: italic;
+      color: var(--gold-light);
+      font-weight: 400;
+    }
+    .pedigree-cards {
+      display: flex;
+      gap: 1px;
+      margin-top: 45px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-top: none;
+      animation: pedigreeReveal 0.45s cubic-bezier(0.22,0.61,0.36,1) both;
+    }
+    @keyframes pedigreeReveal {
+      from { opacity: 0; transform: translateY(-10px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .pedigree-card {
+      flex: 1;
+      background: var(--surface);
+      padding: 1.4rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+      position: relative;
+      transition: background 0.2s;
+      border-right: 1px solid var(--border);
+    }
+    .pedigree-card:last-child { border-right: none; }
+    .pedigree-card:hover { background: var(--surface2); }
+    .pedigree-card::before {
+      content: "";
+      position: absolute;
+      top: -45px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 1px;
+      height: 44px;
+      background: var(--gold);
+      opacity: 0.45;
+    }
+    .pedigree-card-num {
+      font-family: var(--serif);
+      font-size: 0.72rem;
+      color: var(--gold);
+      font-weight: 300;
+    }
+    .pedigree-card-title {
+      font-family: var(--serif);
+      font-size: 1rem;
+      font-weight: 300;
+      color: var(--text);
+      line-height: 1.25;
+    }
+
+    /* MOBILE push-down pedigree */
+    .mobile-pedigree {
+      display: none;
+      flex-direction: column;
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: 3px;
+      overflow: hidden;
+      margin-top: 0.25rem;
+    }
+    .mobile-pedigree.open { display: flex; animation: pedigreeReveal 0.35s ease both; }
+    .mobile-pedigree-item {
+      background: var(--surface);
+      padding: 0.8rem 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      transition: background 0.2s;
+    }
+    .mobile-pedigree-item:hover { background: var(--surface2); }
+    .mobile-gold-line {
+      width: 1px; height: 22px;
+      background: var(--gold);
+      flex-shrink: 0;
+    }
+    .mobile-pedigree-title {
+      font-family: var(--serif);
+      font-size: 0.95rem;
+      font-weight: 300;
+      color: var(--text);
+    }
 
     /* BRANDS */
     .brands-section {
@@ -871,7 +1033,10 @@
       .phones-row { gap: 0.5rem; }
       .phone-frame { width: 38vw; max-width: 180px; }
       .phone-frame:nth-child(2) { width: 42vw; max-width: 200px; }
-      .services-grid { grid-template-columns: 1fr; }
+      .services-grid { grid-template-columns: 1fr; background: transparent; border: none; }
+      .service-card { border: 1px solid var(--border); border-radius: 4px; margin-bottom: 1px; }
+      .service-card::after { display: none; }
+      .pedigree-panel { display: none !important; }
       .about-section { grid-template-columns: 1fr; gap: 3rem; }
       .form-grid { grid-template-columns: 1fr; }
       .awards-strip { grid-template-columns: 1fr; }
@@ -923,7 +1088,7 @@
 
 <div class="awards-strip reveal">
   <div class="award-cell">
-    <img class="award-img" src="emmy-statue_No BG.png" alt="Emmy Award">
+    <img class="award-img" src="award_image_placeholder.png" alt="Emmy Award">
     <div class="award-num">1×</div>
     <div class="award-label">
       <strong>Emmy</strong>
@@ -931,7 +1096,7 @@
     </div>
   </div>
   <div class="award-cell">
-    <img class="award-img" src="Telly Statue_No BG.png" alt="Telly Award">
+    <img class="award-img" src="award_image_placeholder.png" alt="Telly Award">
     <div class="award-num platinum">3×</div>
     <div class="award-label">
       <strong>Telly</strong>
@@ -939,7 +1104,7 @@
     </div>
   </div>
   <div class="award-cell">
-    <img class="award-img" src="Marcom_Platinum-Statuette-preview2_No BG.png" alt="MARCOM Award">
+    <img class="award-img" src="award_image_placeholder.png" alt="MARCOM Award">
     <div class="award-num platinum">3×</div>
     <div class="award-label">
       <strong>Marcom</strong>
@@ -954,7 +1119,7 @@
       <div class="section-label">Selected Work</div>
       <h2 class="display">Vertically <em>inclined</em></h2>
     </div>
-    <p class="work-header-right">Content that reaches millions.</p>
+    <p class="work-header-right">Content that reaches millions — crafted with precision, delivered on schedule.</p>
   </div>
   <div class="phones-row reveal">
     <div class="phone-frame">
@@ -984,44 +1149,124 @@
         <div class="section-label">Selected Work</div>
         <h2 class="display">Classic <em>horizontal</em></h2>
       </div>
-      <p class="work-header-right">From broadcast to streaming — built for the big screen.</p>
+      <p class="work-header-right">Broadcast, streaming, and cinematic — built for the big screen.</p>
     </div>
     <div class="horizontal-reel-frame">
       <video autoplay muted loop playsinline poster="horizontal_reel poster.jpg">
-        <source src="background loop_1.mp4" type="video/mp4" />
+        <source src="horizontal_reel.mp4" type="video/mp4" />
       </video>
     </div>
   </div>
 </section>
 
-<section class="services-section">
+<section class="services-section" id="capabilities">
   <div class="reveal">
     <div class="section-label">Capabilities</div>
     <h2 class="display">What I <em>do</em></h2>
   </div>
-  <div class="services-grid">
-    <a href="film-tv.html" class="service-item reveal reveal-delay-1">
+
+  <div class="services-grid" id="services-grid">
+
+    <!-- CARD 01: COMMERCIAL -->
+    <div class="service-card reveal reveal-delay-1" id="card-commercial">
       <span class="service-num">01</span>
-      <img class="service-icon" src="Camera.png" alt="">
-      <h3 class="service-title">Film & TV</h3>
-      <p class="service-desc">Feature-length films, short films, documentaries, and episodic television. From development through post — I've done it.</p>
-      <span class="service-arrow">→ Explore</span>
-    </a>
-    <a href="commercial.html" class="service-item reveal reveal-delay-2">
-      <span class="service-num">02</span>
       <img class="service-icon" src="Phone.png" alt="">
       <h3 class="service-title">Commercial</h3>
-      <p class="service-desc">Creative development, broadcast spots, social campaigns, branded content, product demos, testimonials, and mini-docs.</p>
-      <span class="service-arrow">→ Explore</span>
-    </a>
-    <a href="music-video.html" class="service-item reveal reveal-delay-3">
+      <p class="service-desc">Creative Development, Broadcast, Social Media, Branded Content, Product Demos, Testimonials, Mini-Docs, and Experiential Events.</p>
+      <button class="service-expand-btn" data-target="pedigree-commercial" data-card="card-commercial" data-mobile="mobile-commercial" aria-expanded="false">
+        <span>Explore</span>
+        <span class="expand-circle">+</span>
+      </button>
+      <!-- Mobile push-down -->
+      <div class="mobile-pedigree" id="mobile-commercial">
+        <div class="mobile-pedigree-item"><div class="mobile-gold-line"></div><span class="mobile-pedigree-title">Idea Consultation</span></div>
+        <div class="mobile-pedigree-item"><div class="mobile-gold-line"></div><span class="mobile-pedigree-title">Development / Pre-Production</span></div>
+        <div class="mobile-pedigree-item"><div class="mobile-gold-line"></div><span class="mobile-pedigree-title">Production</span></div>
+        <div class="mobile-pedigree-item"><div class="mobile-gold-line"></div><span class="mobile-pedigree-title">Post-Production</span></div>
+      </div>
+    </div>
+
+    <!-- CARD 02: PRODUCTION SUSTAINABILITY -->
+    <div class="service-card reveal reveal-delay-2" id="card-sustainability">
+      <span class="service-num">02</span>
+      <img class="service-icon" src="Phone.png" alt="">
+      <h3 class="service-title">Production Sustainability</h3>
+      <p class="service-desc">Consultation and on-set oversight from development through post.</p>
+      <button class="service-expand-btn" data-target="pedigree-sustainability" data-card="card-sustainability" data-mobile="mobile-sustainability" aria-expanded="false">
+        <span>Explore</span>
+        <span class="expand-circle">+</span>
+      </button>
+      <!-- Mobile push-down -->
+      <div class="mobile-pedigree" id="mobile-sustainability">
+        <div class="mobile-pedigree-item"><div class="mobile-gold-line"></div><span class="mobile-pedigree-title">Education</span></div>
+        <div class="mobile-pedigree-item"><div class="mobile-gold-line"></div><span class="mobile-pedigree-title">Systems &amp; Planning</span></div>
+        <div class="mobile-pedigree-item"><div class="mobile-gold-line"></div><span class="mobile-pedigree-title">Circularity</span></div>
+        <div class="mobile-pedigree-item"><div class="mobile-gold-line"></div><span class="mobile-pedigree-title">Energy</span></div>
+        <div class="mobile-pedigree-item"><div class="mobile-gold-line"></div><span class="mobile-pedigree-title">Communication</span></div>
+      </div>
+    </div>
+
+    <!-- CARD 03: FILM & TV -->
+    <div class="service-card reveal reveal-delay-3" id="card-filmtv">
       <span class="service-num">03</span>
-      <img class="service-icon" src="Album.png" alt="">
-      <h3 class="service-title">Music Video</h3>
-      <p class="service-desc">Story consulting, pre-production strategy, and full end-to-end production for artists and labels.</p>
-      <span class="service-arrow">→ Explore</span>
-    </a>
+      <img class="service-icon" src="Camera.png" alt="">
+      <h3 class="service-title">Film &amp; TV</h3>
+      <p class="service-desc">Features, TV, Shorts, &amp; Documentary.</p>
+      <button class="service-expand-btn" data-target="pedigree-filmtv" data-card="card-filmtv" data-mobile="mobile-filmtv" aria-expanded="false">
+        <span>Explore</span>
+        <span class="expand-circle">+</span>
+      </button>
+      <!-- Mobile push-down -->
+      <div class="mobile-pedigree" id="mobile-filmtv">
+        <div class="mobile-pedigree-item"><div class="mobile-gold-line"></div><span class="mobile-pedigree-title">Writer</span></div>
+        <div class="mobile-pedigree-item"><div class="mobile-gold-line"></div><span class="mobile-pedigree-title">Director</span></div>
+        <div class="mobile-pedigree-item"><div class="mobile-gold-line"></div><span class="mobile-pedigree-title">Producer</span></div>
+        <div class="mobile-pedigree-item"><div class="mobile-gold-line"></div><span class="mobile-pedigree-title">1st AD</span></div>
+      </div>
+    </div>
+
+    <!-- PEDIGREE PANEL: COMMERCIAL (full-width, desktop only) -->
+    <div class="pedigree-panel" id="pedigree-commercial">
+      <div class="pedigree-stem" id="stem-commercial"></div>
+      <div class="pedigree-bar-wrap">
+        <span class="pedigree-bar-label">From Large-Scale Production to One-on-One Influencer Work &mdash; I Want to Get <em>Your Brand</em> Out There.</span>
+      </div>
+      <div class="pedigree-cards">
+        <div class="pedigree-card"><span class="pedigree-card-num">01</span><span class="pedigree-card-title">Idea Consultation</span></div>
+        <div class="pedigree-card"><span class="pedigree-card-num">02</span><span class="pedigree-card-title">Development / Pre-Production</span></div>
+        <div class="pedigree-card"><span class="pedigree-card-num">03</span><span class="pedigree-card-title">Production</span></div>
+        <div class="pedigree-card"><span class="pedigree-card-num">04</span><span class="pedigree-card-title">Post-Production</span></div>
+      </div>
+    </div>
+
+    <!-- PEDIGREE PANEL: PRODUCTION SUSTAINABILITY (desktop only) -->
+    <div class="pedigree-panel" id="pedigree-sustainability">
+      <div class="pedigree-stem" id="stem-sustainability"></div>
+      <div class="pedigree-bar-wrap"></div>
+      <div class="pedigree-cards">
+        <div class="pedigree-card"><span class="pedigree-card-num">01</span><span class="pedigree-card-title">Education</span></div>
+        <div class="pedigree-card"><span class="pedigree-card-num">02</span><span class="pedigree-card-title">Systems &amp; Planning</span></div>
+        <div class="pedigree-card"><span class="pedigree-card-num">03</span><span class="pedigree-card-title">Circularity</span></div>
+        <div class="pedigree-card"><span class="pedigree-card-num">04</span><span class="pedigree-card-title">Energy</span></div>
+        <div class="pedigree-card"><span class="pedigree-card-num">05</span><span class="pedigree-card-title">Communication</span></div>
+      </div>
+    </div>
+
+    <!-- PEDIGREE PANEL: FILM & TV (desktop only) -->
+    <div class="pedigree-panel" id="pedigree-filmtv">
+      <div class="pedigree-stem" id="stem-filmtv"></div>
+      <div class="pedigree-bar-wrap"></div>
+      <div class="pedigree-cards">
+        <div class="pedigree-card"><span class="pedigree-card-num">01</span><span class="pedigree-card-title">Writer</span></div>
+        <div class="pedigree-card"><span class="pedigree-card-num">02</span><span class="pedigree-card-title">Director</span></div>
+        <div class="pedigree-card"><span class="pedigree-card-num">03</span><span class="pedigree-card-title">Producer</span></div>
+        <div class="pedigree-card"><span class="pedigree-card-num">04</span><span class="pedigree-card-title">1st AD</span></div>
+      </div>
+    </div>
+
   </div>
+</section>
+
 </section>
 
 <div class="brands-section reveal">
@@ -1211,7 +1456,95 @@
     go(0);
   })();
 
-  // Video intersection observer
+
+  // PEDIGREE EXPAND SYSTEM
+  (function() {
+    const isMobile = () => window.innerWidth <= 900;
+    const buttons  = document.querySelectorAll('.service-expand-btn');
+
+    // Position the vertical stem under its parent card center
+    function positionStem(panelId, cardId) {
+      const panel = document.getElementById(panelId);
+      const stem  = panel ? panel.querySelector('.pedigree-stem') : null;
+      const card  = document.getElementById(cardId);
+      const grid  = document.getElementById('services-grid');
+      if (!stem || !card || !grid) return;
+      const cardRect = card.getBoundingClientRect();
+      const gridRect = grid.getBoundingClientRect();
+      const stemLeft = cardRect.left - gridRect.left + cardRect.width / 2;
+      stem.style.left = stemLeft + 'px';
+    }
+
+    function closeAll(exceptBtn) {
+      buttons.forEach(btn => {
+        if (btn === exceptBtn) return;
+        btn.classList.remove('open');
+        btn.setAttribute('aria-expanded', 'false');
+        // close desktop panel
+        const panel = document.getElementById(btn.dataset.target);
+        if (panel) panel.classList.remove('open');
+        // close mobile
+        const mob = document.getElementById(btn.dataset.mobile);
+        if (mob) mob.classList.remove('open');
+        // deactivate card
+        const card = document.getElementById(btn.dataset.card);
+        if (card) card.classList.remove('active');
+      });
+    }
+
+    buttons.forEach(btn => {
+      btn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        const isOpen   = btn.classList.contains('open');
+        const targetId = btn.dataset.target;
+        const cardId   = btn.dataset.card;
+        const mobileId = btn.dataset.mobile;
+
+        closeAll(btn);
+
+        if (isOpen) {
+          // toggle off
+          btn.classList.remove('open');
+          btn.setAttribute('aria-expanded', 'false');
+          const panel = document.getElementById(targetId);
+          if (panel) panel.classList.remove('open');
+          const mob = document.getElementById(mobileId);
+          if (mob) mob.classList.remove('open');
+          const card = document.getElementById(cardId);
+          if (card) card.classList.remove('active');
+        } else {
+          // toggle on
+          btn.classList.add('open');
+          btn.setAttribute('aria-expanded', 'true');
+          const card = document.getElementById(cardId);
+          if (card) card.classList.add('active');
+
+          if (isMobile()) {
+            const mob = document.getElementById(mobileId);
+            if (mob) mob.classList.add('open');
+          } else {
+            const panel = document.getElementById(targetId);
+            if (panel) {
+              panel.classList.add('open');
+              // Wait for display:block then position stem
+              requestAnimationFrame(() => positionStem(targetId, cardId));
+            }
+          }
+        }
+      });
+    });
+
+    // Reposition stems on resize
+    window.addEventListener('resize', () => {
+      buttons.forEach(btn => {
+        if (btn.classList.contains('open') && !isMobile()) {
+          positionStem(btn.dataset.target, btn.dataset.card);
+        }
+      });
+    });
+  })();
+
+    // Video intersection observer
   document.addEventListener('DOMContentLoaded', () => {
     const vids = document.querySelectorAll('video');
     if ('IntersectionObserver' in window) {
