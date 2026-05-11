@@ -24,7 +24,8 @@
       --muted-mid: #A09C96;
       --serif: 'Cormorant Garamond', Georgia, serif;
       --sans: 'DM Sans', system-ui, sans-serif;
-      --section: clamp(80px, 10vw, 140px);
+      /* REDUCED section spacing to tighten gaps between sections */
+      --section: clamp(48px, 6vw, 80px);
     }
 
     html { scroll-behavior: smooth; }
@@ -323,7 +324,6 @@
       opacity: 0.85;
     }
 
-
     /* HORIZONTAL REEL */
     .horizontal-reel-frame {
       position: relative;
@@ -386,7 +386,7 @@
       display: flex;
       justify-content: space-between;
       align-items: flex-end;
-      margin-bottom: 4rem;
+      margin-bottom: 3rem;
     }
     .work-header-left {}
     .work-header-right {
@@ -458,7 +458,7 @@
       gap: 1px;
       background: var(--border);
       border: 1px solid var(--border);
-      margin-top: 4rem;
+      margin-top: 3rem;
       position: relative;
     }
     .service-card {
@@ -486,12 +486,21 @@
     .service-card:hover::after { transform: scaleX(1); }
     .service-card.active { background: var(--surface); }
     .service-card.active::after { transform: scaleX(1); }
+
+    /* SERVICE ICON — no gold tint, bigger, dark background */
     .service-icon {
-      width: 40px; height: 40px;
+      width: 64px;
+      height: 64px;
       object-fit: contain;
-      filter: invert(75%) sepia(30%) saturate(500%) hue-rotate(5deg) brightness(90%);
-      opacity: 0.85;
+      /* Remove gold filter — show original image colors */
+      filter: none;
+      opacity: 0.9;
+      /* Dark background so icon stands out against the card */
+      background: transparent;
+      border-radius: 8px;
+      padding: 4px;
     }
+
     .service-num {
       font-family: var(--serif);
       font-size: 3rem;
@@ -574,7 +583,6 @@
       to   { opacity: 0; }
     }
 
-    /* ── Main vertical stem: grows downward from parent card ── */
     .pedigree-stem {
       position: absolute;
       top: 0;
@@ -584,14 +592,13 @@
       left: var(--stem-left, 50%);
       transform: translateX(-50%) scaleY(0);
       transform-origin: top center;
-      transition: none; /* controlled via JS animation */
+      transition: none;
     }
     .pedigree-stem.animate {
       transform: translateX(-50%) scaleY(1);
       transition: transform 0.32s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
-    /* ── Horizontal bar: draws from center outward ── */
     .pedigree-bar-wrap {
       position: absolute;
       top: 52px;
@@ -599,7 +606,6 @@
       height: 1px;
       overflow: visible;
     }
-    /* Left arm — drawn via clip-path from center leftward */
     .pedigree-bar-left {
       position: absolute;
       top: 0;
@@ -614,7 +620,6 @@
       transform: scaleX(1);
       transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     }
-    /* Right arm */
     .pedigree-bar-right {
       position: absolute;
       top: 0;
@@ -630,7 +635,6 @@
       transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
-    /* ── Per-card vertical drop lines ── */
     .pedigree-card-stem {
       position: absolute;
       top: 53px;
@@ -648,7 +652,6 @@
       transition: transform 0.22s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
-    /* ── Sub-card row ── */
     .pedigree-cards {
       display: flex;
       gap: 12px;
@@ -656,7 +659,6 @@
       padding: 0 2px;
     }
 
-    /* ── Individual flip card ── */
     .pedigree-card-wrap {
       flex: 1;
       perspective: 900px;
@@ -668,7 +670,7 @@
       height: 100%;
       transform-style: preserve-3d;
       transform: rotateY(180deg);
-      transition: none; /* JS controls timing */
+      transition: none;
     }
     .pedigree-card-wrap.flipped .pedigree-card-inner {
       transform: rotateY(0deg);
@@ -716,13 +718,11 @@
       line-height: 1.25;
     }
 
-    /* ── Sentence below sub-cards (commercial only) ── */
     .pedigree-sentence {
       text-align: center;
       margin-top: 1.8rem;
       opacity: 0;
       pointer-events: none;
-      /* duration set by JS to match total flip window */
       transition: opacity var(--sentence-duration, 1s) ease;
     }
     .pedigree-sentence.visible { opacity: 1; }
@@ -892,45 +892,99 @@
     }
     .dot-btn.active { background: var(--gold); width: 40px; }
 
-    /* ABOUT */
+    /* ABOUT — layered floating collage */
     .about-section {
       padding: var(--section) 3rem;
       max-width: 1300px;
       margin: 0 auto;
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 6rem;
+      gap: 4rem;
       align-items: center;
     }
+
+    /* Collage container — tall enough to show all layers */
     .about-img-wrap {
       position: relative;
+      /* Height driven by main image; extra space for overlapping cards */
+      height: 520px;
     }
-    .about-img-wrap img {
-      width: 100%;
-      border-radius: 4px;
-      filter: grayscale(15%) contrast(1.05);
-      display: block;
-    }
+
+    /* Gold corner bracket — top right of main photo */
     .about-img-wrap::after {
       content: '';
       position: absolute;
-      inset: -12px -12px auto auto;
-      width: 60%;
-      height: 60%;
+      top: -14px;
+      right: -14px;
+      width: 44%;
+      height: 34%;
       border-top: 1px solid var(--gold);
       border-right: 1px solid var(--gold);
       pointer-events: none;
+      z-index: 5;
     }
+
+    /* Subtle bracket — bottom left */
     .about-img-wrap::before {
       content: '';
       position: absolute;
-      inset: auto auto -12px -12px;
-      width: 40%;
-      height: 40%;
+      bottom: 30px;
+      left: -14px;
+      width: 30%;
+      height: 22%;
       border-bottom: 1px solid var(--border-mid);
       border-left: 1px solid var(--border-mid);
       pointer-events: none;
+      z-index: 5;
     }
+
+    /* Main (Emmy) photo — upper-left, anchors the stack */
+    .about-img-main {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 72%;
+      height: 78%;
+      object-fit: cover;
+      border-radius: 3px;
+      filter: grayscale(15%) contrast(1.05);
+      display: block;
+      z-index: 1;
+      box-shadow: 0 24px 60px rgba(0,0,0,0.6);
+    }
+
+    /* Second photo — overlaps bottom of main, pushed right */
+    .about-img-secondary-1 {
+      position: absolute;
+      bottom: 0;
+      left: 14%;
+      width: 58%;
+      aspect-ratio: 3/2;
+      object-fit: cover;
+      border-radius: 3px;
+      filter: grayscale(15%) contrast(1.05);
+      display: block;
+      z-index: 2;
+      box-shadow: 0 20px 48px rgba(0,0,0,0.65);
+      border: 3px solid var(--surface);
+    }
+
+    /* Third photo — floats upper-right, partially overlapping main */
+    .about-img-secondary-2 {
+      position: absolute;
+      top: 8%;
+      right: 0;
+      width: 40%;
+      aspect-ratio: 2/3;
+      object-fit: cover;
+      border-radius: 3px;
+      filter: grayscale(15%) contrast(1.05);
+      display: block;
+      z-index: 3;
+      box-shadow: 0 20px 48px rgba(0,0,0,0.65);
+      border: 3px solid var(--surface);
+    }
+
     .about-copy {}
     .about-copy p {
       font-size: 0.95rem;
@@ -1128,7 +1182,9 @@
       .service-card::after { display: none; }
       .pedigree-panel { display: none !important; }
       .pedigree-card-stem { display: none !important; }
-      .about-section { grid-template-columns: 1fr; gap: 3rem; }
+      .about-section { grid-template-columns: 1fr; gap: 2rem; }
+      .about-img-wrap { height: 300px; }
+      .about-img-secondary-2 { width: 36%; }
       .form-grid { grid-template-columns: 1fr; }
       .awards-strip { grid-template-columns: 1fr; }
       .award-cell { border-right: none; border-bottom: 1px solid var(--border); }
@@ -1210,7 +1266,7 @@
       <div class="section-label">Selected Work</div>
       <h2 class="display">Vertically <em>inclined</em></h2>
     </div>
-    <p class="work-header-right">Content that reaches millions — crafted with precision, delivered on schedule.</p>
+    <p class="work-header-right">Content that reaches millions.</p>
   </div>
   <div class="phones-row reveal">
     <div class="phone-frame">
@@ -1268,7 +1324,6 @@
         <span>Explore</span>
         <span class="expand-circle">+</span>
       </button>
-      <!-- Mobile push-down -->
       <div class="mobile-pedigree" id="mobile-commercial">
         <div class="mobile-pedigree-item"><div class="mobile-gold-line"></div><span class="mobile-pedigree-title">Idea Consultation</span></div>
         <div class="mobile-pedigree-item"><div class="mobile-gold-line"></div><span class="mobile-pedigree-title">Development / Pre-Production</span></div>
@@ -1287,7 +1342,6 @@
         <span>Explore</span>
         <span class="expand-circle">+</span>
       </button>
-      <!-- Mobile push-down -->
       <div class="mobile-pedigree" id="mobile-sustainability">
         <div class="mobile-pedigree-item"><div class="mobile-gold-line"></div><span class="mobile-pedigree-title">Education</span></div>
         <div class="mobile-pedigree-item"><div class="mobile-gold-line"></div><span class="mobile-pedigree-title">Systems &amp; Planning</span></div>
@@ -1307,7 +1361,6 @@
         <span>Explore</span>
         <span class="expand-circle">+</span>
       </button>
-      <!-- Mobile push-down -->
       <div class="mobile-pedigree" id="mobile-filmtv">
         <div class="mobile-pedigree-item"><div class="mobile-gold-line"></div><span class="mobile-pedigree-title">Writer</span></div>
         <div class="mobile-pedigree-item"><div class="mobile-gold-line"></div><span class="mobile-pedigree-title">Director</span></div>
@@ -1446,11 +1499,6 @@
   </div>
 </section>
 
-  </div>
-</section>
-
-</section>
-
 <div class="brands-section reveal">
   <p class="brands-label">Trusted by leading brands</p>
   <img src="All Logos New_No BG.png" alt="Clients include ESPN, GMC, Lay's, Samsung, Starbucks" class="brands-logo">
@@ -1520,9 +1568,18 @@
 </section>
 
 <section class="about-section" id="about">
+  <!-- Layered floating photo collage -->
   <div class="about-img-wrap reveal">
-    <img src="collin-emmy.webp" alt="Collin O'Brien holding an Emmy award" loading="lazy">
+    <!-- Main photo (Emmy shot) — upper left, anchors the stack -->
+    <img class="about-img-main" src="collin-emmy.webp" alt="Collin O'Brien holding an Emmy award" loading="lazy">
+    <!-- Second photo: overlaps the bottom of the Emmy photo — replace filename below -->
+    <img class="about-img-secondary-1" src="collin-photo-2.jpg" alt="Collin O'Brien on set" loading="lazy"
+         onerror="this.style.background='#181818';">
+    <!-- Third photo: floats upper right — replace filename below -->
+    <img class="about-img-secondary-2" src="collin-photo-3.jpg" alt="Collin O'Brien directing" loading="lazy"
+         onerror="this.style.background='#111111';">
   </div>
+
   <div class="about-copy reveal reveal-delay-1">
     <div class="section-label">About</div>
     <h2 class="display" style="margin-bottom: 2rem;">The <em>craft</em><br>behind the lens</h2>
@@ -1572,6 +1629,7 @@
           <option value="social">Social Campaign</option>
           <option value="music-video">Music Video</option>
           <option value="consulting">Creative Consulting</option>
+          <option value="not-sure">Not Sure Yet</option>
           <option value="other">Other</option>
         </select>
       </div>
@@ -1638,20 +1696,17 @@
     go(0);
   })();
 
-
-  // PEDIGREE EXPAND SYSTEM — flowing water choreography
+  // PEDIGREE EXPAND SYSTEM
   (function() {
     const isMobile = () => window.innerWidth <= 900;
 
-    // ── Timing constants (ms) ──────────────────────────────
-    const T_STEM     = 320;  // main stem grows down
-    const T_BAR      = 380;  // horizontal bar draws outward
-    const T_DROP     = 200;  // each drop line falls
-    const T_FLIP_LAG = 60;   // flip starts after drop line arrives
-    const T_FLIP     = 600;  // flip CSS transition duration
-    const T_CLOSE    = 150;  // fast fade-out on close
+    const T_STEM     = 320;
+    const T_BAR      = 380;
+    const T_DROP     = 200;
+    const T_FLIP_LAG = 60;
+    const T_FLIP     = 600;
+    const T_CLOSE    = 150;
 
-    // ── Geometry ───────────────────────────────────────────
     function positionGeometry(panelId, cardId) {
       const panel = document.getElementById(panelId);
       const stem  = panel && panel.querySelector('.pedigree-stem');
@@ -1680,7 +1735,6 @@
       });
     }
 
-    // How long after bar-start does the bar reach card i?
     function barArrivalMs(panelId, cardId, i) {
       const panel = document.getElementById(panelId);
       const card  = document.getElementById(cardId);
@@ -1699,7 +1753,6 @@
       return Math.round((dist / Math.max(halfW, 1)) * T_BAR);
     }
 
-    // ── OPEN sequence ──────────────────────────────────────
     function runOpen(panelId, cardId) {
       const panel = document.getElementById(panelId);
       if (!panel) return;
@@ -1711,7 +1764,6 @@
       const wraps     = Array.from(panel.querySelectorAll('.pedigree-card-wrap'));
       const sentence  = panel.querySelector('.pedigree-sentence');
 
-      // Hard reset
       [stem, barL, barR, ...dropStems].forEach(el => el && el.classList.remove('animate'));
       wraps.forEach(w => w.classList.remove('flipped'));
       if (sentence) {
@@ -1722,38 +1774,26 @@
       requestAnimationFrame(() => {
         positionGeometry(panelId, cardId);
         requestAnimationFrame(() => {
-
-          // Act 1 — stem drops
           if (stem) stem.classList.add('animate');
 
           setTimeout(() => {
-            // Act 2 — bar draws left + right simultaneously
             if (barL) barL.classList.add('animate');
             if (barR) barR.classList.add('animate');
 
-            // Calculate per-card arrival times (relative to bar start)
             const arrivals = wraps.map((_, i) => barArrivalMs(panelId, cardId, i));
             const firstFlipAt = Math.min(...arrivals) + T_FLIP_LAG;
             const lastFlipAt  = Math.max(...arrivals) + T_FLIP_LAG;
             const flipWindow  = (lastFlipAt - firstFlipAt) + T_FLIP;
 
-            // Set sentence transition duration = flip window so it starts with first flip
-            // and is fully visible when last flip finishes
             if (sentence) {
               sentence.style.setProperty('--sentence-duration', flipWindow + 'ms');
             }
 
-            // Acts 3 & 4 — drop line falls then card flips when bar arrives
             wraps.forEach((wrap, i) => {
               const arrival = arrivals[i];
-
-              setTimeout(() => {
-                if (dropStems[i]) dropStems[i].classList.add('animate');
-              }, arrival);
-
+              setTimeout(() => { if (dropStems[i]) dropStems[i].classList.add('animate'); }, arrival);
               setTimeout(() => {
                 wrap.classList.add('flipped');
-                // Trigger sentence on first card flip
                 if (i === wraps.indexOf(wraps.reduce((a, b) =>
                   arrivals[wraps.indexOf(a)] <= arrivals[wraps.indexOf(b)] ? a : b
                 ))) {
@@ -1762,8 +1802,6 @@
               }, arrival + T_FLIP_LAG);
             });
 
-            // Sentence triggered on first flip — find the card with earliest arrival
-            // (already handled above via reduce; belt-and-suspenders below)
             const earliestIdx = arrivals.indexOf(Math.min(...arrivals));
             setTimeout(() => {
               if (sentence) sentence.classList.add('visible');
@@ -1774,7 +1812,6 @@
       });
     }
 
-    // ── CLOSE: instant 150ms fade, then hide ───────────────
     function runClose(panelId, onDone) {
       const panel = document.getElementById(panelId);
       if (!panel || !panel.classList.contains('open')) {
@@ -1784,7 +1821,6 @@
       panel.classList.add('closing');
       setTimeout(() => {
         panel.classList.remove('open', 'closing');
-        // Reset all animated children instantly
         const sentence  = panel.querySelector('.pedigree-sentence');
         const dropStems = panel.querySelectorAll('.pedigree-card-stem');
         const barL      = panel.querySelector('.pedigree-bar-left');
@@ -1798,7 +1834,6 @@
       }, T_CLOSE);
     }
 
-    // ── Close all other open panels ────────────────────────
     function closeOthers(exceptBtn, onDone) {
       const open = Array.from(document.querySelectorAll('.service-expand-btn.open'))
                         .filter(b => b !== exceptBtn);
@@ -1813,7 +1848,6 @@
       });
     }
 
-    // ── Wire up buttons ────────────────────────────────────
     document.querySelectorAll('.service-expand-btn').forEach(btn => {
       btn.addEventListener('click', function(e) {
         e.stopPropagation();
@@ -1857,7 +1891,7 @@
     });
   })();
 
-    // Video intersection observer
+  // Video intersection observer
   document.addEventListener('DOMContentLoaded', () => {
     const vids = document.querySelectorAll('video');
     if ('IntersectionObserver' in window) {
