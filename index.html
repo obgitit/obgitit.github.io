@@ -24,7 +24,6 @@
       --muted-mid: #A09C96;
       --serif: 'Cormorant Garamond', Georgia, serif;
       --sans: 'DM Sans', system-ui, sans-serif;
-      /* REDUCED section spacing to tighten gaps between sections */
       --section: clamp(48px, 6vw, 80px);
     }
 
@@ -49,7 +48,6 @@
       z-index: 9999;
       transform: translate(-50%, -50%);
       transition: width 0.2s, height 0.2s, background 0.2s;
-      mix-blend-mode: normal;
     }
     .cursor-ring {
       position: fixed;
@@ -261,7 +259,6 @@
       letter-spacing: 0.2em;
       text-transform: uppercase;
       color: var(--muted);
-      writing-mode: horizontal-tb;
     }
 
     /* AWARDS STRIP */
@@ -299,10 +296,7 @@
       background-clip: text;
       color: transparent;
     }
-    .award-label {
-      display: flex;
-      flex-direction: column;
-    }
+    .award-label { display: flex; flex-direction: column; }
     .award-label strong {
       font-family: var(--sans);
       font-size: 0.85rem;
@@ -317,35 +311,20 @@
       color: var(--muted);
       text-transform: uppercase;
     }
-    .award-img {
-      height: 72px;
-      width: auto;
-      object-fit: contain;
-      opacity: 0.85;
-    }
+    .award-img { height: 72px; width: auto; object-fit: contain; opacity: 0.85; }
 
-    /* HORIZONTAL REEL */
-    .horizontal-reel-frame {
-      position: relative;
-      width: 100%;
-      aspect-ratio: 16/9;
-      background: #0a0a0a;
-      border-radius: 16px;
-      border: 1.5px solid rgba(255,255,255,0.10);
-      overflow: hidden;
-      box-shadow:
-        0 0 0 1px rgba(0,0,0,0.8),
-        0 40px 80px rgba(0,0,0,0.7),
-        inset 0 1px 0 rgba(255,255,255,0.06);
+    /* WORK / REEL SECTION */
+    .work-section {
+      padding: var(--section) 3rem;
+      max-width: 1300px;
+      margin: 0 auto;
     }
-    .horizontal-reel-frame video {
-      width: 100%; height: 100%;
-      object-fit: cover;
-      pointer-events: none;
+    .work-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 3rem;
     }
-    .horizontal-reel-wrap { width: 100%; }
-
-    /* SECTION COMMONS */
     .section-label {
       font-family: var(--sans);
       font-size: 0.68rem;
@@ -374,28 +353,6 @@
     }
     h2.display em { font-style: italic; color: var(--gold-light); }
 
-    /* WORK / REEL SECTION */
-    .work-section {
-      padding: var(--section) 0;
-      max-width: 1300px;
-      margin: 0 auto;
-      padding-left: 3rem;
-      padding-right: 3rem;
-    }
-    .work-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-end;
-      margin-bottom: 3rem;
-    }
-    .work-header-left {}
-    .work-header-right {
-      font-size: 0.85rem;
-      color: var(--muted);
-      max-width: 280px;
-      text-align: right;
-      line-height: 1.6;
-    }
     .phones-row {
       display: flex;
       justify-content: center;
@@ -411,47 +368,16 @@
       border-radius: 36px;
       border: 1.5px solid rgba(255,255,255,0.12);
       overflow: hidden;
-      box-shadow:
-        0 0 0 1px rgba(0,0,0,0.8),
-        0 40px 80px rgba(0,0,0,0.7),
-        inset 0 1px 0 rgba(255,255,255,0.08);
-      transition: transform 0.4s ease, box-shadow 0.4s ease;
-      cursor: none;
-    }
-    .phone-frame:hover {
-      box-shadow:
-        0 0 0 1px rgba(0,0,0,0.8),
-        0 60px 120px rgba(0,0,0,0.8),
-        0 0 40px rgba(200,169,110,0.08),
-        inset 0 1px 0 rgba(255,255,255,0.08);
+      box-shadow: 0 40px 80px rgba(0,0,0,0.7);
+      transition: transform 0.4s ease;
     }
     .phone-frame:nth-child(1) { transform: rotate(-6deg) translateY(30px); }
     .phone-frame:nth-child(2) { transform: rotate(0deg) translateY(0px); width: 240px; }
     .phone-frame:nth-child(3) { transform: rotate(6deg) translateY(30px); }
-    .phone-frame:nth-child(1):hover { transform: rotate(-2deg) translateY(15px) scale(1.03); }
-    .phone-frame:nth-child(2):hover { transform: rotate(0deg) translateY(-10px) scale(1.03); }
-    .phone-frame:nth-child(3):hover { transform: rotate(2deg) translateY(15px) scale(1.03); }
-    .phone-notch {
-      position: absolute;
-      top: 12px; left: 50%;
-      transform: translateX(-50%);
-      width: 80px; height: 26px;
-      background: #0a0a0a;
-      border-radius: 14px;
-      z-index: 10;
-    }
-    .phone-frame video {
-      width: 100%; height: 100%;
-      object-fit: cover;
-      pointer-events: none;
-    }
+    .phone-frame video { width: 100%; height: 100%; object-fit: cover; }
 
     /* SERVICES */
-    .services-section {
-      padding: var(--section) 3rem;
-      max-width: 1300px;
-      margin: 0 auto;
-    }
+    .services-section { padding: var(--section) 3rem; max-width: 1300px; margin: 0 auto; }
     .services-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -459,438 +385,25 @@
       background: var(--border);
       border: 1px solid var(--border);
       margin-top: 3rem;
-      position: relative;
     }
     .service-card {
       background: var(--black);
-      padding: 2.8rem 2.4rem 2.2rem;
-      color: var(--text);
-      display: flex;
-      flex-direction: column;
-      gap: 1.2rem;
+      padding: 2.8rem 2.4rem;
       transition: background 0.3s;
       position: relative;
-      cursor: default;
-    }
-    .service-card::after {
-      content: "";
-      position: absolute;
-      bottom: 0; left: 0; right: 0;
-      height: 2px;
-      background: var(--gold);
-      transform: scaleX(0);
-      transform-origin: left;
-      transition: transform 0.35s ease;
     }
     .service-card:hover { background: var(--surface); }
-    .service-card:hover::after { transform: scaleX(1); }
-    .service-card.active { background: var(--surface); }
-    .service-card.active::after { transform: scaleX(1); }
-
-    /* SERVICE ICON — no gold tint, bigger, dark background */
-    .service-icon {
-      width: 64px;
-      height: 64px;
-      object-fit: contain;
-      /* Remove gold filter — show original image colors */
-      filter: none;
-      opacity: 0.9;
-      /* Dark background so icon stands out against the card */
-      background: transparent;
-      border-radius: 8px;
-      padding: 4px;
-    }
-
-    .service-num {
-      font-family: var(--serif);
-      font-size: 3rem;
-      font-weight: 300;
-      color: var(--border-mid);
-      line-height: 1;
-      position: absolute;
-      top: 1.8rem;
-      right: 2rem;
-    }
-    .service-title {
-      font-family: var(--serif);
-      font-size: 1.75rem;
-      font-weight: 300;
-      letter-spacing: -0.01em;
-      margin-top: 0.5rem;
-    }
-    .service-desc {
-      font-size: 0.85rem;
-      color: var(--muted);
-      line-height: 1.7;
-      flex: 1;
-    }
-    .service-expand-btn {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-top: 0.5rem;
-      padding-top: 1rem;
-      border-top: 1px solid var(--border);
-      background: none;
-      border-left: none;
-      border-right: none;
-      border-bottom: none;
-      color: var(--muted-mid);
-      font-family: var(--sans);
-      font-size: 0.72rem;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      cursor: pointer;
-      width: 100%;
-      text-align: left;
-      transition: color 0.2s;
-    }
-    .service-expand-btn:hover { color: var(--gold); }
-    .service-expand-btn.open { color: var(--gold); }
-    .expand-circle {
-      width: 24px; height: 24px;
-      border: 1px solid currentColor;
-      border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 1rem;
-      line-height: 1;
-      flex-shrink: 0;
-      transition: transform 0.35s ease, background 0.2s, color 0.2s;
-    }
-    .service-expand-btn.open .expand-circle {
-      transform: rotate(45deg);
-      background: var(--gold);
-      color: var(--black);
-      border-color: var(--gold);
-    }
-
-    /* PEDIGREE PANEL desktop */
-    .pedigree-panel {
-      display: none;
-      grid-column: 1 / -1;
-      position: relative;
-      background: var(--black);
-      padding-bottom: 2.5rem;
-      overflow: visible;
-    }
-    .pedigree-panel.open { display: block; }
-    .pedigree-panel.closing {
-      pointer-events: none;
-      animation: pedigreeClose 0.15s ease forwards;
-    }
-    @keyframes pedigreeClose {
-      from { opacity: 1; }
-      to   { opacity: 0; }
-    }
-
-    .pedigree-stem {
-      position: absolute;
-      top: 0;
-      width: 1px;
-      background: var(--gold);
-      height: 52px;
-      left: var(--stem-left, 50%);
-      transform: translateX(-50%) scaleY(0);
-      transform-origin: top center;
-      transition: none;
-    }
-    .pedigree-stem.animate {
-      transform: translateX(-50%) scaleY(1);
-      transition: transform 0.32s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-
-    .pedigree-bar-wrap {
-      position: absolute;
-      top: 52px;
-      left: 0; right: 0;
-      height: 1px;
-      overflow: visible;
-    }
-    .pedigree-bar-left {
-      position: absolute;
-      top: 0;
-      right: 50%; left: 0;
-      height: 1px;
-      background: var(--gold);
-      transform-origin: right center;
-      transform: scaleX(0);
-      transition: none;
-    }
-    .pedigree-bar-left.animate {
-      transform: scaleX(1);
-      transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-    .pedigree-bar-right {
-      position: absolute;
-      top: 0;
-      left: 50%; right: 0;
-      height: 1px;
-      background: var(--gold);
-      transform-origin: left center;
-      transform: scaleX(0);
-      transition: none;
-    }
-    .pedigree-bar-right.animate {
-      transform: scaleX(1);
-      transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-
-    .pedigree-card-stem {
-      position: absolute;
-      top: 53px;
-      width: 1px;
-      height: 63px;
-      background: var(--gold);
-      opacity: 0.55;
-      z-index: 1;
-      transform: translateX(-50%) scaleY(0);
-      transform-origin: top center;
-      transition: none;
-    }
-    .pedigree-card-stem.animate {
-      transform: translateX(-50%) scaleY(1);
-      transition: transform 0.22s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-
-    .pedigree-cards {
-      display: flex;
-      gap: 12px;
-      margin-top: 116px;
-      padding: 0 2px;
-    }
-
-    .pedigree-card-wrap {
-      flex: 1;
-      perspective: 900px;
-      height: 88px;
-    }
-    .pedigree-card-inner {
-      position: relative;
-      width: 100%;
-      height: 100%;
-      transform-style: preserve-3d;
-      transform: rotateY(180deg);
-      transition: none;
-    }
-    .pedigree-card-wrap.flipped .pedigree-card-inner {
-      transform: rotateY(0deg);
-      transition: transform 0.6s cubic-bezier(0.34, 1.2, 0.64, 1);
-    }
-    .pedigree-card-front {
-      position: absolute;
-      inset: 0;
-      background: var(--surface);
-      border: 1px solid var(--border-mid);
-      border-radius: 3px;
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      justify-content: center;
-      padding: 0 1.2rem;
-      gap: 0.3rem;
-      backface-visibility: hidden;
-      -webkit-backface-visibility: hidden;
-      transition: background 0.2s;
-    }
-    .pedigree-card-front:hover { background: var(--surface2); }
-    .pedigree-card-back {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(135deg, rgba(200,169,110,0.18), rgba(200,169,110,0.06));
-      border: 1px solid var(--gold);
-      border-radius: 3px;
-      backface-visibility: hidden;
-      -webkit-backface-visibility: hidden;
-      transform: rotateY(180deg);
-    }
-    .pedigree-card-num {
-      font-family: var(--serif);
-      font-size: 0.68rem;
-      color: var(--gold);
-      font-weight: 300;
-      letter-spacing: 0.08em;
-    }
-    .pedigree-card-title {
-      font-family: var(--serif);
-      font-size: 1rem;
-      font-weight: 300;
-      color: var(--text);
-      line-height: 1.25;
-    }
-
-    .pedigree-sentence {
-      text-align: center;
-      margin-top: 1.8rem;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity var(--sentence-duration, 1s) ease;
-    }
-    .pedigree-sentence.visible { opacity: 1; }
-    .pedigree-sentence-inner {
-      font-family: var(--serif);
-      font-size: 1rem;
-      font-style: italic;
-      font-weight: 300;
-      color: var(--muted-mid);
-      line-height: 1.6;
-    }
-    .pedigree-sentence-inner em {
-      color: var(--gold-light);
-      font-style: italic;
-      font-weight: 400;
-    }
-
-    /* MOBILE push-down pedigree */
-    .mobile-pedigree {
-      display: none;
-      flex-direction: column;
-      gap: 1px;
-      background: var(--border);
-      border: 1px solid var(--border);
-      border-radius: 3px;
-      overflow: hidden;
-      margin-top: 0.25rem;
-    }
-    .mobile-pedigree.open { display: flex; animation: pedigreeReveal 0.35s ease both; }
-    .mobile-pedigree-item {
-      background: var(--surface);
-      padding: 0.8rem 1rem;
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      transition: background 0.2s;
-    }
-    .mobile-pedigree-item:hover { background: var(--surface2); }
-    .mobile-gold-line {
-      width: 1px; height: 22px;
-      background: var(--gold);
-      flex-shrink: 0;
-    }
-    .mobile-pedigree-title {
-      font-family: var(--serif);
-      font-size: 0.95rem;
-      font-weight: 300;
-      color: var(--text);
-    }
+    .service-icon { width: 64px; height: 64px; margin-bottom: 1.5rem; opacity: 0.9; }
+    .service-title { font-family: var(--serif); font-size: 1.75rem; font-weight: 300; margin-bottom: 1rem; }
+    .service-desc { font-size: 0.85rem; color: var(--muted); line-height: 1.7; }
 
     /* BRANDS */
     .brands-section {
       padding: calc(var(--section) * 0.6) 3rem;
       text-align: center;
       border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
     }
-    .brands-label {
-      font-size: 0.68rem;
-      letter-spacing: 0.25em;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin-bottom: 3rem;
-    }
-    .brands-logo {
-      max-width: 780px;
-      width: 100%;
-      height: auto;
-      opacity: 0.45;
-      filter: grayscale(100%) brightness(1.4);
-      transition: opacity 0.3s;
-    }
-    .brands-logo:hover { opacity: 0.7; }
-
-    /* TESTIMONIALS */
-    .testimonials-section {
-      padding: var(--section) 3rem;
-      max-width: 1300px;
-      margin: 0 auto;
-    }
-    .testimonials-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-end;
-      margin-bottom: 3rem;
-    }
-    .carousel-controls {
-      display: flex;
-      gap: 0.5rem;
-    }
-    .carousel-btn {
-      width: 44px; height: 44px;
-      border: 1px solid var(--border-mid);
-      background: transparent;
-      color: var(--muted-mid);
-      font-size: 0.9rem;
-      cursor: none;
-      border-radius: 2px;
-      display: grid;
-      place-items: center;
-      transition: border-color 0.2s, color 0.2s, background 0.2s;
-    }
-    .carousel-btn:hover { border-color: var(--gold); color: var(--gold); background: var(--gold-dim); }
-    .carousel-viewport {
-      overflow: hidden;
-      border: 1px solid var(--border);
-      border-radius: 4px;
-    }
-    .carousel-track {
-      display: flex;
-      transition: transform 0.6s cubic-bezier(0.22, 0.61, 0.36, 1);
-    }
-    .testimonial-slide {
-      min-width: 100%;
-      padding: 3rem;
-      background: var(--surface);
-    }
-    .testimonial-inner {
-      display: grid;
-      grid-template-columns: auto 1fr;
-      gap: 2.5rem;
-      align-items: start;
-      max-width: 900px;
-    }
-    .testimonial-avatar {
-      width: 80px; height: 80px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 1px solid var(--border-mid);
-      filter: grayscale(20%);
-    }
-    .testimonial-quote {
-      font-family: var(--serif);
-      font-size: clamp(1.2rem, 2vw, 1.5rem);
-      font-weight: 300;
-      font-style: italic;
-      line-height: 1.6;
-      color: var(--text);
-      margin-bottom: 1.5rem;
-    }
-    .testimonial-quote::before { content: '\201C'; color: var(--gold); font-size: 1.2em; margin-right: 2px; }
-    .testimonial-quote::after { content: '\201D'; color: var(--gold); font-size: 1.2em; margin-left: 2px; }
-    .testimonial-name {
-      font-size: 0.9rem;
-      font-weight: 500;
-      letter-spacing: 0.06em;
-      color: var(--text);
-      margin-bottom: 0.25rem;
-    }
-    .testimonial-role {
-      font-size: 0.78rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--gold);
-    }
-    .carousel-dots {
-      display: flex;
-      gap: 0.5rem;
-      margin-top: 1.5rem;
-    }
-    .dot-btn {
-      width: 24px; height: 2px;
-      background: var(--border-mid);
-      border: none;
-      cursor: none;
-      transition: background 0.2s, width 0.3s;
-    }
-    .dot-btn.active { background: var(--gold); width: 40px; }
+    .brands-logo { max-width: 780px; width: 100%; opacity: 0.45; filter: grayscale(100%); }
 
     /* ABOUT */
     .about-section {
@@ -904,6 +417,8 @@
     }
     .about-img-wrap {
       position: relative;
+      width: 55%; /* Reduced size of the single photo */
+      margin: 0 auto;
     }
     .about-img-wrap img {
       width: 100%;
@@ -931,13 +446,7 @@
       border-left: 1px solid var(--border-mid);
       pointer-events: none;
     }
-    .about-copy {}
-    .about-copy p {
-      font-size: 0.95rem;
-      color: var(--muted-mid);
-      line-height: 1.85;
-      margin-bottom: 1.4rem;
-    }
+    .about-copy p { font-size: 0.95rem; color: var(--muted-mid); line-height: 1.85; margin-bottom: 1.4rem; }
     .about-copy p:first-of-type {
       font-family: var(--serif);
       font-size: 1.2rem;
@@ -953,193 +462,40 @@
       border: 1px solid var(--border);
       margin-top: 2.5rem;
     }
-    .stat-cell {
-      background: var(--black);
-      padding: 1.5rem;
-      text-align: center;
-    }
-    .stat-num {
-      font-family: var(--serif);
-      font-size: 2rem;
-      font-weight: 300;
-      color: var(--gold);
-      display: block;
-    }
-    .stat-label {
-      font-size: 0.7rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin-top: 0.25rem;
-    }
+    .stat-cell { background: var(--black); padding: 1.5rem; text-align: center; }
+    .stat-num { font-family: var(--serif); font-size: 2rem; color: var(--gold); display: block; }
+    .stat-label { font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
 
-    /* BOOKING CTA */
-    .cta-section {
-      padding: var(--section) 3rem;
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-      border-top: 1px solid var(--border);
-    }
-    .cta-section::before {
-      content: '';
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 600px;
-      height: 600px;
-      background: radial-gradient(circle, rgba(200,169,110,0.06) 0%, transparent 70%);
-      pointer-events: none;
-    }
-    .cta-section .section-label { justify-content: center; }
-    .cta-section .section-label::before { display: none; }
-    .cta-title {
-      font-family: var(--serif);
-      font-size: clamp(3rem, 6vw, 5.5rem);
-      font-weight: 300;
-      letter-spacing: -0.02em;
-      line-height: 1.05;
-      margin: 1.5rem auto 2rem;
-      max-width: 800px;
-    }
-    .cta-title em { font-style: italic; color: var(--gold-light); }
-    .cta-sub {
-      color: var(--muted);
-      font-size: 1rem;
-      margin-bottom: 3rem;
-      max-width: 450px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-    .cta-form-wrap {
-      max-width: 580px;
-      margin: 0 auto;
-      text-align: left;
-    }
+    /* CTA FORM */
+    .cta-section { padding: var(--section) 3rem; text-align: center; border-top: 1px solid var(--border); }
+    .cta-title { font-family: var(--serif); font-size: clamp(3rem, 6vw, 5.5rem); font-weight: 300; margin-bottom: 2rem; }
+    .cta-form-wrap { max-width: 580px; margin: 0 auto; text-align: left; }
     .form-row { margin-bottom: 1rem; }
-    .form-row label {
-      display: block;
-      font-size: 0.7rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin-bottom: 0.5rem;
+    .form-row label { display: block; font-size: 0.7rem; color: var(--muted); margin-bottom: 0.5rem; text-transform: uppercase; }
+    .form-row input, .form-row textarea, .form-row select {
+      width: 100%; background: var(--surface); border: 1px solid var(--border-mid); padding: 0.9rem; color: var(--text); outline: none;
     }
-    .form-row input,
-    .form-row textarea,
-    .form-row select {
-      width: 100%;
-      background: var(--surface);
-      border: 1px solid var(--border-mid);
-      border-radius: 2px;
-      padding: 0.9rem 1.1rem;
-      color: var(--text);
-      font-family: var(--sans);
-      font-size: 0.95rem;
-      outline: none;
-      transition: border-color 0.2s;
-      appearance: none;
-    }
-    .form-row input:focus,
-    .form-row textarea:focus,
-    .form-row select:focus {
-      border-color: var(--gold);
-    }
-    .form-row textarea { resize: vertical; min-height: 120px; }
-    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
     .form-submit {
-      width: 100%;
-      margin-top: 1.5rem;
-      padding: 1.1rem;
-      background: var(--gold);
-      color: var(--black);
-      border: none;
-      font-family: var(--sans);
-      font-size: 0.82rem;
-      font-weight: 500;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      cursor: none;
-      border-radius: 2px;
-      transition: background 0.2s, transform 0.15s;
+      width: 100%; padding: 1.1rem; background: var(--gold); color: var(--black); border: none; font-weight: 500; text-transform: uppercase; cursor: pointer; transition: background 0.2s;
     }
-    .form-submit:hover { background: var(--gold-light); transform: translateY(-2px); }
+    .form-submit:hover { background: var(--gold-light); }
 
-    /* FOOTER */
-    footer {
-      border-top: 1px solid var(--border);
-      padding: 2.5rem 3rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    .footer-logo {
-      font-family: var(--serif);
-      font-size: 1rem;
-      font-weight: 300;
-      color: var(--muted);
-    }
-    .footer-copy {
-      font-size: 0.75rem;
-      color: var(--muted);
-      letter-spacing: 0.05em;
-    }
+    footer { border-top: 1px solid var(--border); padding: 2.5rem 3rem; display: flex; justify-content: space-between; color: var(--muted); font-size: 0.75rem; }
 
     /* ANIMATIONS */
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(24px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-    @keyframes scrollPulse {
-      0%, 100% { opacity: 0.4; }
-      50% { opacity: 1; }
-    }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    @keyframes scrollPulse { 0%, 100% { opacity: 0.4; } 50% { opacity: 1; } }
 
-    /* REVEAL ON SCROLL */
-    .reveal {
-      opacity: 0;
-      transform: translateY(32px);
-      transition: opacity 0.8s ease, transform 0.8s ease;
-    }
-    .reveal.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    .reveal-delay-1 { transition-delay: 0.1s; }
-    .reveal-delay-2 { transition-delay: 0.2s; }
-    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal { opacity: 0; transform: translateY(32px); transition: 0.8s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
 
-    /* MOBILE */
     @media (max-width: 900px) {
-      nav { padding: 1.2rem 1.5rem; }
-      .nav-links { gap: 1.2rem; }
-      .nav-links li:not(:last-child) { display: none; }
-      .work-section, .services-section, .testimonials-section, .about-section, .cta-section, .brands-section { padding-left: 1.5rem; padding-right: 1.5rem; }
-      .phones-row { gap: 0.5rem; }
-      .phone-frame { width: 38vw; max-width: 180px; }
-      .phone-frame:nth-child(2) { width: 42vw; max-width: 200px; }
-      .services-grid { grid-template-columns: 1fr; background: transparent; border: none; }
-      .service-card { border: 1px solid var(--border); border-radius: 4px; margin-bottom: 1px; }
-      .service-card::after { display: none; }
-      .pedigree-panel { display: none !important; }
-      .pedigree-card-stem { display: none !important; }
-      .about-section { grid-template-columns: 1fr; gap: 2rem; }
-      .about-img-wrap { height: 300px; }
-      .about-img-secondary-2 { width: 36%; }
-      .form-grid { grid-template-columns: 1fr; }
+      .about-section { grid-template-columns: 1fr; }
+      .about-img-wrap { width: 80%; }
+      .services-grid { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
       .awards-strip { grid-template-columns: 1fr; }
-      .award-cell { border-right: none; border-bottom: 1px solid var(--border); }
-      .work-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
-      .work-header-right { text-align: left; }
-      .testimonials-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
-      footer { flex-direction: column; gap: 1rem; text-align: center; }
-      body { cursor: auto; }
-      .cursor, .cursor-ring { display: none; }
     }
   </style>
 </head>
@@ -1153,23 +509,23 @@
   <ul class="nav-links">
     <li><a href="#work">Work</a></li>
     <li><a href="#about">About</a></li>
-    <li><a href="#testimonials">Reviews</a></li>
+    <li><a href="#capabilities">Capabilities</a></li>
     <li><a href="#contact" class="nav-cta">Book a Call</a></li>
   </ul>
 </nav>
 
 <section class="hero" id="home">
   <div class="hero-video-wrap">
-    <video autoplay muted loop playsinline poster="background loop_1 poster.jpg">
+    <video autoplay muted loop playsinline>
       <source src="background loop_1.mp4" type="video/mp4" />
     </video>
   </div>
   <div class="hero-content">
     <p class="hero-eyebrow">Emmy Award–Winning Producer & Director</p>
     <h1 class="hero-title">Stories that<br><em>demand</em> attention</h1>
-    <p class="hero-sub">From streaming platforms to social campaigns — cinematic production that elevates brands and moves audiences.</p>
+    <p class="hero-sub">Cinematic production that elevates brands and moves audiences across every platform.</p>
     <div class="hero-actions">
-      <a href="#contact" class="btn-primary">Book a Consultation →</a>
+      <a href="#contact" class="btn-primary">Book a Consultation</a>
       <a href="#work" class="btn-ghost">View Work</a>
     </div>
   </div>
@@ -1181,74 +537,33 @@
 
 <div class="awards-strip reveal">
   <div class="award-cell">
-    <img class="award-img" src="emmy-statue_No BG.png" alt="Emmy Award">
+    <img class="award-img" src="emmy-statue_No BG.png" alt="Emmy">
     <div class="award-num">1×</div>
-    <div class="award-label">
-      <strong>Emmy</strong>
-      <span>Award</span>
-    </div>
+    <div class="award-label"><strong>Emmy</strong><span>Award</span></div>
   </div>
   <div class="award-cell">
-    <img class="award-img" src="Telly Statue_No BG.png" alt="Telly Award">
+    <img class="award-img" src="Telly Statue_No BG.png" alt="Telly">
     <div class="award-num platinum">3×</div>
-    <div class="award-label">
-      <strong>Telly</strong>
-      <span>Awards</span>
-    </div>
+    <div class="award-label"><strong>Telly</strong><span>Awards</span></div>
   </div>
   <div class="award-cell">
-    <img class="award-img" src="Marcom_Platinum-Statuette-preview2_No BG.png" alt="MARCOM Award">
+    <img class="award-img" src="Marcom_Platinum-Statuette-preview2_No BG.png" alt="Marcom">
     <div class="award-num platinum">3×</div>
-    <div class="award-label">
-      <strong>Marcom</strong>
-      <span>Awards</span>
-    </div>
+    <div class="award-label"><strong>Marcom</strong><span>Awards</span></div>
   </div>
 </div>
 
 <section class="work-section" id="work">
   <div class="work-header reveal">
-    <div class="work-header-left">
+    <div>
       <div class="section-label">Selected Work</div>
       <h2 class="display">Vertically <em>inclined</em></h2>
     </div>
-    <p class="work-header-right">Content that reaches millions.</p>
   </div>
   <div class="phones-row reveal">
-    <div class="phone-frame">
-      <div class="phone-notch"></div>
-      <video autoplay muted loop playsinline poster="Gabriela_1 poster.jpg">
-        <source src="Gabriela_1.mp4" type="video/mp4" />
-      </video>
-    </div>
-    <div class="phone-frame">
-      <div class="phone-notch"></div>
-      <video autoplay muted loop playsinline poster="Bella Dose and Alyssa Raghu_1 poster.jpg">
-        <source src="Bella Dose and Alyssa Raghu_1.mp4" type="video/mp4" />
-      </video>
-    </div>
-    <div class="phone-frame">
-      <div class="phone-notch"></div>
-      <video autoplay muted loop playsinline poster="Jay_1 poster.jpg">
-        <source src="Jay_1.mp4" type="video/mp4" />
-      </video>
-    </div>
-  </div>
-
-  <!-- HORIZONTAL REEL -->
-  <div class="horizontal-reel-wrap reveal">
-    <div class="work-header" style="margin-top: var(--section); margin-bottom: 2.5rem;">
-      <div class="work-header-left">
-        <div class="section-label">Selected Work</div>
-        <h2 class="display">Classic <em>horizontal</em></h2>
-      </div>
-      <p class="work-header-right">Broadcast, streaming, and cinematic — built for the big screen.</p>
-    </div>
-    <div class="horizontal-reel-frame">
-      <video autoplay muted loop playsinline poster="horizontal_reel poster.jpg">
-        <source src="background loop_1.mp4" type="video/mp4" />
-      </video>
-    </div>
+    <div class="phone-frame"><video autoplay muted loop playsinline><source src="Gabriela_1.mp4" type="video/mp4"></video></div>
+    <div class="phone-frame"><video autoplay muted loop playsinline><source src="Bella Dose and Alyssa Raghu_1.mp4" type="video/mp4"></video></div>
+    <div class="phone-frame"><video autoplay muted loop playsinline><source src="Jay_1.mp4" type="video/mp4"></video></div>
   </div>
 </section>
 
@@ -1257,596 +572,86 @@
     <div class="section-label">Capabilities</div>
     <h2 class="display">What I <em>do</em></h2>
   </div>
-
-  <div class="services-grid" id="services-grid">
-
-    <!-- CARD 01: COMMERCIAL -->
-    <div class="service-card reveal reveal-delay-1" id="card-commercial">
-      <span class="service-num">01</span>
+  <div class="services-grid">
+    <div class="service-card reveal">
       <img class="service-icon" src="Phone.png" alt="">
       <h3 class="service-title">Commercial</h3>
-      <p class="service-desc">Creative Development, Broadcast, Social Media, Branded Content, Product Demos, Testimonials, Mini-Docs, and Experiential Events.</p>
-      <button class="service-expand-btn" data-target="pedigree-commercial" data-card="card-commercial" data-mobile="mobile-commercial" aria-expanded="false">
-        <span>Explore</span>
-        <span class="expand-circle">+</span>
-      </button>
-      <div class="mobile-pedigree" id="mobile-commercial">
-        <div class="mobile-pedigree-item"><div class="mobile-gold-line"></div><span class="mobile-pedigree-title">Idea Consultation</span></div>
-        <div class="mobile-pedigree-item"><div class="mobile-gold-line"></div><span class="mobile-pedigree-title">Development / Pre-Production</span></div>
-        <div class="mobile-pedigree-item"><div class="mobile-gold-line"></div><span class="mobile-pedigree-title">Production</span></div>
-        <div class="mobile-pedigree-item"><div class="mobile-gold-line"></div><span class="mobile-pedigree-title">Post-Production</span></div>
-      </div>
+      <p class="service-desc">Creative development, social media campaigns, and branded content that maximizes ROI.</p>
     </div>
-
-    <!-- CARD 02: PRODUCTION SUSTAINABILITY -->
-    <div class="service-card reveal reveal-delay-2" id="card-sustainability">
-      <span class="service-num">02</span>
+    <div class="service-card reveal">
       <img class="service-icon" src="Phone.png" alt="">
-      <h3 class="service-title">Production Sustainability</h3>
-      <p class="service-desc">Consultation and on-set oversight from development through post.</p>
-      <button class="service-expand-btn" data-target="pedigree-sustainability" data-card="card-sustainability" data-mobile="mobile-sustainability" aria-expanded="false">
-        <span>Explore</span>
-        <span class="expand-circle">+</span>
-      </button>
-      <div class="mobile-pedigree" id="mobile-sustainability">
-        <div class="mobile-pedigree-item"><div class="mobile-gold-line"></div><span class="mobile-pedigree-title">Education</span></div>
-        <div class="mobile-pedigree-item"><div class="mobile-gold-line"></div><span class="mobile-pedigree-title">Systems &amp; Planning</span></div>
-        <div class="mobile-pedigree-item"><div class="mobile-gold-line"></div><span class="mobile-pedigree-title">Circularity</span></div>
-        <div class="mobile-pedigree-item"><div class="mobile-gold-line"></div><span class="mobile-pedigree-title">Energy</span></div>
-        <div class="mobile-pedigree-item"><div class="mobile-gold-line"></div><span class="mobile-pedigree-title">Communication</span></div>
-      </div>
+      <h3 class="service-title">Sustainability</h3>
+      <p class="service-desc">Consultation and oversight to integrate green practices into high-stakes production environments.</p>
     </div>
-
-    <!-- CARD 03: FILM & TV -->
-    <div class="service-card reveal reveal-delay-3" id="card-filmtv">
-      <span class="service-num">03</span>
+    <div class="service-card reveal">
       <img class="service-icon" src="Camera.png" alt="">
-      <h3 class="service-title">Film &amp; TV</h3>
-      <p class="service-desc">Features, TV, Shorts, &amp; Documentary.</p>
-      <button class="service-expand-btn" data-target="pedigree-filmtv" data-card="card-filmtv" data-mobile="mobile-filmtv" aria-expanded="false">
-        <span>Explore</span>
-        <span class="expand-circle">+</span>
-      </button>
-      <div class="mobile-pedigree" id="mobile-filmtv">
-        <div class="mobile-pedigree-item"><div class="mobile-gold-line"></div><span class="mobile-pedigree-title">Writer</span></div>
-        <div class="mobile-pedigree-item"><div class="mobile-gold-line"></div><span class="mobile-pedigree-title">Director</span></div>
-        <div class="mobile-pedigree-item"><div class="mobile-gold-line"></div><span class="mobile-pedigree-title">Producer</span></div>
-        <div class="mobile-pedigree-item"><div class="mobile-gold-line"></div><span class="mobile-pedigree-title">1st AD</span></div>
-      </div>
+      <h3 class="service-title">Film & TV</h3>
+      <p class="service-desc">Award-winning narrative and documentary work, from writing to 1st assistant directing.</p>
     </div>
-
-    <!-- PEDIGREE PANEL: COMMERCIAL (full-width, desktop only) -->
-    <div class="pedigree-panel" id="pedigree-commercial">
-      <div class="pedigree-stem" id="stem-commercial"></div>
-      <div class="pedigree-bar-wrap">
-        <div class="pedigree-bar-left" id="bar-left-commercial"></div>
-        <div class="pedigree-bar-right" id="bar-right-commercial"></div>
-      </div>
-      <div class="pedigree-card-stem" id="cstem-c-1"></div>
-      <div class="pedigree-card-stem" id="cstem-c-2"></div>
-      <div class="pedigree-card-stem" id="cstem-c-3"></div>
-      <div class="pedigree-card-stem" id="cstem-c-4"></div>
-      <div class="pedigree-cards" id="pcards-commercial">
-        <div class="pedigree-card-wrap" data-index="0">
-          <div class="pedigree-card-inner">
-            <div class="pedigree-card-front"><span class="pedigree-card-num">01</span><span class="pedigree-card-title">Idea Consultation</span></div>
-            <div class="pedigree-card-back"></div>
-          </div>
-        </div>
-        <div class="pedigree-card-wrap" data-index="1">
-          <div class="pedigree-card-inner">
-            <div class="pedigree-card-front"><span class="pedigree-card-num">02</span><span class="pedigree-card-title">Development / Pre-Production</span></div>
-            <div class="pedigree-card-back"></div>
-          </div>
-        </div>
-        <div class="pedigree-card-wrap" data-index="2">
-          <div class="pedigree-card-inner">
-            <div class="pedigree-card-front"><span class="pedigree-card-num">03</span><span class="pedigree-card-title">Production</span></div>
-            <div class="pedigree-card-back"></div>
-          </div>
-        </div>
-        <div class="pedigree-card-wrap" data-index="3">
-          <div class="pedigree-card-inner">
-            <div class="pedigree-card-front"><span class="pedigree-card-num">04</span><span class="pedigree-card-title">Post-Production</span></div>
-            <div class="pedigree-card-back"></div>
-          </div>
-        </div>
-      </div>
-      <div class="pedigree-sentence" id="sentence-commercial">
-        <span class="pedigree-sentence-inner">From Large-Scale Production to One-on-One Influencer Work &mdash; I Want to Get <em>Your Brand</em> Out There.</span>
-      </div>
-    </div>
-
-    <!-- PEDIGREE PANEL: PRODUCTION SUSTAINABILITY (desktop only) -->
-    <div class="pedigree-panel" id="pedigree-sustainability">
-      <div class="pedigree-stem" id="stem-sustainability"></div>
-      <div class="pedigree-bar-wrap">
-        <div class="pedigree-bar-left" id="bar-left-sustainability"></div>
-        <div class="pedigree-bar-right" id="bar-right-sustainability"></div>
-      </div>
-      <div class="pedigree-card-stem" id="cstem-s-1"></div>
-      <div class="pedigree-card-stem" id="cstem-s-2"></div>
-      <div class="pedigree-card-stem" id="cstem-s-3"></div>
-      <div class="pedigree-card-stem" id="cstem-s-4"></div>
-      <div class="pedigree-card-stem" id="cstem-s-5"></div>
-      <div class="pedigree-cards" id="pcards-sustainability">
-        <div class="pedigree-card-wrap" data-index="0">
-          <div class="pedigree-card-inner">
-            <div class="pedigree-card-front"><span class="pedigree-card-num">01</span><span class="pedigree-card-title">Education</span></div>
-            <div class="pedigree-card-back"></div>
-          </div>
-        </div>
-        <div class="pedigree-card-wrap" data-index="1">
-          <div class="pedigree-card-inner">
-            <div class="pedigree-card-front"><span class="pedigree-card-num">02</span><span class="pedigree-card-title">Systems &amp; Planning</span></div>
-            <div class="pedigree-card-back"></div>
-          </div>
-        </div>
-        <div class="pedigree-card-wrap" data-index="2">
-          <div class="pedigree-card-inner">
-            <div class="pedigree-card-front"><span class="pedigree-card-num">03</span><span class="pedigree-card-title">Circularity</span></div>
-            <div class="pedigree-card-back"></div>
-          </div>
-        </div>
-        <div class="pedigree-card-wrap" data-index="3">
-          <div class="pedigree-card-inner">
-            <div class="pedigree-card-front"><span class="pedigree-card-num">04</span><span class="pedigree-card-title">Energy</span></div>
-            <div class="pedigree-card-back"></div>
-          </div>
-        </div>
-        <div class="pedigree-card-wrap" data-index="4">
-          <div class="pedigree-card-inner">
-            <div class="pedigree-card-front"><span class="pedigree-card-num">05</span><span class="pedigree-card-title">Communication</span></div>
-            <div class="pedigree-card-back"></div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- PEDIGREE PANEL: FILM & TV (desktop only) -->
-    <div class="pedigree-panel" id="pedigree-filmtv">
-      <div class="pedigree-stem" id="stem-filmtv"></div>
-      <div class="pedigree-bar-wrap">
-        <div class="pedigree-bar-left" id="bar-left-filmtv"></div>
-        <div class="pedigree-bar-right" id="bar-right-filmtv"></div>
-      </div>
-      <div class="pedigree-card-stem" id="cstem-f-1"></div>
-      <div class="pedigree-card-stem" id="cstem-f-2"></div>
-      <div class="pedigree-card-stem" id="cstem-f-3"></div>
-      <div class="pedigree-card-stem" id="cstem-f-4"></div>
-      <div class="pedigree-cards" id="pcards-filmtv">
-        <div class="pedigree-card-wrap" data-index="0">
-          <div class="pedigree-card-inner">
-            <div class="pedigree-card-front"><span class="pedigree-card-num">01</span><span class="pedigree-card-title">Writer</span></div>
-            <div class="pedigree-card-back"></div>
-          </div>
-        </div>
-        <div class="pedigree-card-wrap" data-index="1">
-          <div class="pedigree-card-inner">
-            <div class="pedigree-card-front"><span class="pedigree-card-num">02</span><span class="pedigree-card-title">Director</span></div>
-            <div class="pedigree-card-back"></div>
-          </div>
-        </div>
-        <div class="pedigree-card-wrap" data-index="2">
-          <div class="pedigree-card-inner">
-            <div class="pedigree-card-front"><span class="pedigree-card-num">03</span><span class="pedigree-card-title">Producer</span></div>
-            <div class="pedigree-card-back"></div>
-          </div>
-        </div>
-        <div class="pedigree-card-wrap" data-index="3">
-          <div class="pedigree-card-inner">
-            <div class="pedigree-card-front"><span class="pedigree-card-num">04</span><span class="pedigree-card-title">1st AD</span></div>
-            <div class="pedigree-card-back"></div>
-          </div>
-        </div>
-      </div>
-    </div>
-
   </div>
 </section>
 
 <div class="brands-section reveal">
-  <p class="brands-label">Trusted by leading brands</p>
-  <img src="All Logos New_No BG.png" alt="Clients include ESPN, GMC, Lay's, Samsung, Starbucks" class="brands-logo">
+  <img src="All Logos New_No BG.png" alt="Brands" class="brands-logo">
 </div>
 
-<section class="testimonials-section" id="testimonials">
-  <div class="testimonials-header reveal">
-    <div>
-      <div class="section-label">Testimonials</div>
-      <h2 class="display">What they <em>say</em></h2>
-    </div>
-    <div class="carousel-controls">
-      <button class="carousel-btn" id="t-prev" aria-label="Previous">◀</button>
-      <button class="carousel-btn" id="t-next" aria-label="Next">▶</button>
-    </div>
-  </div>
-  <div class="carousel-viewport reveal">
-    <div class="carousel-track" id="t-track">
-      <div class="testimonial-slide">
-        <div class="testimonial-inner">
-          <img class="testimonial-avatar" src="Kelly Sallaway_IMdB.png" alt="Kelly Sallaway">
-          <div>
-            <p class="testimonial-quote">He brought a delayed project on schedule, then helped us save thousands on licensing. I want him on every production!</p>
-            <p class="testimonial-name">Kelly Sallaway</p>
-            <p class="testimonial-role">Emmy Award-Winning Producer</p>
-          </div>
-        </div>
-      </div>
-      <div class="testimonial-slide">
-        <div class="testimonial-inner">
-          <img class="testimonial-avatar" src="Jasmine Holdsworth.png" alt="Jasmine Holdsworth">
-          <div>
-            <p class="testimonial-quote">He's like a swiss army knife on set. He can do anything!</p>
-            <p class="testimonial-name">Jasmine Holdsworth</p>
-            <p class="testimonial-role">Line Producer</p>
-          </div>
-        </div>
-      </div>
-      <div class="testimonial-slide">
-        <div class="testimonial-inner">
-          <img class="testimonial-avatar" src="Ryan Henry Johnston.png" alt="Ryan Henry Johnston">
-          <div>
-            <p class="testimonial-quote">He's invaluable because he's calm under pressure. When everyone else is hyperventilating, he's already analyzed the situation and providing courses of action.</p>
-            <p class="testimonial-name">Ryan Henry Johnston</p>
-            <p class="testimonial-role">Multi-Award-Winning Director</p>
-          </div>
-        </div>
-      </div>
-      <div class="testimonial-slide">
-        <div class="testimonial-inner">
-          <img class="testimonial-avatar" src="Tina Imahara.png" alt="Tina Imahara">
-          <div>
-            <p class="testimonial-quote">Collin is wonderfully talented — hungry, driven, and persistent. I was amazed at his knowledge and confidence, and how he helped others feel welcome.</p>
-            <p class="testimonial-name">Tina Imahara</p>
-            <p class="testimonial-role">Academy Award-Winning Editor</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="carousel-dots" id="t-dots">
-    <button class="dot-btn active"></button>
-    <button class="dot-btn"></button>
-    <button class="dot-btn"></button>
-    <button class="dot-btn"></button>
-  </div>
-</section>
-
 <section class="about-section" id="about">
-  <!-- Layered floating photo collage -->
   <div class="about-img-wrap reveal">
-    <!-- Main photo (Emmy shot) — upper left, anchors the stack -->
-    <img class="about-img-main" src="collin-emmy.webp" alt="Collin O'Brien holding an Emmy award" loading="lazy">
-    <!-- Second photo: overlaps the bottom of the Emmy photo — replace filename below -->
-    <img class="about-img-secondary-1" src="collin-photo-2.jpg" alt="Collin O'Brien on set" loading="lazy"
-         onerror="this.style.background='#181818';">
-    <!-- Third photo: floats upper right — replace filename below -->
-    <img class="about-img-secondary-2" src="collin-photo-3.jpg" alt="Collin O'Brien directing" loading="lazy"
-         onerror="this.style.background='#111111';">
+    <img src="collin-emmy.webp" alt="Collin O'Brien Emmy Award" loading="lazy">
   </div>
-
-  <div class="about-copy reveal reveal-delay-1">
+  <div class="about-copy reveal">
     <div class="section-label">About</div>
     <h2 class="display" style="margin-bottom: 2rem;">The <em>craft</em><br>behind the lens</h2>
-    <p>Emmy Award-winning producer and multi-award-winning writer & director with experience across features, shorts, documentaries, music videos, commercials, and branded content.</p>
-    <p>A background in sales, mechanical engineering, and assistant directing gives me a rare ability to adapt to any environment — bridging creative vision with logistical execution. My curiosity about a client's core principles drives scripts, pitch decks, and campaigns that maximize ROI.</p>
-    <p>3× International MARCOM Award winner for advertising and marketing social media campaigns. Content that reaches millions — on time and on budget.</p>
+    <p>Emmy Award-winning producer and multi-award-winning writer & director with over a decade of experience across streaming platforms and independent cinema.</p>
+    <p>My background in Mechanical Engineering from ASU gives me a unique technical edge in production management, allowing me to bridge high-level creative vision with rigorous logistical execution.</p>
     <div class="about-stats">
-      <div class="stat-cell">
-        <span class="stat-num">30+</span>
-        <span class="stat-label">Awards Won</span>
-      </div>
-      <div class="stat-cell">
-        <span class="stat-num">M+</span>
-        <span class="stat-label">Viewers Reached</span>
-      </div>
-      <div class="stat-cell">
-        <span class="stat-num">10+</span>
-        <span class="stat-label">Years Active</span>
-      </div>
+      <div class="stat-cell"><span class="stat-num">30+</span><span class="stat-label">Awards</span></div>
+      <div class="stat-cell"><span class="stat-num">M+</span><span class="stat-label">Views</span></div>
+      <div class="stat-cell"><span class="stat-num">10+</span><span class="stat-label">Years</span></div>
     </div>
   </div>
 </section>
 
 <section class="cta-section" id="contact">
-  <div class="section-label">Book a Consultation</div>
+  <div class="section-label">Contact</div>
   <h2 class="cta-title">Let's build something<br><em>worth watching</em></h2>
-  <p class="cta-sub">Reach out and let's talk about your project.</p>
-
   <div class="cta-form-wrap reveal">
-    <form action="https://formspree.io/f/YOUR_FORM_ID_HERE" method="POST">
-      <div class="form-grid">
-        <div class="form-row">
-          <label for="name">Your Name</label>
-          <input type="text" id="name" name="name" placeholder="Jane Smith" required>
-        </div>
-        <div class="form-row">
-          <label for="email">Email Address</label>
-          <input type="email" id="email" name="_replyto" placeholder="jane@company.com" required>
-        </div>
-      </div>
-      <div class="form-row">
-        <label for="project">Project Type</label>
-        <select id="project" name="project">
-          <option value="" disabled selected>Select a category...</option>
-          <option value="film-tv">Film / TV</option>
-          <option value="commercial">Commercial / Branded Content</option>
-          <option value="social">Social Campaign</option>
-          <option value="music-video">Music Video</option>
-          <option value="consulting">Creative Consulting</option>
-          <option value="not-sure">Not Sure Yet</option>
-          <option value="other">Other</option>
-        </select>
-      </div>
-      <div class="form-row">
-        <label for="message">Tell me about your project, or just say HELP!...</label>
-        <textarea id="message" name="message" placeholder="What are you making? What's the timeline? What's the goal?" required></textarea>
-      </div>
-      <input type="text" name="_gotcha" style="display:none">
-      <button type="submit" class="form-submit">Send Message — Book a Call →</button>
+    <form action="#" method="POST">
+      <div class="form-row"><label>Name</label><input type="text" required></div>
+      <div class="form-row"><label>Email</label><input type="email" required></div>
+      <div class="form-row"><label>Message</label><textarea required></textarea></div>
+      <button type="submit" class="form-submit">Send Message</button>
     </form>
   </div>
 </section>
 
 <footer>
-  <span class="footer-logo">Collin O'Brien</span>
-  <span class="footer-copy">© 2026 Collin O'Brien · All rights reserved</span>
+  <span>Collin O'Brien</span>
+  <span>© 2026 · All rights reserved</span>
 </footer>
 
 <script>
-  // Custom cursor
   const cursor = document.getElementById('cursor');
   const ring = document.getElementById('cursor-ring');
   let mx = 0, my = 0, rx = 0, ry = 0;
-  document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; cursor.style.left = mx + 'px'; cursor.style.top = my + 'px'; });
-  function animateRing() {
-    rx += (mx - rx) * 0.12;
-    ry += (my - ry) * 0.12;
-    ring.style.left = rx + 'px';
-    ring.style.top = ry + 'px';
-    requestAnimationFrame(animateRing);
+  document.addEventListener('mousemove', e => { 
+    mx = e.clientX; my = e.clientY; 
+    cursor.style.left = mx + 'px'; cursor.style.top = my + 'px'; 
+  });
+  function animate() {
+    rx += (mx - rx) * 0.12; ry += (my - ry) * 0.12;
+    ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
+    requestAnimationFrame(animate);
   }
-  animateRing();
+  animate();
 
-  // Nav scroll
   const nav = document.getElementById('nav');
-  window.addEventListener('scroll', () => {
-    nav.classList.toggle('scrolled', window.scrollY > 60);
-  });
+  window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 60));
 
-  // Scroll reveal
-  const reveals = document.querySelectorAll('.reveal');
   const observer = new IntersectionObserver(entries => {
-    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
   }, { threshold: 0.12 });
-  reveals.forEach(el => observer.observe(el));
-
-  // Testimonials carousel
-  (function() {
-    const track = document.getElementById('t-track');
-    const dots = Array.from(document.querySelectorAll('.dot-btn'));
-    const slides = track.querySelectorAll('.testimonial-slide');
-    let idx = 0, timer;
-    function go(i) {
-      idx = (i + slides.length) % slides.length;
-      track.style.transform = `translateX(${-idx * 100}%)`;
-      dots.forEach((d, di) => d.classList.toggle('active', di === idx));
-    }
-    document.getElementById('t-next').addEventListener('click', () => go(idx + 1));
-    document.getElementById('t-prev').addEventListener('click', () => go(idx - 1));
-    dots.forEach((d, di) => d.addEventListener('click', () => go(di)));
-    timer = setInterval(() => go(idx + 1), 6000);
-    track.parentElement.addEventListener('mouseenter', () => clearInterval(timer));
-    track.parentElement.addEventListener('mouseleave', () => { timer = setInterval(() => go(idx + 1), 6000); });
-    go(0);
-  })();
-
-  // PEDIGREE EXPAND SYSTEM
-  (function() {
-    const isMobile = () => window.innerWidth <= 900;
-
-    const T_STEM     = 320;
-    const T_BAR      = 380;
-    const T_DROP     = 200;
-    const T_FLIP_LAG = 60;
-    const T_FLIP     = 600;
-    const T_CLOSE    = 150;
-
-    function positionGeometry(panelId, cardId) {
-      const panel = document.getElementById(panelId);
-      const stem  = panel && panel.querySelector('.pedigree-stem');
-      const card  = document.getElementById(cardId);
-      const grid  = document.getElementById('services-grid');
-      if (!panel || !card || !grid || !stem) return;
-
-      const gridRect = grid.getBoundingClientRect();
-      const cardRect = card.getBoundingClientRect();
-      const stemX    = cardRect.left - gridRect.left + cardRect.width / 2;
-      stem.style.left = stemX + 'px';
-
-      const barL = panel.querySelector('.pedigree-bar-left');
-      const barR = panel.querySelector('.pedigree-bar-right');
-      const pct  = (stemX / panel.offsetWidth * 100).toFixed(2);
-      if (barL) { barL.style.right = (100 - pct) + '%'; barL.style.left = '0'; }
-      if (barR) { barR.style.left = pct + '%'; barR.style.right = '0'; }
-
-      const wraps     = Array.from(panel.querySelectorAll('.pedigree-card-wrap'));
-      const dropStems = Array.from(panel.querySelectorAll('.pedigree-card-stem'));
-      const panelRect = panel.getBoundingClientRect();
-      wraps.forEach((wrap, i) => {
-        if (!dropStems[i]) return;
-        const wr = wrap.getBoundingClientRect();
-        dropStems[i].style.left = (wr.left - panelRect.left + wr.width / 2) + 'px';
-      });
-    }
-
-    function barArrivalMs(panelId, cardId, i) {
-      const panel = document.getElementById(panelId);
-      const card  = document.getElementById(cardId);
-      const grid  = document.getElementById('services-grid');
-      if (!panel || !card || !grid) return i * 80;
-
-      const gridRect = grid.getBoundingClientRect();
-      const cardRect = card.getBoundingClientRect();
-      const stemX    = cardRect.left - gridRect.left + cardRect.width / 2;
-      const wraps    = Array.from(panel.querySelectorAll('.pedigree-card-wrap'));
-      if (!wraps[i]) return i * 80;
-      const wr       = wraps[i].getBoundingClientRect();
-      const cardCX   = wr.left - gridRect.left + wr.width / 2;
-      const dist     = Math.abs(cardCX - stemX);
-      const halfW    = panel.offsetWidth / 2;
-      return Math.round((dist / Math.max(halfW, 1)) * T_BAR);
-    }
-
-    function runOpen(panelId, cardId) {
-      const panel = document.getElementById(panelId);
-      if (!panel) return;
-
-      const stem      = panel.querySelector('.pedigree-stem');
-      const barL      = panel.querySelector('.pedigree-bar-left');
-      const barR      = panel.querySelector('.pedigree-bar-right');
-      const dropStems = Array.from(panel.querySelectorAll('.pedigree-card-stem'));
-      const wraps     = Array.from(panel.querySelectorAll('.pedigree-card-wrap'));
-      const sentence  = panel.querySelector('.pedigree-sentence');
-
-      [stem, barL, barR, ...dropStems].forEach(el => el && el.classList.remove('animate'));
-      wraps.forEach(w => w.classList.remove('flipped'));
-      if (sentence) {
-        sentence.classList.remove('visible');
-        sentence.style.removeProperty('--sentence-duration');
-      }
-
-      requestAnimationFrame(() => {
-        positionGeometry(panelId, cardId);
-        requestAnimationFrame(() => {
-          if (stem) stem.classList.add('animate');
-
-          setTimeout(() => {
-            if (barL) barL.classList.add('animate');
-            if (barR) barR.classList.add('animate');
-
-            const arrivals = wraps.map((_, i) => barArrivalMs(panelId, cardId, i));
-            const firstFlipAt = Math.min(...arrivals) + T_FLIP_LAG;
-            const lastFlipAt  = Math.max(...arrivals) + T_FLIP_LAG;
-            const flipWindow  = (lastFlipAt - firstFlipAt) + T_FLIP;
-
-            if (sentence) {
-              sentence.style.setProperty('--sentence-duration', flipWindow + 'ms');
-            }
-
-            wraps.forEach((wrap, i) => {
-              const arrival = arrivals[i];
-              setTimeout(() => { if (dropStems[i]) dropStems[i].classList.add('animate'); }, arrival);
-              setTimeout(() => {
-                wrap.classList.add('flipped');
-                if (i === wraps.indexOf(wraps.reduce((a, b) =>
-                  arrivals[wraps.indexOf(a)] <= arrivals[wraps.indexOf(b)] ? a : b
-                ))) {
-                  if (sentence) sentence.classList.add('visible');
-                }
-              }, arrival + T_FLIP_LAG);
-            });
-
-            const earliestIdx = arrivals.indexOf(Math.min(...arrivals));
-            setTimeout(() => {
-              if (sentence) sentence.classList.add('visible');
-            }, arrivals[earliestIdx] + T_FLIP_LAG);
-
-          }, T_STEM);
-        });
-      });
-    }
-
-    function runClose(panelId, onDone) {
-      const panel = document.getElementById(panelId);
-      if (!panel || !panel.classList.contains('open')) {
-        if (onDone) onDone();
-        return;
-      }
-      panel.classList.add('closing');
-      setTimeout(() => {
-        panel.classList.remove('open', 'closing');
-        const sentence  = panel.querySelector('.pedigree-sentence');
-        const dropStems = panel.querySelectorAll('.pedigree-card-stem');
-        const barL      = panel.querySelector('.pedigree-bar-left');
-        const barR      = panel.querySelector('.pedigree-bar-right');
-        const stem      = panel.querySelector('.pedigree-stem');
-        const wraps     = panel.querySelectorAll('.pedigree-card-wrap');
-        [stem, barL, barR, ...dropStems].forEach(el => el && el.classList.remove('animate'));
-        wraps.forEach(w => w.classList.remove('flipped'));
-        if (sentence) { sentence.classList.remove('visible'); }
-        if (onDone) onDone();
-      }, T_CLOSE);
-    }
-
-    function closeOthers(exceptBtn, onDone) {
-      const open = Array.from(document.querySelectorAll('.service-expand-btn.open'))
-                        .filter(b => b !== exceptBtn);
-      if (!open.length) { if (onDone) onDone(); return; }
-      let done = 0;
-      open.forEach(btn => {
-        btn.classList.remove('open');
-        btn.setAttribute('aria-expanded', 'false');
-        document.getElementById(btn.dataset.card)?.classList.remove('active');
-        document.getElementById(btn.dataset.mobile)?.classList.remove('open');
-        runClose(btn.dataset.target, () => { if (++done === open.length && onDone) onDone(); });
-      });
-    }
-
-    document.querySelectorAll('.service-expand-btn').forEach(btn => {
-      btn.addEventListener('click', function(e) {
-        e.stopPropagation();
-        const isOpen   = btn.classList.contains('open');
-        const targetId = btn.dataset.target;
-        const cardId   = btn.dataset.card;
-        const mobileId = btn.dataset.mobile;
-
-        if (isOpen) {
-          btn.classList.remove('open');
-          btn.setAttribute('aria-expanded', 'false');
-          document.getElementById(cardId)?.classList.remove('active');
-          if (isMobile()) {
-            document.getElementById(mobileId)?.classList.remove('open');
-          } else {
-            runClose(targetId);
-          }
-        } else {
-          closeOthers(btn, () => {
-            btn.classList.add('open');
-            btn.setAttribute('aria-expanded', 'true');
-            document.getElementById(cardId)?.classList.add('active');
-            if (isMobile()) {
-              document.getElementById(mobileId)?.classList.add('open');
-            } else {
-              const panel = document.getElementById(targetId);
-              if (panel) {
-                panel.classList.add('open');
-                runOpen(targetId, cardId);
-              }
-            }
-          });
-        }
-      });
-    });
-
-    window.addEventListener('resize', () => {
-      document.querySelectorAll('.service-expand-btn.open').forEach(btn => {
-        if (!isMobile()) positionGeometry(btn.dataset.target, btn.dataset.card);
-      });
-    });
-  })();
-
-  // Video intersection observer
-  document.addEventListener('DOMContentLoaded', () => {
-    const vids = document.querySelectorAll('video');
-    if ('IntersectionObserver' in window) {
-      const vo = new IntersectionObserver(entries => {
-        entries.forEach(e => { e.isIntersecting ? e.target.play().catch(()=>{}) : e.target.pause(); });
-      }, { threshold: 0.1 });
-      vids.forEach(v => vo.observe(v));
-    }
-  });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 </script>
 </body>
 </html>
