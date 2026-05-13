@@ -892,86 +892,101 @@
     }
     .dot-btn.active { background: var(--gold); width: 40px; }
 
-    /* ABOUT */
-    .about-section {
-      padding: var(--section) 3rem;
-      max-width: 1300px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 4rem;
-      align-items: center;
-    }
-    .about-img-wrap {
-      position: relative;
-    }
-    .about-img-wrap img {
-      width: 400px;
-      border-radius: 4px;
-      filter: grayscale(15%) contrast(1.05);
-      display: block;
-    }
-    .about-img-wrap::after {
-      content: '';
-      position: absolute;
-      inset: -12px -12px auto auto;
-      width: 60%;
-      height: 60%;
-      border-top: 1px solid var(--gold);
-      border-right: 1px solid var(--gold);
-      pointer-events: none;
-    }
-    .about-img-wrap::before {
-      content: '';
-      position: absolute;
-      inset: auto auto -12px -12px;
-      width: 40%;
-      height: 40%;
-      border-bottom: 1px solid var(--border-mid);
-      border-left: 1px solid var(--border-mid);
-      pointer-events: none;
-    }
-    .about-copy {}
-    .about-copy p {
-      font-size: 0.95rem;
-      color: var(--muted-mid);
-      line-height: 1.85;
-      margin-bottom: 1.4rem;
-    }
-    .about-copy p:first-of-type {
-      font-family: var(--serif);
-      font-size: 1.2rem;
-      color: var(--text);
-      font-weight: 300;
-      line-height: 1.7;
-    }
-    .about-stats {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1px;
-      background: var(--border);
-      border: 1px solid var(--border);
-      margin-top: 2.5rem;
-    }
-    .stat-cell {
-      background: var(--black);
-      padding: 1.5rem;
-      text-align: center;
-    }
-    .stat-num {
-      font-family: var(--serif);
-      font-size: 2rem;
-      font-weight: 300;
-      color: var(--gold);
-      display: block;
-    }
-    .stat-label {
-      font-size: 0.7rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin-top: 0.25rem;
-    }
+   /* ABOUT */
+.about-section {
+  padding: var(--section) 3rem;
+  max-width: 1300px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+/* 1. We set the wrapper to 50% width to shrink the whole unit */
+.about-img-wrap {
+  position: relative;
+  width: 50%; 
+  margin-left: 0; /* Keeps it aligned to the left; use 'auto' to center */
+}
+
+.about-img-wrap img {
+  width: 100%; /* This now fills 100% of the 50% wrapper */
+  border-radius: 4px;
+  filter: grayscale(15%) contrast(1.05);
+  display: block;
+}
+
+/* 2. The gold line (Top Right) */
+.about-img-wrap::after {
+  content: '';
+  position: absolute;
+  /* Negative inset keeps it slightly outside the new smaller image */
+  inset: -12px -12px auto auto; 
+  width: 60%;
+  height: 60%;
+  border-top: 1px solid var(--gold);
+  border-right: 1px solid var(--gold);
+  pointer-events: none;
+}
+
+/* 3. The grey line (Bottom Left) */
+.about-img-wrap::before {
+  content: '';
+  position: absolute;
+  inset: auto auto -12px -12px;
+  width: 40%;
+  height: 40%;
+  border-bottom: 1px solid var(--border-mid);
+  border-left: 1px solid var(--border-mid);
+  pointer-events: none;
+}
+
+.about-copy p {
+  font-size: 0.95rem;
+  color: var(--muted-mid);
+  line-height: 1.85;
+  margin-bottom: 1.4rem;
+}
+
+.about-copy p:first-of-type {
+  font-family: var(--serif);
+  font-size: 1.2rem;
+  color: var(--text);
+  font-weight: 300;
+  line-height: 1.7;
+}
+
+.about-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  margin-top: 2.5rem;
+}
+
+.stat-cell {
+  background: var(--black);
+  padding: 1.5rem;
+  text-align: center;
+}
+
+.stat-num {
+  font-family: var(--serif);
+  font-size: 2rem;
+  font-weight: 300;
+  color: var(--gold);
+  display: block;
+}
+
+.stat-label {
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-top: 0.25rem;
+}
 
     /* BOOKING CTA */
     .cta-section {
