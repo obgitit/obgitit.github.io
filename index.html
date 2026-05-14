@@ -496,6 +496,10 @@
       border-radius: 8px;
       padding: 4px;
     }
+    .service-icon.large {
+      width: 96px;
+      height: 96px;
+    }
 
     .service-num {
       font-family: var(--serif);
@@ -658,7 +662,12 @@
     .pedigree-card-wrap {
       flex: 1;
       perspective: 900px;
-      height: 88px;
+      height: 140px;
+      opacity: 0;
+      transition: none;
+    }
+    .pedigree-card-wrap.revealed {
+      opacity: 1;
     }
     .pedigree-card-inner {
       position: relative;
@@ -682,11 +691,13 @@
       flex-direction: column;
       align-items: flex-start;
       justify-content: center;
-      padding: 0 1.2rem;
+      padding: 0.9rem 1.2rem;
       gap: 0.3rem;
       backface-visibility: hidden;
       -webkit-backface-visibility: hidden;
       transition: background 0.2s;
+      /* Hide content until card faces us — prevents seeing text through the back */
+      overflow: hidden;
     }
     .pedigree-card-front:hover { background: var(--surface2); }
     .pedigree-card-back {
@@ -712,6 +723,13 @@
       font-weight: 300;
       color: var(--text);
       line-height: 1.25;
+    }
+    .pedigree-card-desc {
+      font-family: var(--sans);
+      font-size: 0.72rem;
+      color: var(--muted);
+      line-height: 1.55;
+      margin-top: 0.35rem;
     }
 
     .pedigree-sentence {
@@ -1264,7 +1282,7 @@
     <!-- CARD 02: PRODUCTION SUSTAINABILITY -->
     <div class="service-card reveal reveal-delay-2" id="card-sustainability">
       <span class="service-num">02</span>
-      <img class="service-icon" src="Leaf and film.png" alt="">
+      <img class="service-icon large" src="Leaf and film.png" alt="">
       <h3 class="service-title">Production Sustainability</h3>
       <p class="service-desc">Consultation and on-set oversight from development through post.</p>
       <button class="service-expand-btn" data-target="pedigree-sustainability" data-card="card-sustainability" data-mobile="mobile-sustainability" aria-expanded="false">
@@ -1312,25 +1330,25 @@
       <div class="pedigree-cards" id="pcards-commercial">
         <div class="pedigree-card-wrap" data-index="0">
           <div class="pedigree-card-inner">
-            <div class="pedigree-card-front"><span class="pedigree-card-num">01</span><span class="pedigree-card-title">Idea Consultation</span></div>
+            <div class="pedigree-card-front"><span class="pedigree-card-num">01</span><span class="pedigree-card-title">Idea Consultation</span><span class="pedigree-card-desc">Strategic creative sessions to align your brand's core message with high-impact visual storytelling.</span></div>
             <div class="pedigree-card-back"></div>
           </div>
         </div>
         <div class="pedigree-card-wrap" data-index="1">
           <div class="pedigree-card-inner">
-            <div class="pedigree-card-front"><span class="pedigree-card-num">02</span><span class="pedigree-card-title">Development / Pre-Production</span></div>
+            <div class="pedigree-card-front"><span class="pedigree-card-num">02</span><span class="pedigree-card-title">Development / Pre-Production</span><span class="pedigree-card-desc">Full-scale logistical planning, from script polishing and storyboarding to casting and location scouting.</span></div>
             <div class="pedigree-card-back"></div>
           </div>
         </div>
         <div class="pedigree-card-wrap" data-index="2">
           <div class="pedigree-card-inner">
-            <div class="pedigree-card-front"><span class="pedigree-card-num">03</span><span class="pedigree-card-title">Production</span></div>
+            <div class="pedigree-card-front"><span class="pedigree-card-num">03</span><span class="pedigree-card-title">Production</span><span class="pedigree-card-desc">Expert on-set execution using top-tier crews and equipment to bring the creative vision to life.</span></div>
             <div class="pedigree-card-back"></div>
           </div>
         </div>
         <div class="pedigree-card-wrap" data-index="3">
           <div class="pedigree-card-inner">
-            <div class="pedigree-card-front"><span class="pedigree-card-num">04</span><span class="pedigree-card-title">Post-Production</span></div>
+            <div class="pedigree-card-front"><span class="pedigree-card-num">04</span><span class="pedigree-card-title">Post-Production</span><span class="pedigree-card-desc">Precision editing, color grading, and sound design tailored for broadcast, web, and social platforms.</span></div>
             <div class="pedigree-card-back"></div>
           </div>
         </div>
@@ -1355,31 +1373,31 @@
       <div class="pedigree-cards" id="pcards-sustainability">
         <div class="pedigree-card-wrap" data-index="0">
           <div class="pedigree-card-inner">
-            <div class="pedigree-card-front"><span class="pedigree-card-num">01</span><span class="pedigree-card-title">Education</span></div>
+            <div class="pedigree-card-front"><span class="pedigree-card-num">01</span><span class="pedigree-card-title">Education</span><span class="pedigree-card-desc">On-boarding crews and stakeholders on the SPEC (Sustainable Production for Entertainment Certification) framework.</span></div>
             <div class="pedigree-card-back"></div>
           </div>
         </div>
         <div class="pedigree-card-wrap" data-index="1">
           <div class="pedigree-card-inner">
-            <div class="pedigree-card-front"><span class="pedigree-card-num">02</span><span class="pedigree-card-title">Systems &amp; Planning</span></div>
+            <div class="pedigree-card-front"><span class="pedigree-card-num">02</span><span class="pedigree-card-title">Systems &amp; Planning</span><span class="pedigree-card-desc">Integrating green protocols into the production workflow from the earliest stages of development.</span></div>
             <div class="pedigree-card-back"></div>
           </div>
         </div>
         <div class="pedigree-card-wrap" data-index="2">
           <div class="pedigree-card-inner">
-            <div class="pedigree-card-front"><span class="pedigree-card-num">03</span><span class="pedigree-card-title">Circularity</span></div>
+            <div class="pedigree-card-front"><span class="pedigree-card-num">03</span><span class="pedigree-card-title">Circularity</span><span class="pedigree-card-desc">Implementing waste diversion and material re-use systems for sets, props, and wardrobe.</span></div>
             <div class="pedigree-card-back"></div>
           </div>
         </div>
         <div class="pedigree-card-wrap" data-index="3">
           <div class="pedigree-card-inner">
-            <div class="pedigree-card-front"><span class="pedigree-card-num">04</span><span class="pedigree-card-title">Energy</span></div>
+            <div class="pedigree-card-front"><span class="pedigree-card-num">04</span><span class="pedigree-card-title">Energy</span><span class="pedigree-card-desc">Auditing and optimizing power usage through battery tech and renewable energy alternatives on set.</span></div>
             <div class="pedigree-card-back"></div>
           </div>
         </div>
         <div class="pedigree-card-wrap" data-index="4">
           <div class="pedigree-card-inner">
-            <div class="pedigree-card-front"><span class="pedigree-card-num">05</span><span class="pedigree-card-title">Communication</span></div>
+            <div class="pedigree-card-front"><span class="pedigree-card-num">05</span><span class="pedigree-card-title">Communication</span><span class="pedigree-card-desc">Transparent reporting and storytelling about your production's environmental impact for stakeholders and PR.</span></div>
             <div class="pedigree-card-back"></div>
           </div>
         </div>
@@ -1400,25 +1418,25 @@
       <div class="pedigree-cards" id="pcards-filmtv">
         <div class="pedigree-card-wrap" data-index="0">
           <div class="pedigree-card-inner">
-            <div class="pedigree-card-front"><span class="pedigree-card-num">01</span><span class="pedigree-card-title">Writer</span></div>
+            <div class="pedigree-card-front"><span class="pedigree-card-num">01</span><span class="pedigree-card-title">Writer</span><span class="pedigree-card-desc">Narrative-driven storytelling specializing in technical environments and character-centric drama.</span></div>
             <div class="pedigree-card-back"></div>
           </div>
         </div>
         <div class="pedigree-card-wrap" data-index="1">
           <div class="pedigree-card-inner">
-            <div class="pedigree-card-front"><span class="pedigree-card-num">02</span><span class="pedigree-card-title">Director</span></div>
+            <div class="pedigree-card-front"><span class="pedigree-card-num">02</span><span class="pedigree-card-title">Director</span><span class="pedigree-card-desc">Cinematic vision paired with a collaborative leadership style to elicit peak performances from cast and crew.</span></div>
             <div class="pedigree-card-back"></div>
           </div>
         </div>
         <div class="pedigree-card-wrap" data-index="2">
           <div class="pedigree-card-inner">
-            <div class="pedigree-card-front"><span class="pedigree-card-num">03</span><span class="pedigree-card-title">Producer</span></div>
+            <div class="pedigree-card-front"><span class="pedigree-card-num">03</span><span class="pedigree-card-title">Producer</span><span class="pedigree-card-desc">Award-winning oversight that bridges the gap between creative vision and financial reality.</span></div>
             <div class="pedigree-card-back"></div>
           </div>
         </div>
         <div class="pedigree-card-wrap" data-index="3">
           <div class="pedigree-card-inner">
-            <div class="pedigree-card-front"><span class="pedigree-card-num">04</span><span class="pedigree-card-title">1st AD</span></div>
+            <div class="pedigree-card-front"><span class="pedigree-card-num">04</span><span class="pedigree-card-title">1st AD</span><span class="pedigree-card-desc">Bringing order to the chaos. Expert scheduling and set management to keep the creative engine running on time.</span></div>
             <div class="pedigree-card-back"></div>
           </div>
         </div>
@@ -1686,7 +1704,7 @@
       const sentence  = panel.querySelector('.pedigree-sentence');
 
       [stem, barL, barR, ...dropStems].forEach(el => el && el.classList.remove('animate'));
-      wraps.forEach(w => w.classList.remove('flipped'));
+      wraps.forEach(w => { w.classList.remove('flipped'); w.classList.remove('revealed'); });
       if (sentence) {
         sentence.classList.remove('visible');
         sentence.style.removeProperty('--sentence-duration');
@@ -1702,8 +1720,10 @@
             if (barR) barR.classList.add('animate');
 
             const arrivals = wraps.map((_, i) => barArrivalMs(panelId, cardId, i));
-            const firstFlipAt = Math.min(...arrivals) + T_FLIP_LAG;
-            const lastFlipAt  = Math.max(...arrivals) + T_FLIP_LAG;
+            // T_DROP is how long the drop-stem takes to descend (~220ms)
+            const dropDuration = 220;
+            const firstFlipAt = Math.min(...arrivals) + dropDuration + T_FLIP_LAG;
+            const lastFlipAt  = Math.max(...arrivals) + dropDuration + T_FLIP_LAG;
             const flipWindow  = (lastFlipAt - firstFlipAt) + T_FLIP;
 
             if (sentence) {
@@ -1712,21 +1732,22 @@
 
             wraps.forEach((wrap, i) => {
               const arrival = arrivals[i];
+              // Drop stem starts drawing when bar reaches this card's x-position
               setTimeout(() => { if (dropStems[i]) dropStems[i].classList.add('animate'); }, arrival);
+              // Reveal card (make it visible) when drop-stem finishes descending
+              setTimeout(() => {
+                wrap.classList.add('revealed');
+              }, arrival + dropDuration);
+              // Flip card shortly after it becomes visible
               setTimeout(() => {
                 wrap.classList.add('flipped');
-                if (i === wraps.indexOf(wraps.reduce((a, b) =>
-                  arrivals[wraps.indexOf(a)] <= arrivals[wraps.indexOf(b)] ? a : b
-                ))) {
-                  if (sentence) sentence.classList.add('visible');
-                }
-              }, arrival + T_FLIP_LAG);
+              }, arrival + dropDuration + T_FLIP_LAG);
             });
 
             const earliestIdx = arrivals.indexOf(Math.min(...arrivals));
             setTimeout(() => {
               if (sentence) sentence.classList.add('visible');
-            }, arrivals[earliestIdx] + T_FLIP_LAG);
+            }, arrivals[earliestIdx] + dropDuration + T_FLIP_LAG);
 
           }, T_STEM);
         });
@@ -1740,6 +1761,7 @@
         return;
       }
       panel.classList.add('closing');
+
       setTimeout(() => {
         panel.classList.remove('open', 'closing');
         const sentence  = panel.querySelector('.pedigree-sentence');
@@ -1749,7 +1771,7 @@
         const stem      = panel.querySelector('.pedigree-stem');
         const wraps     = panel.querySelectorAll('.pedigree-card-wrap');
         [stem, barL, barR, ...dropStems].forEach(el => el && el.classList.remove('animate'));
-        wraps.forEach(w => w.classList.remove('flipped'));
+        wraps.forEach(w => { w.classList.remove('flipped'); w.classList.remove('revealed'); });
         if (sentence) { sentence.classList.remove('visible'); }
         if (onDone) onDone();
       }, T_CLOSE);
