@@ -24,7 +24,6 @@
       --muted-mid: #A09C96;
       --serif: 'Cormorant Garamond', Georgia, serif;
       --sans: 'DM Sans', system-ui, sans-serif;
-      /* REDUCED section spacing to tighten gaps between sections */
       --section: clamp(48px, 6vw, 80px);
     }
 
@@ -487,15 +486,12 @@
     .service-card.active { background: var(--surface); }
     .service-card.active::after { transform: scaleX(1); }
 
-    /* SERVICE ICON — no gold tint, bigger, dark background */
     .service-icon {
       width: 64px;
       height: 64px;
       object-fit: contain;
-      /* Remove gold filter — show original image colors */
       filter: none;
       opacity: 0.9;
-      /* Dark background so icon stands out against the card */
       background: transparent;
       border-radius: 8px;
       padding: 4px;
@@ -892,7 +888,7 @@
     }
     .dot-btn.active { background: var(--gold); width: 40px; }
 
-    /* ABOUT — layered floating collage */
+    /* ABOUT — single image layout */
     .about-section {
       padding: var(--section) 3rem;
       max-width: 1300px;
@@ -903,86 +899,20 @@
       align-items: center;
     }
 
-    /* Collage container — tall enough to show all layers */
     .about-img-wrap {
-      position: relative;
-      /* Height driven by main image; extra space for overlapping cards */
-      height: 520px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
 
-    /* Gold corner bracket — top right of main photo */
-    .about-img-wrap::after {
-      content: '';
-      position: absolute;
-      top: -14px;
-      right: -14px;
-      width: 44%;
-      height: 34%;
-      border-top: 1px solid var(--gold);
-      border-right: 1px solid var(--gold);
-      pointer-events: none;
-      z-index: 5;
-    }
-
-    /* Subtle bracket — bottom left */
-    .about-img-wrap::before {
-      content: '';
-      position: absolute;
-      bottom: 30px;
-      left: -14px;
-      width: 30%;
-      height: 22%;
-      border-bottom: 1px solid var(--border-mid);
-      border-left: 1px solid var(--border-mid);
-      pointer-events: none;
-      z-index: 5;
-    }
-
-    /* Main (Emmy) photo — upper-left, anchors the stack */
     .about-img-main {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 72%;
-      height: 78%;
+      width: 50%;
+      height: auto;
       object-fit: cover;
       border-radius: 3px;
       filter: grayscale(15%) contrast(1.05);
       display: block;
-      z-index: 1;
       box-shadow: 0 24px 60px rgba(0,0,0,0.6);
-    }
-
-    /* Second photo — overlaps bottom of main, pushed right */
-    .about-img-secondary-1 {
-      position: absolute;
-      bottom: 0;
-      left: 14%;
-      width: 58%;
-      aspect-ratio: 3/2;
-      object-fit: cover;
-      border-radius: 3px;
-      filter: grayscale(15%) contrast(1.05);
-      display: block;
-      z-index: 2;
-      box-shadow: 0 20px 48px rgba(0,0,0,0.65);
-      border: 3px solid var(--surface);
-    }
-
-    /* Third photo — floats upper-right, partially overlapping main */
-    .about-img-secondary-2 {
-      position: absolute;
-      top: 8%;
-      right: 0;
-      width: 40%;
-      aspect-ratio: 2/3;
-      object-fit: cover;
-      border-radius: 3px;
-      filter: grayscale(15%) contrast(1.05);
-      display: block;
-      z-index: 3;
-      box-shadow: 0 20px 48px rgba(0,0,0,0.65);
-      border: 3px solid var(--surface);
     }
 
     .about-copy {}
@@ -1183,8 +1113,7 @@
       .pedigree-panel { display: none !important; }
       .pedigree-card-stem { display: none !important; }
       .about-section { grid-template-columns: 1fr; gap: 2rem; }
-      .about-img-wrap { height: 300px; }
-      .about-img-secondary-2 { width: 36%; }
+      .about-img-main { width: 50%; }
       .form-grid { grid-template-columns: 1fr; }
       .awards-strip { grid-template-columns: 1fr; }
       .award-cell { border-right: none; border-bottom: 1px solid var(--border); }
@@ -1568,16 +1497,8 @@
 </section>
 
 <section class="about-section" id="about">
-  <!-- Layered floating photo collage -->
   <div class="about-img-wrap reveal">
-    <!-- Main photo (Emmy shot) — upper left, anchors the stack -->
     <img class="about-img-main" src="collin-emmy.webp" alt="Collin O'Brien holding an Emmy award" loading="lazy">
-    <!-- Second photo: overlaps the bottom of the Emmy photo — replace filename below -->
-    <img class="about-img-secondary-1" src="IMG_6860 2_Smaller file.jpg" alt="Collin O'Brien on set" loading="lazy"
-         onerror="this.style.background='#181818';">
-    <!-- Third photo: floats upper right — replace filename below -->
-    <img class="about-img-secondary-2" src="Jacinto's Crew 2.jpg" alt="Collin O'Brien directing" loading="lazy"
-         onerror="this.style.background='#111111';">
   </div>
 
   <div class="about-copy reveal reveal-delay-1">
